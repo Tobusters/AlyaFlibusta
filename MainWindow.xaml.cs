@@ -90,5 +90,12 @@ namespace WpfApp1
                 //GenreSelect.Content;
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            RegLog regLog = new RegLog();
+            regLog.Activate();
+            regLog.ShowDialog();
+        }
     }
 }

@@ -12,7 +12,7 @@
                 <RowDefinition/>
                 <RowDefinition MaxHeight="60"/>
             </Grid.RowDefinitions>
-            <Grid x:Name="BookMain">
+            <Grid x:Name="BookMain" Grid.Row="0" Visibility="Visible">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -37,6 +37,7 @@
                 </Viewbox>
                 <DataGrid d:ItemsSource="{d:SampleData ItemCount=20}" Grid.Column="1"/>
             </Grid>
+            
             <Viewbox HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 0 0 10"  Grid.Row="1">
             <WrapPanel >
                 <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88">
@@ -51,7 +52,7 @@
                         </Grid>
                     </Viewbox>
                 </Button>
-                <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88">
+                <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88" Click="Button_Click">
                     <Viewbox>
                         <Grid Style="{x:Null}">
                             <Grid.RowDefinitions>

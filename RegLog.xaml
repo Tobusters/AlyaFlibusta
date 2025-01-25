@@ -31,12 +31,12 @@
                 <TextBox/>
                 <Label Content="Пароль:"/>
                 <TextBox/>
-                <Button Content="Регистрация"/>
+                <Button Content="Регистрация" Template="{DynamicResource ButtonRegular}"/>
             </StackPanel>
             </Viewbox>
             <StackPanel Grid.Row="1" Style="{StaticResource Smaller}" HorizontalAlignment="Center">
                 <Label Content="Уже есть аккаунт?"/>
-                <Button Content="Войти" Click="ToLogIn"/>
+                <Button Content="Войти" Click="ToLogIn" Template="{DynamicResource ButtonRegular}"/>
             </StackPanel>
         </Grid>
     </Grid>
