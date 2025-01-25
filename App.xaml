@@ -1,0 +1,67 @@
+﻿<Application x:Class="WpfApp1.App"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:local="clr-namespace:WpfApp1"
+			 StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Imgs.xaml"/>
+                <ResourceDictionary Source="/Buttons.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="BorderColor">
+                <Setter Property="Control.BorderBrush" Value="#99d1ff"/>
+            </Style>
+            <Style x:Key="PanelButtons">
+                <Setter Property="FrameworkElement.Margin" Value="5 0 5 0"/>
+                <Setter Property="Control.Background" Value="#6fBBCC"/>
+            </Style>
+            <Style x:Key="SecondColor" BasedOn="{StaticResource BorderColor}">
+                <Setter Property="Control.Background" Value="#66BBCC"/>
+            </Style>
+            <Style x:Key="FirstColor"  BasedOn="{StaticResource BorderColor}">
+                <Setter Property="Control.Background" Value="#FF4D8E9C"/>
+            </Style>
+            <Style x:Key="TherdColor"  BasedOn="{StaticResource BorderColor}" >
+                <Setter Property="Control.Background" Value="#FF376169"/>
+            </Style>
+            <Style x:Key="FourthColor"  BasedOn="{StaticResource BorderColor}" >
+                <Setter Property="Control.Background" Value="#79c4d2"/>
+            </Style>
+            <!--https://www.w3schools.com/colors/colors_picker.asp-->
+            <Style TargetType="{x:Type CheckBox}">
+                <Setter Property="Margin" Value="10 0 0 0"/>
+            </Style>
+            <Style x:Key="Smaller">
+                <Setter Property="FrameworkElement.Margin" Value="0 1 0 0"/>
+                <Setter Property="Control.FontSize" Value="10"/>
+            </Style>
+            <Style TargetType="{x:Type TextBox}"  BasedOn="{StaticResource TherdColor}">
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="Margin" Value="0 0 0 5"/>
+                <Setter Property="MinWidth" Value="30"/>
+            </Style>
+            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource FourthColor}">
+                <Setter Property="Margin" Value="5 0 5 0"/>
+            </Style>
+            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource FirstColor}">
+                <Setter Property="Margin" Value="0 0 0 5"/>
+            </Style>
+            <Style TargetType="{x:Type Button}"  BasedOn="{StaticResource SecondColor}"/>
+            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource TherdColor}"/>
+            <Style TargetType="{x:Type TabControl}" BasedOn="{StaticResource SecondColor}"/>
+            <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource TherdColor}"/>
+            <Style TargetType="{x:Type Grid}">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#FF1F8DA4"/>
+                            <GradientStop Color="#FF376169" Offset="1"/>
+                            <GradientStop Color="#FF4D8E9C" Offset="0.821"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
