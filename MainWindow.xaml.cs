@@ -78,11 +78,12 @@ namespace WpfApp1
 			{
 				//MessageBox.Show("sdsd");
 				string[] list = genres.GetGenresNames();
+				string[] listID = genres.GetGenresID();
 				ScrollViewer scrollViewer = new ScrollViewer();
 				StackPanel stackPanel = new StackPanel();
 				for (int i = 0; i < list.Length; i++)
 				{
-					stackPanel.Children.Add(new CheckBox { Content = list[i], Name = list[i].Replace(" ", "") });
+					stackPanel.Children.Add(new CheckBox { Content = list[i], Name = listID[i]});
 				}
 				scrollViewer.Content = stackPanel;
 				scrollViewer.MaxHeight = 150;
