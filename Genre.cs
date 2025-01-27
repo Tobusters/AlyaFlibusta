@@ -57,14 +57,21 @@ namespace WpfApp1
             return strings;
         }
 
-        public void SetGenres(SqlDataReader sqlData)
+        public void SetGenres(SqlDataReader sqlData, ref SQLConnection connection)
         {
             genres.Clear();
-            while (sqlData.Read())
+            try
             {
-                genres.Add(sqlData[0].ToString(), sqlData[1].ToString());
+                while (sqlData.Read())
+                {
+                    genres.Add(sqlData[0].ToString(), sqlData[1].ToString());
+                }
             }
-            sqlData.Close();
+            finally
+            {
+                sqlData.Close();
+                connection.Conn.Close();
+            }
         }
 
         public string[] GetGenresID()

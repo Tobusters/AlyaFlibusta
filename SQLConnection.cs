@@ -90,7 +90,7 @@ namespace WpfApp1
             }
             finally
             {
-                FinallyBody();
+               // FinallyBody();
             }
             return null;
         }

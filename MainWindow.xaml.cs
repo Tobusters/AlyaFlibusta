@@ -44,28 +44,8 @@ namespace WpfApp1
             //RegLog regLog = new RegLog();
             //regLog.ShowDialog();
             books.AddBook(ref testBook1);
-			genres.SetGenres(conn.ConnectToDTBaseAndRead("select * from Genre"));
-			//genres.AddGenre("0", "Science Fantasy");
-			//genres.AddGenre("1", "Fantasy");
-			//genres.AddGenre("2", "Science Fiction");
-			//genres.AddGenre("3", "Science Trust");
-			//genres.AddGenre("4", "Science Trust");
-			//genres.AddGenre("5", "Science Trust");
-			//genres.AddGenre("6", "Science Trust");
-			//genres.AddGenre("7", "Science Trust");
-			//genres.AddGenre("8", "Science Trust");
-			//genres.AddGenre("9", "Science Trust");
-			//genres.AddGenre("10", "Science Trust");
-			//genres.AddGenre("11", "Science Trust");
-			//genres.AddGenre("12", "Science Trust");
-			//genres.AddGenre("13", "Science Trust");
-			//genres.AddGenre("14", "Science Trust");
-			//genres.AddGenre("15", "Science Trust");
-			//genres.AddGenre("16", "Science Trust");
-			//genres.AddGenre("17", "Science Trust");
-			//genres.AddGenre("18", "Science Trust");
-			//genres.AddGenre("19", "Science Trust");
-			Books2G.AddBook2genre(books[0].ID, genres[0]);
+			genres.SetGenres(conn.ConnectToDTBaseAndRead("select * from Genre"), ref conn);
+			//Books2G.AddBook2genre(books[0].ID, genres[0]);
 			ExpandGenresUpdate();
 			//UpdateComboBox(GenreSelect);
 		}
@@ -87,22 +67,37 @@ namespace WpfApp1
 		public void ExpandGenresUpdate()
 		{
 			if (GenreSelect != null)
-			{
-				//MessageBox.Show("sdsd");
-				string[] list = genres.GetGenresNames();
-				string[] listID = genres.GetGenresID();
+			{ 
+				GenreSelect.Content = null;
+			}
+                ////MessageBox.Show("sdsd");
+                //string[] list = genres.GetGenresNames();
+                //string[] listID = genres.GetGenresID();
+                //ScrollViewer scrollViewer = new ScrollViewer();
+                //StackPanel stackPanel = new StackPanel();
+                //for (int i = 0; i < list.Length; i++)
+                //{
+                //	stackPanel.Children.Add(new CheckBox { Content = list[i], Name = listID[i]});
+                //}
+                //scrollViewer.Content = stackPanel;
+                //scrollViewer.MaxHeight = 150;
+                //GenreSelect.Content = scrollViewer;
+                ////GenreSelect.Content;
+                ///
+
+
+                Dictionary<string, string> list = genres.GetGenresDict();
 				ScrollViewer scrollViewer = new ScrollViewer();
 				StackPanel stackPanel = new StackPanel();
-				for (int i = 0; i < list.Length; i++)
-				{
-					stackPanel.Children.Add(new CheckBox { Content = list[i], Name = listID[i]});
+				stackPanel.Children.Add(new TextBox { Name = "FilterGenre", HorizontalAlignment = HorizontalAlignment.Left, MinWidth = 50 });
+				foreach (var Genres in list) { 
+					stackPanel.Children.Add(new CheckBox { Content = Genres.Value, Name = 'G' + Genres.Key });
 				}
 				scrollViewer.Content = stackPanel;
 				scrollViewer.MaxHeight = 150;
 				GenreSelect.Content = scrollViewer;
-				//GenreSelect.Content;
-			}
-		}
+			
+        }
 
 		private void ToUserAccount(object sender, RoutedEventArgs e)
 		{
