@@ -17,14 +17,14 @@ namespace WpfApp1
             private set { connection = value; }
         }
 
-        //SqlDataReader rdr { get; set; }
 
         private SQLConnection()
         {
+            Conn = new SqlConnection(@"Server=DESKTOP-QVUI8Q3;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");
         }
         private SQLConnection(ref string coon)
         {
-            Conn = new SqlConnection(@"Server=DESKTOP-QVUI8Q3;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");
+            Conn = new SqlConnection(coon);
         }
 
         public static SQLConnection getInstance()
@@ -39,6 +39,8 @@ namespace WpfApp1
                 instance = new SQLConnection(ref coon);
             return instance;
         }
+
+
 
         private void TryConnectionAndQueryBody(string select)
         {
@@ -73,6 +75,27 @@ namespace WpfApp1
                 FinallyBody();
             }
         }
+        public SqlDataReader ConnectToDTBaseAndRead(string select)
+        {
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand(select, Conn);//Запрос
+                Conn.Open();//Открываем подключение
+                SqlDataReader rdr = sqlCommand.ExecuteReader();//Включаем Читалку, для считывания ответа на запрос sql
+                return rdr;//Не самая удобная реализация, но работает
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message.ToString(), e.ToString());
+            }
+            finally
+            {
+                FinallyBody();
+            }
+            return null;
+        }
+
+
     }
 }
 

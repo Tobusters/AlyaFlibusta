@@ -27,32 +27,44 @@ namespace WpfApp1
 		BOOKS books = BOOKS.getInstance();
 		GENRES genres = GENRES.getInstance();
 		BOOKS2G Books2G = BOOKS2G.getInstance();
+		SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
 		public MainWindow()
 		{
 			InitializeComponent();
-			//RegLog regLog = new RegLog();
-			//regLog.ShowDialog();
-			books.AddBook(ref testBook1);
-			genres.AddGenre("0", "Science Fantasy");
-			genres.AddGenre("1", "Fantasy");
-			genres.AddGenre("2", "Science Fiction");
-			genres.AddGenre("3", "Science Trust");
-			genres.AddGenre("4", "Science Trust");
-			genres.AddGenre("5", "Science Trust");
-			genres.AddGenre("6", "Science Trust");
-			genres.AddGenre("7", "Science Trust");
-			genres.AddGenre("8", "Science Trust");
-			genres.AddGenre("9", "Science Trust");
-			genres.AddGenre("10", "Science Trust");
-			genres.AddGenre("11", "Science Trust");
-			genres.AddGenre("12", "Science Trust");
-			genres.AddGenre("13", "Science Trust");
-			genres.AddGenre("14", "Science Trust");
-			genres.AddGenre("15", "Science Trust");
-			genres.AddGenre("16", "Science Trust");
-			genres.AddGenre("17", "Science Trust");
-			genres.AddGenre("18", "Science Trust");
-			genres.AddGenre("19", "Science Trust");
+            if (conn.Conn != null)
+            {
+                MessageBox.Show("Успешное подключение!", "Статус подключения", MessageBoxButton.OK);
+				conn.Conn.Open();
+                conn.Conn.Close();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка подключения!", "Статус подключения", MessageBoxButton.OK);
+            }
+            //RegLog regLog = new RegLog();
+            //regLog.ShowDialog();
+            books.AddBook(ref testBook1);
+			genres.SetGenres(conn.ConnectToDTBaseAndRead("select * from Genre"));
+			//genres.AddGenre("0", "Science Fantasy");
+			//genres.AddGenre("1", "Fantasy");
+			//genres.AddGenre("2", "Science Fiction");
+			//genres.AddGenre("3", "Science Trust");
+			//genres.AddGenre("4", "Science Trust");
+			//genres.AddGenre("5", "Science Trust");
+			//genres.AddGenre("6", "Science Trust");
+			//genres.AddGenre("7", "Science Trust");
+			//genres.AddGenre("8", "Science Trust");
+			//genres.AddGenre("9", "Science Trust");
+			//genres.AddGenre("10", "Science Trust");
+			//genres.AddGenre("11", "Science Trust");
+			//genres.AddGenre("12", "Science Trust");
+			//genres.AddGenre("13", "Science Trust");
+			//genres.AddGenre("14", "Science Trust");
+			//genres.AddGenre("15", "Science Trust");
+			//genres.AddGenre("16", "Science Trust");
+			//genres.AddGenre("17", "Science Trust");
+			//genres.AddGenre("18", "Science Trust");
+			//genres.AddGenre("19", "Science Trust");
 			Books2G.AddBook2genre(books[0].ID, genres[0]);
 			ExpandGenresUpdate();
 			//UpdateComboBox(GenreSelect);
