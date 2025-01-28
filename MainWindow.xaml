@@ -12,7 +12,7 @@
                 <RowDefinition/>
                 <RowDefinition MinHeight="15" MaxHeight="60"/>
             </Grid.RowDefinitions>
-            <Grid x:Name="BookMain" Grid.Row="0" Visibility="Hidden">
+            <Grid x:Name="BookMain" Grid.Row="0" Visibility="Visible">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -21,7 +21,7 @@
                 <StackPanel  >
                     <StackPanel  >
                     <Label Content="Поиск по названию" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <TextBox  TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+                    <TextBox Template="{DynamicResource TextBoxRegular}"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
                 </StackPanel>
                 <StackPanel  HorizontalAlignment="Left"  >
                     <Label Content="Поиск по жанру" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -80,7 +80,7 @@
                     </StackPanel>
                 </Grid>
             </Grid>
-            <Grid Name="Upload" Grid.Row="0">
+            <Grid Name="Upload" Grid.Row="0" Visibility="Hidden">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
