@@ -11,6 +11,25 @@ namespace WpfApp1
         //static readonly string connectionString = @"Server=DESKTOP-QVUI8Q3;database=Warehouse;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true";
         private SqlConnection connection;
 
+        public static bool IsConnected { get; private set; } = false;
+
+
+        private void CheckConn()
+        {
+            try
+            {
+                Conn.Open();
+                IsConnected = true;
+            }
+            catch (SqlException e)
+            {
+                IsConnected = false;
+                MessageBox.Show(e.Message);
+            }
+            finally { Conn.Close(); }
+        }
+
+
         public SqlConnection Conn
         {
             get { return connection; }
