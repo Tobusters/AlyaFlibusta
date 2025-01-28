@@ -12,7 +12,7 @@
                 <RowDefinition/>
                 <RowDefinition MinHeight="15" MaxHeight="60"/>
             </Grid.RowDefinitions>
-            <Grid x:Name="BookMain" Grid.Row="0" Visibility="Visible">
+            <Grid x:Name="BookMain" Grid.Row="0" Visibility="Hidden">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -32,7 +32,7 @@
                     <Label Content="Поиск по оценке" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top"  />
                 </StackPanel>
-                <Button Content="Поиск" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 20" Template="{DynamicResource ButtonRegular}" />
+                <Button Template="{DynamicResource Goyda}" Content="Поиск" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 20"  />
                 </StackPanel>
                 </Viewbox>
                 <DataGrid d:ItemsSource="{d:SampleData ItemCount=20}" Grid.Column="1"/>
@@ -80,41 +80,18 @@
                     </StackPanel>
                 </Grid>
             </Grid>
-            <Grid Name="Upload" Grid.Row="0" Visibility="Hidden">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                
-                <!-- Поля для ввода Названия и Автора -->
-                <StackPanel >
-                    <TextBlock Text="Название книги" Margin="0,0,0,5"/>
-                    <TextBox x:Name="BookTitle" Width="300"/>
-
-                    <TextBlock Text="Автор" Margin="10,10,0,5"/>
-                    <TextBox x:Name="Author" Width="300"/>
-                
-
-
-                <!-- Большое поле для ввода описания книги -->
-                <TextBlock Text="Описание книги"/>
-                <TextBox x:Name="BookDescription" MinWidth="780" MinHeight="100" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
-
-                <!-- Кнопки "Загрузить файл или ссылку" и "Опубликовать" -->
-                </StackPanel>
-                <Button Content="Загрузить файл или ссылку" Width="150" VerticalAlignment="Bottom" Template="{DynamicResource ButtonRegular}"/>
-                <!-- Жанры -->
-                <Expander Header="Жанры" Grid.Column="1">
-                    <StackPanel>
-                        <CheckBox Content="Фантастика"/>
-                        <CheckBox Content="Роман"/>
-                        <CheckBox Content="Детектив"/>
-                        <CheckBox Content="Научная литература"/>
-                        <CheckBox Content="Приключения"/>
-                        <!-- Добавьте больше жанров по мере необходимости -->
-                    </StackPanel>
+            <Grid Name="Upload" Grid.Row="0" Visibility="Visible">
+                <Button Content="Подтвердить" HorizontalAlignment="Left" Margin="10,77,0,0" VerticalAlignment="Top"/>
+                <Button Content="Выбрать" HorizontalAlignment="Left" Margin="10,162,0,0" VerticalAlignment="Top"/>
+                <TextBox HorizontalAlignment="Left" Margin="10,54,0,0" Text="Введите название" VerticalAlignment="Top" Width="120"/>
+                <Expander HorizontalAlignment="Left" Height="60" Header="Expander" Margin="10,102,0,0" VerticalAlignment="Top" Width="100">
+                    <Grid Background="#FFE5E5E5"/>
                 </Expander>
-                    <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Опубликовать" Width="100" Grid.Column="1" Template="{DynamicResource ButtonRegular}"/>
+                <Expander HorizontalAlignment="Left" Height="60" Header="Expander" Margin="10,242,0,0" VerticalAlignment="Top" Width="100">
+                    <Grid Background="#FFE5E5E5"/>
+                </Expander>
+                <TextBlock HorizontalAlignment="Left" Margin="10,187,0,0" TextWrapping="Wrap" Text="Укажите возрастную категорию книги" VerticalAlignment="Top" Height="50" Width="100"/>
+
             </Grid>
             <Viewbox HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 0 0 0"  Grid.Row="1">
             <WrapPanel >

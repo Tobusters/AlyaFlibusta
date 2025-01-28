@@ -27,24 +27,24 @@ namespace WpfApp1
 		BOOKS books = BOOKS.getInstance();
 		GENRES genres = GENRES.getInstance();
 		BOOKS2G Books2G = BOOKS2G.getInstance();
-		SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
+		//SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
 		public MainWindow()
 		{
 			InitializeComponent();
-            if (conn.Conn != null)
-            {
-                MessageBox.Show("Успешное подключение!", "Статус подключения", MessageBoxButton.OK);
-				conn.Conn.Open();
-                conn.Conn.Close();
-            }
-            else
-            {
-                MessageBox.Show("Ошибка подключения!", "Статус подключения", MessageBoxButton.OK);
-            }
+    //        if (conn.Conn != null)
+    //        {
+    //            MessageBox.Show("Успешное подключение!", "Статус подключения", MessageBoxButton.OK);
+				//conn.Conn.Open();
+    //            conn.Conn.Close();
+    //        }
+            //else
+            //{
+            //    MessageBox.Show("Ошибка подключения!", "Статус подключения", MessageBoxButton.OK);
+            //}
             //RegLog regLog = new RegLog();
             //regLog.ShowDialog();
             books.AddBook(ref testBook1);
-			genres.SetGenres(conn.ConnectToDTBaseAndRead("select * from Genre"), ref conn);
+			//genres.SetGenres(conn.ConnectToDTBaseAndRead("select * from Genre"), ref conn);
 			//Books2G.AddBook2genre(books[0].ID, genres[0]);
 			ExpandGenresUpdate();
 			//UpdateComboBox(GenreSelect);
