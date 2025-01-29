@@ -125,7 +125,7 @@
                         </RadialGradientBrush>
                     </Setter.Value>
                 </Setter>
-
+                
             </Trigger>
             <Trigger Property="IsPressed" Value="true">
                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>

@@ -7,76 +7,77 @@
 		mc:Ignorable="d"
 		Title="MainWindow" Width="800" Height="450">
     <Grid>
-        <Grid>
+        <Grid x:Name="Grid01" Style="{DynamicResource GridStyle1}">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition MaxHeight="60"/>
             </Grid.RowDefinitions>
-            <Grid x:Name="BookMain">
+            <Grid Style="{DynamicResource GridStyle1}" x:Name="BookMain">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Viewbox HorizontalAlignment="Left">
-                <StackPanel  >
                     <StackPanel  >
-                    <Label Content="Поиск по названию" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <TextBox  TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-                </StackPanel>
-                <StackPanel  HorizontalAlignment="Left"  >
-                    <Label Content="Поиск по жанру" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Expander x:Name="GenreSelect">
-                    </Expander>
-                </StackPanel>
-                <StackPanel  HorizontalAlignment="Left"  >
-                    <Label Content="Поиск по оценке" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top"  />
-                </StackPanel>
-                <Button Content="Поиск" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 20" Template="{DynamicResource ButtonRegular}" />
-                </StackPanel>
+                        <StackPanel  >
+                            <Label Content="Поиск по названию" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <TextBox  TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+                        </StackPanel>
+                        <StackPanel  HorizontalAlignment="Left"  >
+                            <Label Content="Поиск по жанру" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <Expander x:Name="GenreSelect">
+                            </Expander>
+                        </StackPanel>
+                        <StackPanel  HorizontalAlignment="Left"  >
+                            <Label Content="Поиск по оценке" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top"  />
+                        </StackPanel>
+                        <Button Content="Поиск" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 20" Template="{DynamicResource ButtonRegular}" />
+                    </StackPanel>
                 </Viewbox>
                 <DataGrid d:ItemsSource="{d:SampleData ItemCount=20}" Grid.Column="1"/>
             </Grid>
             <Viewbox HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 0 0 10"  Grid.Row="1">
-            <WrapPanel >
-                <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88">
-                    <Viewbox>
-                        <Grid Style="{x:Null}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="23*" />
-                                <RowDefinition Height="22*"/>
-                            </Grid.RowDefinitions>
-                            <Image Style="{StaticResource ImgBookExplore}" Grid.Row="0"/>
-                            <TextBlock Text="Коллекция" Grid.Row="1" VerticalAlignment="Top"/>
-                        </Grid>
-                    </Viewbox>
-                </Button>
-                <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88">
-                    <Viewbox>
-                        <Grid Style="{x:Null}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="23*" />
-                                <RowDefinition Height="22*"/>
-                            </Grid.RowDefinitions>
-                            <Image Style="{StaticResource ImgAccount}" Grid.Row="0"/>
-                            <TextBlock Text="Аккаунт" Grid.Row="1" VerticalAlignment="Top"/>
-                        </Grid>
-                    </Viewbox>
-                </Button>
-                <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88">
-                    <Viewbox>
-                        <Grid Style="{x:Null}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="23*" />
-                                <RowDefinition Height="22*"/>
-                            </Grid.RowDefinitions>
-                            <Image Style="{StaticResource ImgBookUploads}" Grid.Row="0"/>
-                            <TextBlock Text="Мастерская" Grid.Row="1" VerticalAlignment="Top"/>
-                        </Grid>
-                    </Viewbox>
-                </Button>
-            </WrapPanel>
+                <WrapPanel >
+                    <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88">
+                        <Viewbox>
+                            <Grid Style="{x:Null}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="23*" />
+                                    <RowDefinition Height="22*"/>
+                                </Grid.RowDefinitions>
+                                <Image Style="{StaticResource ImgBookExplore}" Grid.Row="0"/>
+                                <TextBlock Text="Коллекция" Grid.Row="1" VerticalAlignment="Top"/>
+                            </Grid>
+                        </Viewbox>
+                    </Button>
+                    <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88">
+                        <Viewbox>
+                            <Grid Style="{x:Null}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="23*" />
+                                    <RowDefinition Height="22*"/>
+                                </Grid.RowDefinitions>
+                                <Image Style="{StaticResource ImgAccount}" Grid.Row="0"/>
+                                <TextBlock Text="Аккаунт" Grid.Row="1" VerticalAlignment="Top"/>
+                            </Grid>
+                        </Viewbox>
+                    </Button>
+                    <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88">
+                        <Viewbox>
+                            <Grid Style="{x:Null}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="23*" />
+                                    <RowDefinition Height="22*"/>
+                                </Grid.RowDefinitions>
+                                <Image Style="{StaticResource ImgBookUploads}" Grid.Row="0"/>
+                                <TextBlock Text="Мастерская" Grid.Row="1" VerticalAlignment="Top"/>
+                            </Grid>
+                        </Viewbox>
+                    </Button>
+                </WrapPanel>
             </Viewbox>
+            <Button Content="Style" HorizontalAlignment="Left" Margin="0,374,0,0" VerticalAlignment="Top" Grid.RowSpan="2" Click="ChangeStyle_Click"/>
         </Grid>
     </Grid>
 </Window>

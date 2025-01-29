@@ -8,6 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Imgs.xaml"/>
                 <ResourceDictionary Source="/Buttons.xaml"/>
+                <ResourceDictionary Source="/GridStiles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <Style x:Key="BorderColor">
                 <Setter Property="Control.BorderBrush" Value="#99d1ff"/>
@@ -51,17 +52,6 @@
             <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource TherdColor}"/>
             <Style TargetType="{x:Type TabControl}" BasedOn="{StaticResource SecondColor}"/>
             <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource TherdColor}"/>
-            <Style TargetType="{x:Type Grid}">
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <LinearGradientBrush>
-                            <GradientStop Color="#FF1F8DA4"/>
-                            <GradientStop Color="#FF376169" Offset="1"/>
-                            <GradientStop Color="#FF4D8E9C" Offset="0.821"/>
-                        </LinearGradientBrush>
-                    </Setter.Value>
-                </Setter>
-            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

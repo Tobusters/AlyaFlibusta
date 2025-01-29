@@ -72,6 +72,48 @@ namespace WpfApp1
                 return;
             }
         }
+
+        private void ChangeStyle_Click(object sender, EventArgs e)
+        {
+            if (Grid01.Style == (Style)FindResource("GridStyle1") && BookMain.Style == (Style)FindResource("GridStyle1"))
+            {
+                Grid01.Style = (Style)FindResource("GridStyle2");
+                BookMain.Style = (Style)FindResource("GridStyle2");
+            }
+            else
+            {
+                if (Grid01.Style == (Style)FindResource("GridStyle2") && BookMain.Style == (Style)FindResource("GridStyle2"))
+                {
+                    Grid01.Style = (Style)FindResource("GridStyle3");
+                    BookMain.Style = (Style)FindResource("GridStyle3");
+                }
+                else
+                {
+                    if (Grid01.Style == (Style)FindResource("GridStyle3") && BookMain.Style == (Style)FindResource("GridStyle3"))
+                    {
+                        Grid01.Style = (Style)FindResource("GridStyle4");
+                        BookMain.Style = (Style)FindResource("GridStyle4");
+                    }
+                    else
+                    {
+                        if (Grid01.Style == (Style)FindResource("GridStyle4") && BookMain.Style == (Style)FindResource("GridStyle4"))
+                        {
+                            Grid01.Style = (Style)FindResource("GridStyle5");
+                            BookMain.Style = (Style)FindResource("GridStyle5");
+                        }
+                        else
+                        {
+                            Grid01.Style = (Style)FindResource("GridStyle1");
+                            BookMain.Style = (Style)FindResource("GridStyle1");
+                        }
+                    }
+                }
+            }
+
+
+
+        }
+
         public void ExpandGenresUpdate()
         {
             if(GenreSelect != null)
