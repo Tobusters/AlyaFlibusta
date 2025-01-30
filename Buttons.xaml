@@ -8,6 +8,13 @@
     <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
     <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
     <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+    <Color x:Key="FirstColorRGB" R="55" G="97" B="105" A="255"/>
+    <Color x:Key="SecondColorRGB" R="102" G="187" B="204" A="255" />
+    <Color x:Key="TherdColorRGB" R="121" G="196" B="210" A="255" />
+    <Color x:Key="BorderColorRGB" R="153" G="209" B="255" A="255" />
+    <Color x:Key="GradientColorRGB" R="127" G="233" B="255" A="255" />
+
+
     <ControlTemplate x:Key="ButtonMenu" TargetType="{x:Type ButtonBase}">
         <!--<Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">-->
         <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
@@ -21,7 +28,7 @@
                         </TransformGroup>
                     </RadialGradientBrush.RelativeTransform>
                     <GradientStop Color="AliceBlue" Offset="0"/>
-                    <GradientStop Color="#66bbcc" Offset="1"/>
+                    <GradientStop Color="{StaticResource SecondColorRGB}" Offset="1"/>
                 </RadialGradientBrush>
             </Border.Background>
             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
@@ -36,15 +43,15 @@
                     <Setter.Value>
                         <RadialGradientBrush>
                             <GradientStop Color="White" Offset="0"/>
-                            <GradientStop Color="#66bbcc" Offset="1"/>
+                            <GradientStop Color="{StaticResource SecondColorRGB}" Offset="1"/>
                         </RadialGradientBrush>
                     </Setter.Value>
                 </Setter>
-                <!--<Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>-->
+                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
                 <Setter  Property="BorderBrush" TargetName="border">
                         <Setter.Value>
                         <RadialGradientBrush>
-                            <GradientStop Color="#66bbcc" Offset="0.99"/>
+                            <GradientStop Color="{StaticResource SecondColorRGB}" Offset="0.99"/>
                             <GradientStop Color="White" Offset="1"/>
                             <RadialGradientBrush.RelativeTransform>
                                 <TransformGroup>
@@ -65,7 +72,7 @@
                 <Setter  Property="BorderBrush" TargetName="border">
                     <Setter.Value>
                         <RadialGradientBrush>
-                            <GradientStop Color="#99d1ff" Offset="0.99"/>
+                            <GradientStop Color="{StaticResource BorderColorRGB}" Offset="0.99"/>
                             <GradientStop Color="White" Offset="1"/>
                             <RadialGradientBrush.RelativeTransform>
                                 <TransformGroup>
@@ -90,7 +97,7 @@
         <!--<Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">-->
         <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
             <Border.Background>
-                <SolidColorBrush Color="#66bbcc"/>
+                <SolidColorBrush Color="{StaticResource SecondColorRGB}"/>
             </Border.Background>
             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
         </Border>
@@ -103,8 +110,8 @@
                 <Setter Property="Background" TargetName="border">
                     <Setter.Value>
                         <RadialGradientBrush>
-                            <GradientStop Color="#66bbcc" Offset="1.5"/>
-                            <GradientStop Color="#7FE9FF" Offset="0"/>
+                            <GradientStop Color="{StaticResource SecondColorRGB}" Offset="1.5"/>
+                            <GradientStop Color="{StaticResource GradientColorRGB}" Offset="0"/>
                         </RadialGradientBrush>
                     </Setter.Value>
                 </Setter>
@@ -112,7 +119,7 @@
                 <Setter  Property="BorderBrush" TargetName="border">
                     <Setter.Value>
                         <RadialGradientBrush>
-                            <GradientStop Color="#66bbcc" Offset="0.99"/>
+                            <GradientStop Color="{StaticResource SecondColorRGB}" Offset="0.99"/>
                             <GradientStop Color="White" Offset="1"/>
                             <RadialGradientBrush.RelativeTransform>
                                 <TransformGroup>
@@ -133,7 +140,7 @@
                 <Setter  Property="BorderBrush" TargetName="border">
                     <Setter.Value>
                         <RadialGradientBrush>
-                            <GradientStop Color="#99d1ff" Offset="0.99"/>
+                            <GradientStop Color="{StaticResource BorderColorRGB}" Offset="0.99"/>
                             <GradientStop Color="White" Offset="1"/>
                             <RadialGradientBrush.RelativeTransform>
                                 <TransformGroup>
