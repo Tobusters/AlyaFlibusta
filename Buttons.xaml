@@ -60,7 +60,7 @@
 
             </Trigger>
             <Trigger Property="IsPressed" Value="true">
-                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                <!--<Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>-->
                 <!--<Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>-->
                 <Setter  Property="BorderBrush" TargetName="border">
                     <Setter.Value>
@@ -104,7 +104,7 @@
                     <Setter.Value>
                         <RadialGradientBrush>
                             <GradientStop Color="#66bbcc" Offset="1.5"/>
-                            <GradientStop Color="#00AACC" Offset="0"/>
+                            <GradientStop Color="#7FE9FF" Offset="0"/>
                         </RadialGradientBrush>
                     </Setter.Value>
                 </Setter>

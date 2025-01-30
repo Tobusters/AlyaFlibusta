@@ -7,12 +7,12 @@
 		mc:Ignorable="d"
 		Title="MainWindow" Width="800" Height="450">
     <Grid>
-        <Grid>
+        <Grid Name="MainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition/>
-                <RowDefinition MaxHeight="60"/>
+                <RowDefinition MinHeight="15" MaxHeight="60"/>
             </Grid.RowDefinitions>
-            <Grid x:Name="BookMain">
+            <Grid x:Name="BookMain" Grid.Row="0" Visibility="Visible">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -21,7 +21,7 @@
                 <StackPanel  >
                     <StackPanel  >
                     <Label Content="Поиск по названию" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <TextBox  TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+                    <TextBox Template="{DynamicResource TextBoxRegular}"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
                 </StackPanel>
                 <StackPanel  HorizontalAlignment="Left"  >
                     <Label Content="Поиск по жанру" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -37,9 +37,88 @@
                 </Viewbox>
                 <DataGrid d:ItemsSource="{d:SampleData ItemCount=20}" Grid.Column="1"/>
             </Grid>
-            <Viewbox HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 0 0 10"  Grid.Row="1">
+            <Grid Name="Account" Grid.Row="0" Visibility="Hidden">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10">
+                    <Image Style="{StaticResource ImgAccount}" Width="50" Height="50" Margin="0,0,10,0"/>
+                    <TextBlock Text="Имя пользователя" VerticalAlignment="Center" FontSize="20"/>
+                </StackPanel>
+
+                <!-- Кнопка "Написать" -->
+                <Button Content="Написать" Width="100" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0" Template="{DynamicResource ButtonRegular}"/>
+
+                <Grid Margin="10,80,10,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Краткая статистика -->
+                    <StackPanel Grid.Column="0" VerticalAlignment="Top">
+                        <TextBlock Text="Добавлено книг: 123" Margin="0,0,0,10"/>
+                        <TextBlock Text="Время жизни аккаунта: 2 года" Margin="0,0,0,10"/>
+                    </StackPanel>
+
+                    <!-- Список книг -->
+                    <StackPanel Grid.Column="1" VerticalAlignment="Top">
+                        <Expander Header="Книги">
+                            <StackPanel>
+                                <TextBlock Text="Название книги 1" Margin="5"/>
+                                <TextBlock Text="Название книги 2" Margin="5"/>
+                                <TextBlock Text="Название книги 3" Margin="5"/>
+                            </StackPanel>
+                        </Expander>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" VerticalAlignment="Top">
+                        <Expander Header="Загруженные книги">
+                            <StackPanel>
+                                <TextBlock Text="Название книги 1" Margin="5"/>
+                                <TextBlock Text="Название книги 2" Margin="5"/>
+                                <TextBlock Text="Название книги 3" Margin="5"/>
+                            </StackPanel>
+                        </Expander>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid Name="Upload" Grid.Row="0" Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- Поля для ввода Названия и Автора -->
+                <StackPanel >
+                    <TextBlock Text="Название книги" Margin="0,0,0,5"/>
+                    <TextBox x:Name="BookTitle" Width="300"/>
+
+                    <TextBlock Text="Автор" Margin="10,10,0,5"/>
+                    <TextBox x:Name="Author" Width="300"/>
+                
+
+
+                <!-- Большое поле для ввода описания книги -->
+                <TextBlock Text="Описание книги"/>
+                <TextBox x:Name="BookDescription" MinWidth="780" MinHeight="100" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+
+                <!-- Кнопки "Загрузить файл или ссылку" и "Опубликовать" -->
+                </StackPanel>
+                <Button Content="Загрузить файл или ссылку" Width="150" VerticalAlignment="Bottom" Template="{DynamicResource ButtonRegular}"/>
+                <!-- Жанры -->
+                <Expander Header="Жанры" Grid.Column="1">
+                    <StackPanel>
+                        <CheckBox Content="Фантастика"/>
+                        <CheckBox Content="Роман"/>
+                        <CheckBox Content="Детектив"/>
+                        <CheckBox Content="Научная литература"/>
+                        <CheckBox Content="Приключения"/>
+                        <!-- Добавьте больше жанров по мере необходимости -->
+                    </StackPanel>
+                </Expander>
+                    <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Опубликовать" Width="100" Grid.Column="1" Template="{DynamicResource ButtonRegular}"/>
+            </Grid>
+            <Viewbox HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 0 0 0"  Grid.Row="1">
             <WrapPanel >
-                <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88">
+                <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88" Click="ToMainCollection">
                     <Viewbox>
                         <Grid Style="{x:Null}">
                             <Grid.RowDefinitions>
@@ -51,7 +130,7 @@
                         </Grid>
                     </Viewbox>
                 </Button>
-                <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88">
+                <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88" Click="ToUserAccount">
                     <Viewbox>
                         <Grid Style="{x:Null}">
                             <Grid.RowDefinitions>
@@ -63,7 +142,7 @@
                         </Grid>
                     </Viewbox>
                 </Button>
-                <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88">
+                <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88" Click="ToUpload">
                     <Viewbox>
                         <Grid Style="{x:Null}">
                             <Grid.RowDefinitions>
