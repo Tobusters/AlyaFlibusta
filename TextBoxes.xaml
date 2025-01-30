@@ -1,11 +1,24 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/GlobalColours.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
     <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
     <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
     <ControlTemplate x:Key="TextBoxRegular" TargetType="{x:Type TextBoxBase}">
-        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
-            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+        <!--<Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">-->
+        <Border x:Name="border" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+            <Grid Style="{x:Null}">
+                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                <Grid.Background>
+                    <SolidColorBrush Color="{StaticResource FirstColorRGB}" />
+                </Grid.Background>
+            </Grid>
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{StaticResource BorderColorRGB}"/>
+            </Border.BorderBrush>
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsEnabled" Value="false">
@@ -13,10 +26,11 @@
                 </Setter>
             </Trigger>
             <Trigger Property="IsMouseOver" Value="true">
+                
                 <Setter Property="BorderBrush" TargetName="border">
                     <Setter.Value>
                         <RadialGradientBrush>
-                            <GradientStop Color="#66bbcc" Offset="0.99"/>
+                            <GradientStop Color="{StaticResource SecondColorRGB}" Offset="0.99"/>
                             <GradientStop Color="White" Offset="1"/>
                             <RadialGradientBrush.RelativeTransform>
                                 <TransformGroup>
@@ -35,14 +49,14 @@
                 <Setter Property="BorderBrush" TargetName="border">
                     <Setter.Value>
                         <RadialGradientBrush>
-                            <GradientStop Color="#66bbcc" Offset="0.99"/>
+                            <GradientStop Color="{StaticResource SecondColorRGB}" Offset="0.99"/>
                             <GradientStop Color="White" Offset="1"/>
                             <RadialGradientBrush.RelativeTransform>
                                 <TransformGroup>
                                     <ScaleTransform ScaleX="1.25"/>
-                                    <ScaleTransform ScaleY="1"/>
+                                    <ScaleTransform ScaleY="1.25"/>
                                     <TranslateTransform X="-0.125"/>
-                                    <TranslateTransform Y="-0.25"/>
+                                    <TranslateTransform Y="-0.125"/>
                                 </TransformGroup>
                             </RadialGradientBrush.RelativeTransform>
                         </RadialGradientBrush>

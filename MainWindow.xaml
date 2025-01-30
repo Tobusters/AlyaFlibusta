@@ -21,7 +21,7 @@
                 <StackPanel  >
                     <StackPanel  >
                     <Label Content="Поиск по названию" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <TextBox Template="{DynamicResource TextBoxRegular}"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+                    <TextBox Foreground="White" Template="{DynamicResource TextBoxRegular}"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
                 </StackPanel>
                 <StackPanel  HorizontalAlignment="Left"  >
                     <Label Content="Поиск по жанру" HorizontalAlignment="Left" VerticalAlignment="Top"/>

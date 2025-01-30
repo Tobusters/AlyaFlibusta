@@ -49,9 +49,6 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            <Style TargetType="{x:Type ComboBox}" />
-            <Style TargetType="{x:Type TabControl}" />
-            <Style TargetType="{x:Type TabItem}" />
             <Style TargetType="{x:Type Grid}">
                 <Setter Property="Background">
                     <Setter.Value>
