@@ -1,5 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/GlobalColours.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
     <BitmapImage x:Key="Cloud" UriSource="/cloud-integration23.png"></BitmapImage>
     <BitmapImage x:Key="Book" UriSource="/llm-ops-language-model23.png"></BitmapImage>
     <BitmapImage x:Key="Person" UriSource="/free-icon-avatar-6387915.png"></BitmapImage>

@@ -31,26 +31,32 @@ namespace WpfApp1
 		SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
 		public MainWindow()
 		{
-			InitializeComponent();
-			try
-			{
-				if (conn.Conn != null)
-				{
-					MessageBox.Show("Успешное подключение!", "Статус подключения", MessageBoxButton.OK);
-					conn.Conn.Open();
-				}
-			}catch(SqlException e)
-			{
-				MessageBox.Show(e.Message, e.ToString(), MessageBoxButton.OK);	
-			}
-			finally
-			{
-                conn.Conn.Close();
+			var result = MessageBox.Show("Загрузить с sql?", "SQL", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			if (result == MessageBoxResult.Yes) {
+                try
+                {
+                    if (conn.Conn != null)
+                    {
+                        MessageBox.Show("Успешное подключение!", "Статус подключения", MessageBoxButton.OK);
+                        conn.Conn.Open();
+                    }
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show(e.Message, e.ToString(), MessageBoxButton.OK);
+                }
+                finally
+                {
+                    conn.Conn.Close();
+                }
+                genres.SetGenres(conn.ConnectToDTBaseAndRead("select * from Genre"), ref conn);
             }
+
+			InitializeComponent();
+
 			//RegLog regLog = new RegLog();
 			//regLog.ShowDialog();
 			books.AddBook(ref testBook1);
-			genres.SetGenres(conn.ConnectToDTBaseAndRead("select * from Genre"), ref conn);
 			//Books2G.AddBook2genre(books[0].ID, genres[0]);
 			ExpandGenresUpdate();
 			//UpdateComboBox(GenreSelect);

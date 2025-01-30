@@ -1,0 +1,9 @@
+﻿<ResourceDictionary  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Color x:Key="FirstColorRGB" R="55" G="97" B="105" A="255"/>
+    <Color x:Key="SecondColorRGB" R="102" G="187" B="204" A="255" />
+    <Color x:Key="TherdColorRGB" R="121" G="196" B="210" A="255" />
+    <Color x:Key="BorderColorRGB" R="153" G="209" B="255" A="255" />
+    <Color x:Key="GradientColorRGB" R="127" G="233" B="255" A="255" />
+
+</ResourceDictionary>

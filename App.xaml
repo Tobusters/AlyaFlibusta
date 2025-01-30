@@ -9,11 +9,12 @@
                 <ResourceDictionary Source="/TextBoxes.xaml"/>
                 <ResourceDictionary Source="/Imgs.xaml"/>
                 <ResourceDictionary Source="/Buttons.xaml"/>
+                <ResourceDictionary Source="/GlobalColours.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <Color x:Key="FirstColorRGB" R="55" G="97" B="105" A="255"/>
+            <!--<Color x:Key="FirstColorRGB" R="55" G="97" B="105" A="255"/>
             <Color x:Key="SecondColorRGB" R="102" G="187" B="204" A="255" />
             <Color x:Key="TherdColorRGB" R="121" G="196" B="210" A="255" />
-            <Color x:Key="BorderColorRGB" R="153" G="209" B="255" A="255" />
+            <Color x:Key="BorderColorRGB" R="153" G="209" B="255" A="255" />-->
 
             <Style x:Key="BorderColor">
                 <Setter Property="Control.BorderBrush">
