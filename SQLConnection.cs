@@ -11,6 +11,25 @@ namespace WpfApp1
         //static readonly string connectionString = @"Server=DESKTOP-QVUI8Q3;database=Warehouse;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true";
         private SqlConnection connection;
 
+        public static bool IsConnected { get; private set; } = false;
+
+
+        private void CheckConn()
+        {
+            try
+            {
+                Conn.Open();
+                IsConnected = true;
+            }
+            catch (SqlException e)
+            {
+                IsConnected = false;
+                MessageBox.Show(e.Message);
+            }
+            finally { Conn.Close(); }
+        }
+
+
         public SqlConnection Conn
         {
             get { return connection; }
@@ -20,9 +39,10 @@ namespace WpfApp1
 
         private SQLConnection()
         {
-            Conn = new SqlConnection(@"Server=DESKTOP-QVUI8Q3;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");
+            Conn = new SqlConnection(@"Server=DESKTOP-QVUI8Q3;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//дом
+            //Conn = new SqlConnection(@"Server=DESKTOP-CVTHJDK;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");
         }
-        private SQLConnection(ref string coon)
+        private SQLConnection(string coon)
         {
             Conn = new SqlConnection(coon);
         }
@@ -33,10 +53,10 @@ namespace WpfApp1
                 instance = new SQLConnection();
             return instance;
         }
-        public static SQLConnection getInstance(ref string coon)
+        public static SQLConnection getInstance(string coon)
         {
             if (instance == null)
-                instance = new SQLConnection(ref coon);
+                instance = new SQLConnection(coon);
             return instance;
         }
 
