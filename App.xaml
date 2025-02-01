@@ -52,10 +52,10 @@
             <Style TargetType="{x:Type Grid}">
                 <Setter Property="Background">
                     <Setter.Value>
-                        <LinearGradientBrush>
-                            <GradientStop Color="{StaticResource TherdColorRGB }"/>
-                            <GradientStop Color="{StaticResource FirstColorRGB }" Offset="1"/>
-                            <GradientStop Color="{StaticResource SecondColorRGB }" Offset="0.821"/>
+                        <LinearGradientBrush SpreadMethod="Reflect" StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="{StaticResource FirstColorRGB }" Offset="0"/>
+                            <GradientStop Color="{StaticResource SecondColorRGB }"  Offset="0.25"/>
+                            <GradientStop Color="{StaticResource TherdColorRGB }" Offset="0.8"/>
                         </LinearGradientBrush>
                     </Setter.Value>
                 </Setter>
