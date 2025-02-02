@@ -6,10 +6,12 @@
 	<Color x:Key="BorderColorRGB" R="153" G="209" B="255" A="255" />
 	<Color x:Key="GradientColorRGB" R="127" G="233" B="255" A="255" />
 	<Color x:Key="BorderMOverRGB" R="60" G="127" B="177" A="255" />
-	<SolidColorBrush x:Key="FirstColor"		Color="{StaticResource FirstColorRGB}"/>
+    <Color x:Key="TextColorFirstRGB" R="0" G="0" B="0" A="255"/>
+    <SolidColorBrush x:Key="FirstColor"		Color="{StaticResource FirstColorRGB}"/>
 	<SolidColorBrush x:Key="SecondColor"	Color="{StaticResource SecondColorRGB}"/>
 	<SolidColorBrush x:Key="TherdColor"		Color="{StaticResource TherdColorRGB}"/>
 	<SolidColorBrush x:Key="BorderColor"	Color="{StaticResource BorderColorRGB}"/>
 	<SolidColorBrush x:Key="GradientColor"	Color="{StaticResource GradientColorRGB}"/>
 	<SolidColorBrush x:Key="BorderMOver"	Color="{StaticResource BorderMOverRGB}"/>
+    <SolidColorBrush x:Key="TextColorFirst"	Color="{StaticResource TextColorFirstRGB}"/>
 </ResourceDictionary>

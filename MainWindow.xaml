@@ -1,11 +1,11 @@
-﻿<Window x:Class="WpfApp1.MainWindow"
+﻿<Window  x:Class="WpfApp1.MainWindow"
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:WpfApp1"
 		mc:Ignorable="d"
-		Title="MainWindow" Width="800" Height="450">
+		Title="Flibusta" Width="800" Height="450">
     <Grid>
         <Grid Name="MainGrid">
             <Grid.RowDefinitions>
@@ -18,22 +18,23 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Viewbox HorizontalAlignment="Left">
-                <StackPanel  >
                     <StackPanel  >
-                    <Label Content="Поиск по названию" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <TextBox Template="{DynamicResource TextBoxRegular}"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-                </StackPanel>
-                <StackPanel  HorizontalAlignment="Left"  >
-                    <Label Content="Поиск по жанру" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Expander x:Name="GenreSelect">
-                    </Expander>
-                </StackPanel>
-                <StackPanel  HorizontalAlignment="Left"  >
-                    <Label Content="Поиск по оценке" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top"  />
-                </StackPanel>
-                <Button Content="Поиск" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 20" Template="{DynamicResource ButtonRegular}" />
-                </StackPanel>
+                        <StackPanel  >
+                            <Label Content="Поиск по названию" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <CheckBox IsChecked="True" Background="White" Content="СДЕЛАЙ МНЕ ШАБЛОН" />
+                            <TextBox Foreground="{StaticResource TextColorFirst}" Template="{DynamicResource TextBoxRegular}"  TextWrapping="Wrap" Text="Перенести все основные градиенты в Словари тем, для большей кастомизации" VerticalAlignment="Top"/>
+                        </StackPanel>
+                        <StackPanel  HorizontalAlignment="Left"  >
+                            <Label Content="Поиск по жанру" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <Expander x:Name="GenreSelect">
+                            </Expander>
+                        </StackPanel>
+                        <StackPanel  HorizontalAlignment="Left"  >
+                            <Label Content="Поиск по оценке" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top"  />
+                        </StackPanel>
+                        <Button Content="Поиск" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 20" Template="{DynamicResource ButtonRegular}" />
+                    </StackPanel>
                 </Viewbox>
                 <DataGrid d:ItemsSource="{d:SampleData ItemCount=20}" Grid.Column="1"/>
             </Grid>
@@ -85,7 +86,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                
+
                 <!-- Поля для ввода Названия и Автора -->
                 <StackPanel >
                     <TextBlock Text="Название книги" Margin="0,0,0,5"/>
@@ -93,14 +94,14 @@
 
                     <TextBlock Text="Автор" Margin="10,10,0,5"/>
                     <TextBox x:Name="Author" Width="300"/>
-                
 
 
-                <!-- Большое поле для ввода описания книги -->
-                <TextBlock Text="Описание книги"/>
-                <TextBox x:Name="BookDescription" MinWidth="780" MinHeight="100" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
 
-                <!-- Кнопки "Загрузить файл или ссылку" и "Опубликовать" -->
+                    <!-- Большое поле для ввода описания книги -->
+                    <TextBlock Text="Описание книги"/>
+                    <TextBox x:Name="BookDescription" MinWidth="780" MinHeight="100" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+
+                    <!-- Кнопки "Загрузить файл или ссылку" и "Опубликовать" -->
                 </StackPanel>
                 <Button Content="Загрузить файл или ссылку" Width="150" VerticalAlignment="Bottom" Template="{DynamicResource ButtonRegular}"/>
                 <!-- Жанры -->
@@ -114,47 +115,47 @@
                         <!-- Добавьте больше жанров по мере необходимости -->
                     </StackPanel>
                 </Expander>
-                    <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Опубликовать" Width="100" Grid.Column="1" Template="{DynamicResource ButtonRegular}"/>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Опубликовать" Width="100" Grid.Column="1" Template="{DynamicResource ButtonRegular}"/>
             </Grid>
             <Viewbox HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 0 0 0"  Grid.Row="1">
-            <WrapPanel >
-                <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88" Click="ToMainCollection">
-                    <Viewbox>
-                        <Grid Style="{x:Null}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="23*" />
-                                <RowDefinition Height="22*"/>
-                            </Grid.RowDefinitions>
-                            <Image Style="{StaticResource ImgBookExplore}" Grid.Row="0"/>
-                            <TextBlock Text="Коллекция" Grid.Row="1" VerticalAlignment="Top"/>
-                        </Grid>
-                    </Viewbox>
-                </Button>
-                <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88" Click="ToUserAccount">
-                    <Viewbox>
-                        <Grid Style="{x:Null}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="23*" />
-                                <RowDefinition Height="22*"/>
-                            </Grid.RowDefinitions>
-                            <Image Style="{StaticResource ImgAccount}" Grid.Row="0"/>
-                            <TextBlock Text="Аккаунт" Grid.Row="1" VerticalAlignment="Top"/>
-                        </Grid>
-                    </Viewbox>
-                </Button>
-                <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88" Click="ToUpload">
-                    <Viewbox>
-                        <Grid Style="{x:Null}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="23*" />
-                                <RowDefinition Height="22*"/>
-                            </Grid.RowDefinitions>
-                            <Image Style="{StaticResource ImgBookUploads}" Grid.Row="0"/>
-                            <TextBlock Text="Мастерская" Grid.Row="1" VerticalAlignment="Top"/>
-                        </Grid>
-                    </Viewbox>
-                </Button>
-            </WrapPanel>
+                <WrapPanel >
+                    <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88" Click="ToMainCollection">
+                        <Viewbox>
+                            <Grid Style="{x:Null}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="23*" />
+                                    <RowDefinition Height="22*"/>
+                                </Grid.RowDefinitions>
+                                <Image Style="{StaticResource ImgBookExplore}" Grid.Row="0"/>
+                                <TextBlock Text="Коллекция" Grid.Row="1" VerticalAlignment="Top" />
+                            </Grid>
+                        </Viewbox>
+                    </Button>
+                    <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88" Click="ToUserAccount">
+                        <Viewbox>
+                            <Grid Style="{x:Null}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="23*" />
+                                    <RowDefinition Height="22*"/>
+                                </Grid.RowDefinitions>
+                                <Image Style="{StaticResource ImgAccount}" Grid.Row="0"/>
+                                <TextBlock Text="Аккаунт" Grid.Row="1" VerticalAlignment="Top" />
+                            </Grid>
+                        </Viewbox>
+                    </Button>
+                    <Button Template="{DynamicResource ButtonMenu}" Height="45" Width="88" Click="ToUpload">
+                        <Viewbox>
+                            <Grid Style="{x:Null}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="23*" />
+                                    <RowDefinition Height="22*"/>
+                                </Grid.RowDefinitions>
+                                <Image Style="{StaticResource ImgBookUploads}" Grid.Row="0"/>
+                                <TextBlock Text="Мастерская" Grid.Row="1" VerticalAlignment="Top" />
+                            </Grid>
+                        </Viewbox>
+                    </Button>
+                </WrapPanel>
             </Viewbox>
         </Grid>
     </Grid>

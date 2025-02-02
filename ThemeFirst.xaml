@@ -1,15 +1,18 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Color x:Key="FirstColorRGB" R="210" G="135" B="121" A="255" />
-    <Color x:Key="SecondColorRGB" R="204" G="119" B="102" A="255" />
-    <Color x:Key="TherdColorRGB" R="105" G="63" B="55" A="255"/>
-    <Color x:Key="BorderColorRGB" R="255" G="199" B="153" A="255" />
+    <Color x:Key="FirstColorRGB" R="183" G="135" B="106" A="255" />
+    <Color x:Key="SecondColorRGB" R="164" G="119" B="98" A="255" />
+    <Color x:Key="TherdColorRGB" R="145" G="107" B="84" A="255"/>
+    <Color x:Key="BorderColorRGB" R="255" G="212" B="153" A="255" />
     <Color x:Key="GradientColorRGB" R="255" G="149" B="127" A="255" />
-    <Color x:Key="BorderMOverRGB" R="177" G="110" B="60" A="255" />
+    <Color x:Key="BorderMOverRGB" R="177" G="110" B="60" A="255"/>
+    <Color x:Key="TextColorFirstRGB" R="242" G="241" B="224" A="255"/>
+
     <SolidColorBrush x:Key="FirstColor"		Color="{StaticResource FirstColorRGB}"/>
     <SolidColorBrush x:Key="SecondColor"	Color="{StaticResource SecondColorRGB}"/>
     <SolidColorBrush x:Key="TherdColor"		Color="{StaticResource TherdColorRGB}"/>
     <SolidColorBrush x:Key="BorderColor"	Color="{StaticResource BorderColorRGB}"/>
     <SolidColorBrush x:Key="GradientColor"	Color="{StaticResource GradientColorRGB}"/>
     <SolidColorBrush x:Key="BorderMOver"	Color="{StaticResource BorderMOverRGB}"/>
+    <SolidColorBrush x:Key="TextColorFirst"	Color="{StaticResource TextColorFirstRGB}"/>
 </ResourceDictionary>
