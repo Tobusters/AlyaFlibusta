@@ -39,7 +39,7 @@ namespace WpfApp1
 
         private SQLConnection()
         {
-            Conn = new SqlConnection(@"Server=DESKTOP-QVUI8Q3;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//дом
+            Conn = new SqlConnection(@"Server=DESKTOP-QVUI8Q3;database=AlyaFlubusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//дом
             //Conn = new SqlConnection(@"Server=DESKTOP-CVTHJDK;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");
         }
         private SQLConnection(string coon)

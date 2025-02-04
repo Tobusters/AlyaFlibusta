@@ -50,7 +50,7 @@ namespace WpfApp1
                 {
                     conn.Conn.Close();
                 }
-                genres.SetGenres(conn.ConnectToDTBaseAndRead("select * from Genre"), ref conn);
+                genres.SetGenres(conn.ConnectToDTBaseAndRead("exec ShowGenre"), ref conn);
             }
 
 			InitializeComponent();
