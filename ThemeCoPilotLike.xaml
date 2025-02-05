@@ -6,8 +6,8 @@
     <Color x:Key="SecondColorRGB" R="23" G="30" B="50" A="255" />
     <Color x:Key="TherdColorRGB" R="16" G="21" B="40" A="255"/>
     <Color x:Key="BorderColorRGB" R="57" G="60" B="69" A="255" />
-    <Color x:Key="GradientColorRGB" R="255" G="149" B="127" A="255" />
-    <Color x:Key="BorderMOverRGB" R="177" G="110" B="60" A="255" />
+    <Color x:Key="GradientColorRGB" R="247" G="247" B="237" A="255" />
+    <Color x:Key="BorderMOverRGB" R="133" G="139" B="166" A="255" />
     <Color x:Key="TextColorFirstRGB" R="242" G="241" B="224" A="255"/>
 
     <SolidColorBrush x:Key="FirstColor"		Color="{StaticResource FirstColorRGB}"/>
@@ -17,4 +17,19 @@
     <SolidColorBrush x:Key="GradientColor"	Color="{StaticResource GradientColorRGB}"/>
     <SolidColorBrush x:Key="BorderMOver"	Color="{StaticResource BorderMOverRGB}"/>
     <SolidColorBrush x:Key="TextColorFirst"	Color="{StaticResource TextColorFirstRGB}"/>
+    <RadialGradientBrush x:Key="BorderGradient">
+        <GradientStop Color="{StaticResource GradientColorRGB}" Offset="0"/>
+        <GradientStop Color="{StaticResource SecondColorRGB}" Offset="1"/>
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="GradientButton">
+        <RadialGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform ScaleY="0.7"/>
+                <ScaleTransform ScaleX="0.5"/>
+                <TranslateTransform X="0.27"/>
+            </TransformGroup>
+        </RadialGradientBrush.RelativeTransform>
+        <GradientStop Color="AliceBlue" Offset="0"/>
+        <GradientStop Color="{StaticResource SecondColorRGB}" Offset="1"/>
+    </RadialGradientBrush>
 </ResourceDictionary>

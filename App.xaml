@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="/Imgs.xaml"/>
                 <ResourceDictionary Source="/Buttons.xaml"/>
                 <ResourceDictionary Source="/GlobalColours.xaml"/>
+                <ResourceDictionary Source="/CheckBoxes.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <!--<Color x:Key="FirstColorRGB" R="55" G="97" B="105" A="255"/>
             <Color x:Key="SecondColorRGB" R="102" G="187" B="204" A="255" />
