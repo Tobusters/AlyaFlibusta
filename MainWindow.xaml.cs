@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
@@ -27,34 +28,39 @@ namespace WpfApp1
         BOOKS books = BOOKS.getInstance();
         GENRES genres = GENRES.getInstance();
         BOOKS2G Books2G = BOOKS2G.getInstance();
+        //SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
+        SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
         public MainWindow()
         {
+            var result = MessageBox.Show("Загрузить с sql?", "SQL", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    if (conn.Conn != null)
+                    {
+                        MessageBox.Show("Успешное подключение!", "Статус подключения", MessageBoxButton.OK);
+                        conn.Conn.Open();
+                    }
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show(e.Message, e.ToString(), MessageBoxButton.OK);
+                }
+                finally
+                {
+                    conn.Conn.Close();
+                }
+                genres.SetGenres(conn.ConnectToDTBaseAndRead("exec ShowGenre"), ref conn);
+            }
+
             InitializeComponent();
+
             //RegLog regLog = new RegLog();
             //regLog.ShowDialog();
             books.AddBook(ref testBook1);
-            genres.AddGenre("0", "Science Fantasy");
-            genres.AddGenre("1", "Fantasy");
-            genres.AddGenre("2", "Science Fiction");
-            genres.AddGenre("3", "Science Trust");
-            genres.AddGenre("4", "Science Trust");
-            genres.AddGenre("5", "Science Trust");
-            genres.AddGenre("6", "Science Trust");
-            genres.AddGenre("7", "Science Trust");
-            genres.AddGenre("8", "Science Trust");
-            genres.AddGenre("9", "Science Trust");
-            genres.AddGenre("10", "Science Trust");
-            genres.AddGenre("11", "Science Trust");
-            genres.AddGenre("12", "Science Trust");
-            genres.AddGenre("13", "Science Trust");
-            genres.AddGenre("14", "Science Trust");
-            genres.AddGenre("15", "Science Trust");
-            genres.AddGenre("16", "Science Trust");
-            genres.AddGenre("17", "Science Trust");
-            genres.AddGenre("18", "Science Trust");
-            genres.AddGenre("19", "Science Trust");
-            Books2G.AddBook2genre(books[0].ID, genres[0]);
-            ExpandGenresUpdate(); 
+            //Books2G.AddBook2genre(books[0].ID, genres[0]);
+            ExpandGenresUpdate();
             //UpdateComboBox(GenreSelect);
         }
         public void UpdateComboBox(params ComboBox[] comboBoxes)
@@ -72,65 +78,87 @@ namespace WpfApp1
                 return;
             }
         }
-
-        private void ChangeStyle_Click(object sender, EventArgs e)
-        {
-            if (Grid01.Style == (Style)FindResource("GridStyle1") && BookMain.Style == (Style)FindResource("GridStyle1"))
-            {
-                Grid01.Style = (Style)FindResource("GridStyle2");
-                BookMain.Style = (Style)FindResource("GridStyle2");
-            }
-            else
-            {
-                if (Grid01.Style == (Style)FindResource("GridStyle2") && BookMain.Style == (Style)FindResource("GridStyle2"))
-                {
-                    Grid01.Style = (Style)FindResource("GridStyle3");
-                    BookMain.Style = (Style)FindResource("GridStyle3");
-                }
-                else
-                {
-                    if (Grid01.Style == (Style)FindResource("GridStyle3") && BookMain.Style == (Style)FindResource("GridStyle3"))
-                    {
-                        Grid01.Style = (Style)FindResource("GridStyle4");
-                        BookMain.Style = (Style)FindResource("GridStyle4");
-                    }
-                    else
-                    {
-                        if (Grid01.Style == (Style)FindResource("GridStyle4") && BookMain.Style == (Style)FindResource("GridStyle4"))
-                        {
-                            Grid01.Style = (Style)FindResource("GridStyle5");
-                            BookMain.Style = (Style)FindResource("GridStyle5");
-                        }
-                        else
-                        {
-                            Grid01.Style = (Style)FindResource("GridStyle1");
-                            BookMain.Style = (Style)FindResource("GridStyle1");
-                        }
-                    }
-                }
-            }
-
-            
-
-        }
-
         public void ExpandGenresUpdate()
         {
-            if(GenreSelect != null)
+            if (GenreSelect != null)
             {
-                //MessageBox.Show("sdsd");
-                string[]  list = genres.GetGenresNames();
-                ScrollViewer scrollViewer = new ScrollViewer();
-                StackPanel stackPanel = new StackPanel();
-                for (int i = 0; i < list.Length; i++)
-                {
-                    stackPanel.Children.Add(new CheckBox { Content = list[i], Name = list[i].Replace(" ", "")});
-                }
-                scrollViewer.Content = stackPanel;
-                scrollViewer.MaxHeight = 150;
-                GenreSelect.Content = scrollViewer;
-                //GenreSelect.Content;
+                GenreSelect.Content = null;
+            }
+            ////MessageBox.Show("sdsd");
+            //string[] list = genres.GetGenresNames();
+            //string[] listID = genres.GetGenresID();
+            //ScrollViewer scrollViewer = new ScrollViewer();
+            //StackPanel stackPanel = new StackPanel();
+            //for (int i = 0; i < list.Length; i++)
+            //{
+            //	stackPanel.Children.Add(new CheckBox { Content = list[i], Name = listID[i]});
+            //}
+            //scrollViewer.Content = stackPanel;
+            //scrollViewer.MaxHeight = 150;
+            //GenreSelect.Content = scrollViewer;
+            ////GenreSelect.Content;
+            ///
+
+
+            Dictionary<string, string> list = genres.GetGenresDict();
+            ScrollViewer scrollViewer = new ScrollViewer();
+            StackPanel stackPanel = new StackPanel();
+            stackPanel.Children.Add(new TextBox { Name = "FilterGenre", HorizontalAlignment = HorizontalAlignment.Left, MinWidth = 50 });
+            foreach (var Genres in list)
+            {
+                stackPanel.Children.Add(new CheckBox { Content = Genres.Value, Name = 'G' + Genres.Key });
+            }
+            scrollViewer.Content = stackPanel;
+            scrollViewer.MaxHeight = 150;
+            GenreSelect.Content = scrollViewer;
+
+        }
+
+        private void ToUserAccount(object sender, RoutedEventArgs e)
+        {
+            //Проверка на логин
+
+            SwitchViewGrid_ToUserAccount();
+        }
+
+        private void ToMainCollection(object sender, RoutedEventArgs e)
+        {
+            SwitchViewGrid_ToMainCollection();
+        }
+
+        private void ToUpload(object sender, RoutedEventArgs e)
+        {
+            SwitchViewGrid_ToUpload();
+        }
+        private void EnableGrids(bool CollectionGrid, bool AccountGrid, bool UploadGrid)
+        {
+            //if (CollectionGrid == AccountGrid == UploadGrid && CollectionGrid == true)return;	//Так не должно быть
+            //if (CollectionGrid == AccountGrid == UploadGrid && CollectionGrid == false)return;//Так не должно быть
+            if (CollectionGrid == AccountGrid && CollectionGrid == true) return;           //Так не должно быть
+            if (CollectionGrid == UploadGrid && CollectionGrid == true) return;         //Так не должно быть
+            if (AccountGrid == UploadGrid && AccountGrid == true) return;               //Так не должно быть
+            if (CollectionGrid)
+            {
+                BookMain.Visibility = Visibility.Visible;
+                Account.Visibility = Visibility.Hidden;
+                Upload.Visibility = Visibility.Hidden;
+            }
+            if (AccountGrid)
+            {
+                BookMain.Visibility = Visibility.Hidden;
+                Account.Visibility = Visibility.Visible;
+                Upload.Visibility = Visibility.Hidden;
+            }
+            if (UploadGrid)
+            {
+                Upload.Visibility = Visibility.Visible;
+                BookMain.Visibility = Visibility.Hidden;
+                Account.Visibility = Visibility.Hidden;
             }
         }
+        private void SwitchViewGrid_ToMainCollection() { EnableGrids(true, false, false); }
+        private void SwitchViewGrid_ToUserAccount() { EnableGrids(false, true, false); }
+        private void SwitchViewGrid_ToUpload() { EnableGrids(false, false, true); }
+
     }
 }
