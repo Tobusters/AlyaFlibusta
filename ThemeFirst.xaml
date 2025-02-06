@@ -7,7 +7,6 @@
     <Color x:Key="GradientColorRGB" R="255" G="149" B="127" A="255" />
     <Color x:Key="BorderMOverRGB" R="177" G="110" B="60" A="255"/>
     <Color x:Key="TextColorFirstRGB" R="242" G="241" B="224" A="255"/>
-
     <SolidColorBrush x:Key="FirstColor"		Color="{StaticResource FirstColorRGB}"/>
     <SolidColorBrush x:Key="SecondColor"	Color="{StaticResource SecondColorRGB}"/>
     <SolidColorBrush x:Key="TherdColor"		Color="{StaticResource TherdColorRGB}"/>
@@ -15,4 +14,51 @@
     <SolidColorBrush x:Key="GradientColor"	Color="{StaticResource GradientColorRGB}"/>
     <SolidColorBrush x:Key="BorderMOver"	Color="{StaticResource BorderMOverRGB}"/>
     <SolidColorBrush x:Key="TextColorFirst"	Color="{StaticResource TextColorFirstRGB}"/>
+    <RadialGradientBrush x:Key="GradientButtonOver">
+        <GradientStop Color="{StaticResource GradientColorRGB}" Offset="0"/>
+        <GradientStop Color="{StaticResource TherdColorRGB}" Offset="1"/>
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="GradientButtonMenu">
+        <RadialGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform ScaleY="0.7"/>
+                <ScaleTransform ScaleX="0.5"/>
+                <TranslateTransform X="0.27"/>
+            </TransformGroup>
+        </RadialGradientBrush.RelativeTransform>
+        <GradientStop Color="{StaticResource GradientColorRGB}" Offset="0"/>
+        <GradientStop Color="{StaticResource TherdColorRGB}" Offset="1"/>
+    </RadialGradientBrush>
+    <RadialGradientBrush  x:Key="GradientButtonRegularOver">
+        <GradientStop Color="{StaticResource TherdColorRGB}" Offset="0"/>
+        <GradientStop Color="{StaticResource SecondColorRGB}"  Offset="1.5"/>
+    </RadialGradientBrush>
+    <RadialGradientBrush  x:Key="GradientButtonRegularOverPressed">
+        <GradientStop Color="{StaticResource TherdColorRGB}" Offset="0"/>
+        <GradientStop Color="{StaticResource FirstColorRGB}" Offset="1.5"/>
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="GradientBorder.MouseOver">
+        <GradientStop Color="{StaticResource BorderColorRGB}" Offset="0.99"/>
+        <GradientStop Color="{StaticResource GradientColorRGB}" Offset="1"/>
+        <RadialGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform ScaleX="1.25"/>
+                <ScaleTransform ScaleY="1.25"/>
+                <TranslateTransform X="-0.125"/>
+                <TranslateTransform Y="-0.125"/>
+            </TransformGroup>
+        </RadialGradientBrush.RelativeTransform>
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="GradientBorder.Pressed" >
+        <GradientStop Color="{StaticResource BorderMOverRGB}" Offset="0.99"/>
+        <GradientStop Color="{StaticResource GradientColorRGB}" Offset="1"/>
+        <RadialGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform ScaleX="1.25"/>
+                <ScaleTransform ScaleY="1.25"/>
+                <TranslateTransform X="-0.125"/>
+                <TranslateTransform Y="-0.125"/>
+            </TransformGroup>
+        </RadialGradientBrush.RelativeTransform>
+    </RadialGradientBrush>
 </ResourceDictionary>

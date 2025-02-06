@@ -26,11 +26,11 @@
             <Viewbox>
             <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" MinWidth="100">
                 <Label Content="Email:"/>
-                <TextBox/>
+                <TextBox Template="{DynamicResource TextBoxRegular}"/>
                 <Label Content="Логин:"/>
-                <TextBox/>
+                <TextBox Template="{DynamicResource TextBoxRegular}"/>
                 <Label Content="Пароль:"/>
-                <TextBox/>
+                <TextBox Template="{DynamicResource TextBoxRegular}"/>
                 <Button Content="Регистрация" Template="{DynamicResource ButtonRegular}"/>
             </StackPanel>
             </Viewbox>

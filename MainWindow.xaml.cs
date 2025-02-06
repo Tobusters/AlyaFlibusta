@@ -104,7 +104,7 @@ namespace WpfApp1
 				StackPanel stackPanel = new StackPanel();
 				stackPanel.Children.Add(new TextBox { Name = "FilterGenre", HorizontalAlignment = HorizontalAlignment.Left, MinWidth = 50 });
 				foreach (var Genres in list) { 
-					stackPanel.Children.Add(new CheckBox { Content = Genres.Value, Name = 'G' + Genres.Key });
+					stackPanel.Children.Add(new CheckBox { Content = Genres.Value, Name = 'G' + Genres.Key, Template = (ControlTemplate)this.FindResource("CustomCheckBoxes") });
 				}
 				scrollViewer.Content = stackPanel;
 				scrollViewer.MaxHeight = 150;
@@ -128,6 +128,7 @@ namespace WpfApp1
 		{
 			SwitchViewGrid_ToUpload();
         }
+		
 		private void EnableGrids(bool CollectionGrid , bool AccountGrid,bool UploadGrid)
 		{
 			//if (CollectionGrid == AccountGrid == UploadGrid && CollectionGrid == true)return;	//Так не должно быть
