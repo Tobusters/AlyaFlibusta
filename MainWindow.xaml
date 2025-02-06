@@ -10,7 +10,7 @@
         <Grid Name="MainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition/>
-                <RowDefinition MaxHeight="60"/>
+                <RowDefinition MinHeight="15" MaxHeight="60"/>
             </Grid.RowDefinitions>
             <Grid x:Name="BookMain" Grid.Row="0" Visibility="Visible">
                 <Grid.ColumnDefinitions>
@@ -23,7 +23,6 @@
                             <Label Content="Поиск по названию" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <CheckBox Template="{DynamicResource CustomCheckBoxes}" IsChecked="True" Background="White" Content="СДЕЛАЙ МНЕ ШАБЛОН" />
                             <TextBox Foreground="{StaticResource TextColorFirst}" Template="{DynamicResource TextBoxRegular}"  TextWrapping="Wrap" Text="Перенести все основные градиенты в Словари тем, для большей кастомизации также переделай шаблоны для кнопок, можно просто менять заранее объявленные цвета не залазяя в цвета градиента" VerticalAlignment="Top"/>
-
                         </StackPanel>
                         <StackPanel  HorizontalAlignment="Left"  >
                             <Label Content="Поиск по жанру" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -158,7 +157,6 @@
                     </Button>
                 </WrapPanel>
             </Viewbox>
-            <Button Content="Style" HorizontalAlignment="Left" Margin="0,374,0,0" VerticalAlignment="Top" Grid.RowSpan="2" Click="ChangeStyle_Click"/>
         </Grid>
     </Grid>
 </Window>

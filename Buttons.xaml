@@ -1,29 +1,17 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
-    <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
-    <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
-    <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/GlobalColours.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <SolidColorBrush x:Key="Button.MouseOver.Border"    Color="{StaticResource BorderMOverRGB}"/>
     <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
-    <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+    <SolidColorBrush x:Key="Button.Disabled.Border"     Color="#FFADB2B5"/>
     <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
     <ControlTemplate x:Key="ButtonMenu" TargetType="{x:Type ButtonBase}">
         <!--<Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">-->
-        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-            <Border.Background>
-                <RadialGradientBrush>
-                    <RadialGradientBrush.RelativeTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleY="0.7"/>
-                            <ScaleTransform ScaleX="0.5"/>
-                            <TranslateTransform X="0.27"/>
-                        </TransformGroup>
-                    </RadialGradientBrush.RelativeTransform>
-                    <GradientStop Color="AliceBlue" Offset="0"/>
-                    <GradientStop Color="#66bbcc" Offset="1"/>
-                </RadialGradientBrush>
-            </Border.Background>
+        <Border x:Name="border" Background="{StaticResource GradientButton}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
         </Border>
         <ControlTemplate.Triggers>
@@ -31,20 +19,12 @@
                 <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
             </Trigger>
             <Trigger Property="IsMouseOver" Value="true">
-                <!--<Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>-->
-                <Setter Property="Background" TargetName="border">
+                <Setter Property="Background" TargetName="border" Value="{StaticResource BorderGradient}"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                <Setter  Property="BorderBrush" TargetName="border">
                     <Setter.Value>
                         <RadialGradientBrush>
-                            <GradientStop Color="White" Offset="0"/>
-                            <GradientStop Color="#66bbcc" Offset="1"/>
-                        </RadialGradientBrush>
-                    </Setter.Value>
-                </Setter>
-                <!--<Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>-->
-                <Setter  Property="BorderBrush" TargetName="border">
-                        <Setter.Value>
-                        <RadialGradientBrush>
-                            <GradientStop Color="#66bbcc" Offset="0.99"/>
+                            <GradientStop Color="{StaticResource SecondColorRGB}" Offset="0.99"/>
                             <GradientStop Color="White" Offset="1"/>
                             <RadialGradientBrush.RelativeTransform>
                                 <TransformGroup>
@@ -60,12 +40,10 @@
 
             </Trigger>
             <Trigger Property="IsPressed" Value="true">
-                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
-                <!--<Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>-->
                 <Setter  Property="BorderBrush" TargetName="border">
                     <Setter.Value>
                         <RadialGradientBrush>
-                            <GradientStop Color="#99d1ff" Offset="0.99"/>
+                            <GradientStop Color="{StaticResource BorderColorRGB}" Offset="0.99"/>
                             <GradientStop Color="White" Offset="1"/>
                             <RadialGradientBrush.RelativeTransform>
                                 <TransformGroup>
@@ -90,7 +68,7 @@
         <!--<Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">-->
         <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
             <Border.Background>
-                <SolidColorBrush Color="#66bbcc"/>
+                <SolidColorBrush Color="{StaticResource SecondColorRGB}"/>
             </Border.Background>
             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
         </Border>
@@ -103,8 +81,8 @@
                 <Setter Property="Background" TargetName="border">
                     <Setter.Value>
                         <RadialGradientBrush>
-                            <GradientStop Color="#66bbcc" Offset="1.5"/>
-                            <GradientStop Color="#00AACC" Offset="0"/>
+                            <GradientStop Color="{StaticResource SecondColorRGB}" Offset="1.5"/>
+                            <GradientStop Color="{StaticResource GradientColorRGB}" Offset="0"/>
                         </RadialGradientBrush>
                     </Setter.Value>
                 </Setter>
@@ -112,7 +90,7 @@
                 <Setter  Property="BorderBrush" TargetName="border">
                     <Setter.Value>
                         <RadialGradientBrush>
-                            <GradientStop Color="#66bbcc" Offset="0.99"/>
+                            <GradientStop Color="{StaticResource SecondColorRGB}" Offset="0.99"/>
                             <GradientStop Color="White" Offset="1"/>
                             <RadialGradientBrush.RelativeTransform>
                                 <TransformGroup>
@@ -125,15 +103,13 @@
                         </RadialGradientBrush>
                     </Setter.Value>
                 </Setter>
-                
+
             </Trigger>
             <Trigger Property="IsPressed" Value="true">
-                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
-                <!--<Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>-->
                 <Setter  Property="BorderBrush" TargetName="border">
                     <Setter.Value>
                         <RadialGradientBrush>
-                            <GradientStop Color="#99d1ff" Offset="0.99"/>
+                            <GradientStop Color="{StaticResource BorderColorRGB}" Offset="0.99"/>
                             <GradientStop Color="White" Offset="1"/>
                             <RadialGradientBrush.RelativeTransform>
                                 <TransformGroup>

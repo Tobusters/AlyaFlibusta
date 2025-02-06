@@ -24,19 +24,19 @@
                 <RowDefinition Height="150*"/>
             </Grid.RowDefinitions>
             <Viewbox>
-            <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" MinWidth="100">
-                <Label Content="Email:"/>
-                <TextBox/>
-                <Label Content="Логин:"/>
-                <TextBox/>
-                <Label Content="Пароль:"/>
-                <TextBox/>
-                <Button Content="Регистрация"/>
-            </StackPanel>
+                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" MinWidth="100">
+                    <Label Content="Email:"/>
+                    <TextBox/>
+                    <Label Content="Логин:"/>
+                    <TextBox/>
+                    <Label Content="Пароль:"/>
+                    <TextBox/>
+                    <Button Content="Регистрация" Template="{DynamicResource ButtonRegular}"/>
+                </StackPanel>
             </Viewbox>
             <StackPanel Grid.Row="1" Style="{StaticResource Smaller}" HorizontalAlignment="Center">
                 <Label Content="Уже есть аккаунт?"/>
-                <Button Content="Войти" Click="ToLogIn"/>
+                <Button Content="Войти" Click="ToLogIn" Template="{DynamicResource ButtonRegular}"/>
             </StackPanel>
         </Grid>
     </Grid>

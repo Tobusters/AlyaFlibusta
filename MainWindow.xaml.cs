@@ -29,7 +29,7 @@ namespace WpfApp1
         GENRES genres = GENRES.getInstance();
         BOOKS2G Books2G = BOOKS2G.getInstance();
         //SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
-        SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
+        //SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
         public MainWindow()
         {
             var result = MessageBox.Show("Загрузить с sql?", "SQL", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -37,11 +37,11 @@ namespace WpfApp1
             {
                 try
                 {
-                    if (conn.Conn != null)
+                    /*if (conn.Conn != null)
                     {
                         MessageBox.Show("Успешное подключение!", "Статус подключения", MessageBoxButton.OK);
                         conn.Conn.Open();
-                    }
+                    }*/
                 }
                 catch (SqlException e)
                 {
@@ -49,9 +49,9 @@ namespace WpfApp1
                 }
                 finally
                 {
-                    conn.Conn.Close();
+                    //conn.Conn.Close();
                 }
-                genres.SetGenres(conn.ConnectToDTBaseAndRead("exec ShowGenre"), ref conn);
+                //genres.SetGenres(conn.ConnectToDTBaseAndRead("exec ShowGenre"), ref conn);
             }
 
             InitializeComponent();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Windows;
@@ -15,7 +16,7 @@ namespace WpfApp1
 
         public void AddGenre(ref string ID, ref string Name)
         {
-            genres.Add(ID , Name);
+            genres.Add(ID, Name);
         }
         public void AddGenre(string ID, string Name)
         {
@@ -54,6 +55,24 @@ namespace WpfApp1
             }
             return strings;
         }
+
+        public void SetGenres(SqlDataReader sqlData, ref SQLConnection connection)
+        {
+            genres.Clear();
+            try
+            {
+                while (sqlData.Read())
+                {
+                    genres.Add(sqlData[0].ToString(), sqlData[1].ToString());
+                }
+            }
+            finally
+            {
+                sqlData.Close();
+                connection.Conn.Close();
+            }
+        }
+
         public string[] GetGenresID()
         {
             string[] strings = new string[0];
@@ -66,6 +85,12 @@ namespace WpfApp1
             MessageBox.Show(strings.Length.ToString());
 
             return strings;
+        }
+
+        public Dictionary<string, string> GetGenresDict()
+        {
+            Dictionary<string, string> Toreturn = genres;
+            return Toreturn;
         }
         public string GetGenresIDBy(ref string Name)
         {

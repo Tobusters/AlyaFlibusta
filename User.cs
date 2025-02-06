@@ -40,8 +40,8 @@ namespace WpfApp1
             PersonalLibrary = new string[0];
             PersonallyLoadedBooks = new string[0];
         }
-        
-        public User():this("-1", "VoidUser", false) { }
+
+        public User() : this("-1", "VoidUser", false) { }
 
         public void ShowMessages() { }
         public void DeleteAllMessages() { }
@@ -54,13 +54,13 @@ namespace WpfApp1
         public void WriteComment(int BookID) { }
     }
 }
-class Moderator: User
+class Moderator : User
 {
     public Moderator(string iD, string login, bool status) : base(iD, login, status)
     {
     }
 
-    public Moderator(): this("-1", "voidmod", false)
+    public Moderator() : this("-1", "voidmod", false)
     {
     }
 
@@ -70,13 +70,13 @@ class Moderator: User
     public void DeleteBook(int BookID) { }
 
 }
-class Admin: Moderator
+class Admin : Moderator
 {
     public Admin(string iD, string login, bool status) : base(iD, login, status)
     {
     }
 
-    public Admin(): this("-1", "voidmod", false)
+    public Admin() : this("-1", "voidmod", false)
     {
     }
 

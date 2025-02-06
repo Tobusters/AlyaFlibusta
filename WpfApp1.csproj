@@ -56,9 +56,28 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Book.cs" />
+    <Compile Include="CheckBoxes.xaml.cs">
+      <DependentUpon>CheckBoxes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Genre.cs" />
     <Compile Include="RegLog.xaml.cs">
       <DependentUpon>RegLog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SQLConnection.cs" />
+    <Compile Include="TextBlocks.xaml.cs">
+      <DependentUpon>TextBlocks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TextBoxes.xaml.cs">
+      <DependentUpon>TextBoxes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ThemeCoPilotLike.xaml.cs">
+      <DependentUpon>ThemeCoPilotLike.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ThemeFirst.xaml.cs">
+      <DependentUpon>ThemeFirst.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ThemeStandart.xaml.cs">
+      <DependentUpon>ThemeStandart.xaml</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
     <Compile Include="Window1.xaml.cs">
@@ -68,7 +87,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GridStiles.xaml">
+    <Page Include="CheckBoxes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GlobalColours.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -89,6 +112,26 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="RegLog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextBlocks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextBoxes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ThemeCoPilotLike.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ThemeFirst.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ThemeStandart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

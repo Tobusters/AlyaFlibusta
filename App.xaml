@@ -6,47 +6,48 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TextBoxes.xaml"/>
                 <ResourceDictionary Source="/Imgs.xaml"/>
                 <ResourceDictionary Source="/Buttons.xaml"/>
                 <ResourceDictionary Source="/GlobalColours.xaml"/>
                 <ResourceDictionary Source="/CheckBoxes.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <!--<Color x:Key="FirstColorRGB" R="55" G="97" B="105" A="255"/>
+            <Color x:Key="SecondColorRGB" R="102" G="187" B="204" A="255" />
+            <Color x:Key="TherdColorRGB" R="121" G="196" B="210" A="255" />
+            <Color x:Key="BorderColorRGB" R="153" G="209" B="255" A="255" />-->
+
             <Style x:Key="BorderColor">
-                <Setter Property="Control.BorderBrush" Value="#99d1ff"/>
+                <Setter Property="Control.BorderBrush">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{StaticResource BorderColorRGB}"/>
+                    </Setter.Value>
+                </Setter>
             </Style>
-            <Style x:Key="PanelButtons">
-                <Setter Property="FrameworkElement.Margin" Value="5 0 5 0"/>
-                <Setter Property="Control.Background" Value="#6fBBCC"/>
-            </Style>
-            <Style x:Key="SecondColor" BasedOn="{StaticResource BorderColor}">
-                <Setter Property="Control.Background" Value="#66BBCC"/>
-            </Style>
-            <Style x:Key="FirstColor"  BasedOn="{StaticResource BorderColor}">
-                <Setter Property="Control.Background" Value="#FF4D8E9C"/>
-            </Style>
-            <Style x:Key="TherdColor"  BasedOn="{StaticResource BorderColor}" >
-                <Setter Property="Control.Background" Value="#FF376169"/>
-            </Style>
-            <Style x:Key="FourthColor"  BasedOn="{StaticResource BorderColor}" >
-                <Setter Property="Control.Background" Value="#79c4d2"/>
-            </Style>
-            <!--https://www.w3schools.com/colors/colors_picker.asp-->
+
             <Style TargetType="{x:Type CheckBox}">
                 <Setter Property="Margin" Value="10 0 0 0"/>
+                <Setter Property="Foreground" Value="{StaticResource TextColorFirst}"/>
+
             </Style>
             <Style x:Key="Smaller">
                 <Setter Property="FrameworkElement.Margin" Value="0 1 0 0"/>
                 <Setter Property="Control.FontSize" Value="10"/>
             </Style>
-            <Style TargetType="{x:Type TextBox}"  BasedOn="{StaticResource TherdColor}">
+            <Style TargetType="{x:Type TextBox}" >
                 <Setter Property="TextWrapping" Value="Wrap"/>
                 <Setter Property="Margin" Value="0 0 0 5"/>
                 <Setter Property="MinWidth" Value="30"/>
             </Style>
-            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource FourthColor}">
+            <Style TargetType="{x:Type TextBlock}">
                 <Setter Property="Margin" Value="5 0 5 0"/>
+                <Setter Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{StaticResource TextColorFirstRGB}"/>
+                    </Setter.Value>
+                </Setter>
             </Style>
-            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource FirstColor}">
+            <Style TargetType="{x:Type Label}">
                 <Setter Property="Margin" Value="0 0 0 5"/>
             </Style>
             <Style TargetType="{x:Type Button}" >
@@ -75,6 +76,8 @@
             <Style TargetType="DataGridCell">
                 <Setter Property="Background" Value="{StaticResource TherdColor}"/>
             </Style>
+
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
