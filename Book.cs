@@ -10,7 +10,7 @@ namespace WpfApp1
 	{
 		private static BOOKS instance;
 		//Update updatebox;
-		public Book[] Books;
+		private Book[] Books;
         static Book empty = new Book();
         public void AddBook(ref Book book) {
 			var b = Books.Append(book);
@@ -38,6 +38,11 @@ namespace WpfApp1
 				i++;
 			}
 			MessageBox.Show(toShow);
+		}
+
+		public void SetBooksBySql(Book[] booksNew)
+		{
+			Books  = booksNew;
 		}
 
 		private ref Book GetBookByID(string ID)
@@ -108,6 +113,16 @@ namespace WpfApp1
 			get { return name; }
 			set { name = value; }
 		}
+
+		private string authorId;
+
+		public string AuthorId
+        {
+			get { return authorId; }
+			set { authorId = value; }
+		}
+
+
 		private string description;
 
 		public string Description
@@ -125,15 +140,16 @@ namespace WpfApp1
 
 		private string filepath;
 
-		public Book(string iD, string name, string description, DateTime dateOfUpload,string filePath)
+		public Book(string iD, string name, string AId, string description, string dateOfUpload,string filePath)
 		{
 			ID = iD;
+			AuthorId = AId;
 			Name = name;
 			Description = description;
-			DateOfUpload = dateOfUpload;
+			DateOfUpload = DateTime.Parse(dateOfUpload);
 			FilePath = filePath;
 		}
-		public Book() : this("-1", "Void", "Empty class", new DateTime(2010, 4, 11), "/") {}
+		public Book() : this("-1", "Void", "Noname", "Empty class", "2010-4-11", "/") {}
 
 		public string FilePath
 		{

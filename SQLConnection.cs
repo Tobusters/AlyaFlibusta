@@ -13,6 +13,7 @@ namespace WpfApp1
         //static readonly string connectionString = @"Server=.\SQLEXPRESS;database=Warehouse;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true";
         //static readonly string connectionString = @"Server=DESKTOP-QVUI8Q3;database=Warehouse;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true";
         private SqlConnection connection;
+        SqlDataReader rdr;
 
         public static bool IsConnected { get; private set; } = false;
 
@@ -44,10 +45,13 @@ namespace WpfApp1
         {
             Conn = new SqlConnection(@"Server=DESKTOP-QVUI8Q3;database=AlyaFlubusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//дом
             //Conn = new SqlConnection(@"Server=DESKTOP-CVTHJDK;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");
+            rdr = null;
         }
         private SQLConnection(string coon)
         {
             Conn = new SqlConnection(coon);
+            rdr = null;
+
         }
 
         public static SQLConnection getInstance()
@@ -74,10 +78,10 @@ namespace WpfApp1
         }
         private void FinallyBody()
         {
-            //if (rdr != null)
-            //{
-            //    rdr.Close();
-            //}
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
             if (Conn != null)
             {
                 Conn.Close();
@@ -122,27 +126,68 @@ namespace WpfApp1
             return null;
         }
 
-        public Dictionary<string, string> ConnectToDTBaseAndReadDictionary(string select)
+        private void ConnectToDTBaseAndRead(string select)
         {
             try
             {
                 SqlCommand sqlCommand = new SqlCommand(select, Conn);//Запрос
                 Conn.Open();//Открываем подключение
-                SqlDataReader rdr = sqlCommand.ExecuteReader();//Включаем Читалку, для считывания ответа на запрос sql
-                Dictionary<string, string> Dict = new Dictionary<string, string>();
-                while (rdr.Read())
-                {
-                    Dict.Add(rdr[0].ToString(), rdr[1].ToString());
-                }
-                return Dict;
+                rdr = sqlCommand.ExecuteReader();
             }
             catch (SqlException e)
             {
-                MessageBox.Show(e.Message.ToString(), e.ToString());
+                MessageBox.Show(select, e.ToString());
             }
-            finally
+        }
+
+        public Dictionary<string, string> ConnectToDTBaseAndReadDictionary(string select)
+        {
+            ConnectToDTBaseAndRead(select);
+            if (rdr != null)
             {
-               FinallyBody();
+                try
+                {
+                    Dictionary<string, string> Dict = new Dictionary<string, string>();
+                    while (rdr.Read())
+                    {
+                        Dict.Add(rdr[0].ToString(), rdr[1].ToString());
+                    }
+                    return Dict;
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show(e.Message.ToString(), e.ToString());
+                }
+                finally
+                {
+                    FinallyBody();
+                }
+            }
+            return null;
+        }
+        public Book[] ConnectToDTBaseAndReadBooks(string select)
+        {
+            ConnectToDTBaseAndRead(select);
+            if (rdr != null)
+            {
+                Book[] books = new Book()
+                try
+                {
+                    Dictionary<string, string> Dict = new Dictionary<string, string>();
+                    while (rdr.Read())
+                    {
+                        Dict.Add(rdr[0].ToString(), rdr[1].ToString());
+                    }
+                    return Dict;
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show(e.Message.ToString(), e.ToString());
+                }
+                finally
+                {
+                    FinallyBody();
+                }
             }
             return null;
         }
