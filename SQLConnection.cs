@@ -1,5 +1,7 @@
-﻿using System.Data.SqlClient;
+﻿using System.Data;
+using System.Data.SqlClient;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace WpfApp1
 {
@@ -62,11 +64,12 @@ namespace WpfApp1
 
 
 
-        private void TryConnectionAndQueryBody(string select)
+        private SqlCommand TryConnectionAndQueryBody(string select)
         {
             SqlCommand sqlCommand = new SqlCommand(select, Conn);
             Conn.Open();
             sqlCommand.ExecuteNonQuery();
+            return sqlCommand;
         }
         private void FinallyBody()
         {
@@ -84,7 +87,7 @@ namespace WpfApp1
         {
             try
             {
-                TryConnectionAndQueryBody(select);
+                _ = TryConnectionAndQueryBody(select);
             }
             catch (SqlException e)
             {
@@ -95,6 +98,29 @@ namespace WpfApp1
                 FinallyBody();
             }
         }
+
+        public DataView ConnectToDTBaseAndFillDataGrid(string select)
+        {
+            try
+            {
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(TryConnectionAndQueryBody(select));
+                DataTable dataTable = new DataTable("Books");
+                sqlDataAdapter.Fill(dataTable);
+                return dataTable.DefaultView;
+
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message.ToString(), e.ToString());
+            }
+            finally 
+            {
+                FinallyBody();
+            }
+            MessageBox.Show("Ошибка заполнения Datagrid");
+            return null;
+        }
+
         public SqlDataReader ConnectToDTBaseAndRead(string select)
         {
             try

@@ -36,7 +36,7 @@
                         <!--<Button Content="Поиск" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 20" Template="{DynamicResource ButtonRegularRemake}" />-->
                     </StackPanel>
                 </Viewbox>
-                <DataGrid d:ItemsSource="{d:SampleData ItemCount=20}" Grid.Column="1"/>
+                <DataGrid d:ItemsSource="{d:SampleData ItemCount=20}" AutoGenerateColumns="True" x:Name="CollectionBooksViewTable" Grid.Column="1"/>
             </Grid>
             <Grid Name="Account" Grid.Row="0" Visibility="Hidden">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10">
