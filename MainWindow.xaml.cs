@@ -50,7 +50,6 @@ namespace WpfApp1
                 {
                     conn.Conn.Close();
                 }
-				genres.SetGenres(conn.ConnectToDTBaseAndRead("exec ShowGenre"), ref conn);
             }
 
 			InitializeComponent();
@@ -59,9 +58,10 @@ namespace WpfApp1
 			//regLog.ShowDialog();
 			books.AddBook(ref testBook1);
 			//Books2G.AddBook2genre(books[0].ID, genres[0]);
-			ExpandGenresUpdate();
+			genres.SetGenres(conn.ConnectToDTBaseAndReadDictionary("exec ShowGenre"));
 			CollectionBooksViewTable.ItemsSource = conn.ConnectToDTBaseAndFillDataGrid("exec ShowSimpleBooksForViewTable");
 			//UpdateComboBox(GenreSelect);
+			ExpandGenresUpdate();
 		}
 		public void UpdateComboBox(params ComboBox[] comboBoxes)
 		{

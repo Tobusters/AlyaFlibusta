@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
@@ -121,14 +122,19 @@ namespace WpfApp1
             return null;
         }
 
-        public SqlDataReader ConnectToDTBaseAndRead(string select)
+        public Dictionary<string, string> ConnectToDTBaseAndReadDictionary(string select)
         {
             try
             {
                 SqlCommand sqlCommand = new SqlCommand(select, Conn);//Запрос
                 Conn.Open();//Открываем подключение
                 SqlDataReader rdr = sqlCommand.ExecuteReader();//Включаем Читалку, для считывания ответа на запрос sql
-                return rdr;//Не самая удобная реализация, но работает
+                Dictionary<string, string> Dict = new Dictionary<string, string>();
+                while (rdr.Read())
+                {
+                    Dict.Add(rdr[0].ToString(), rdr[1].ToString());
+                }
+                return Dict;
             }
             catch (SqlException e)
             {
@@ -136,7 +142,7 @@ namespace WpfApp1
             }
             finally
             {
-               // FinallyBody();
+               FinallyBody();
             }
             return null;
         }
