@@ -57,10 +57,10 @@ namespace WpfApp1
 
 			//RegLog regLog = new RegLog();
 			//regLog.ShowDialog();
-			books.AddBook(ref testBook1);
+			//books.AddBook(ref testBook1);
 			//Books2G.AddBook2genre(books[0].ID, genres[0]);
-			ExpandGenresUpdate();
-			CollectionBooksViewTable.ItemsSource = conn.ConnectToDTBaseAndFillDataGrid("exec ShowSimpleBooksForViewTable");
+			//ExpandGenresUpdate();
+			//CollectionBooksViewTable.ItemsSource = conn.ConnectToDTBaseAndFillDataGrid("exec ShowSimpleBooksForViewTable");
 			//UpdateComboBox(GenreSelect);
 		}
 		public void UpdateComboBox(params ComboBox[] comboBoxes)
@@ -129,8 +129,33 @@ namespace WpfApp1
 		{
 			SwitchViewGrid_ToUpload();
         }
-		
-		private void EnableGrids(bool CollectionGrid , bool AccountGrid,bool UploadGrid)
+
+        private void ToMessage(object sender, RoutedEventArgs e)
+        {
+			Messager.Visibility = Visibility.Visible;
+        }
+        private void ToBackMessage(object sender, RoutedEventArgs e)
+        {
+            Messager.Visibility = Visibility.Hidden;
+        }
+        private void Timed(object sender, RoutedEventArgs e)
+        {
+            PreviewBook.Visibility = Visibility.Visible;
+        }
+        private void ToBackBook(object sender, RoutedEventArgs e)
+        {
+            PreviewBook.Visibility = Visibility.Hidden;
+        }
+        private void ToComment(object sender, RoutedEventArgs e)
+        {
+            Comments.Visibility = Visibility.Visible;
+        }
+        private void ToBackComments(object sender, RoutedEventArgs e)
+        {
+            Comments.Visibility = Visibility.Hidden;
+        }
+
+        private void EnableGrids(bool CollectionGrid , bool AccountGrid,bool UploadGrid)
 		{
 			//if (CollectionGrid == AccountGrid == UploadGrid && CollectionGrid == true)return;	//Так не должно быть
 			//if (CollectionGrid == AccountGrid == UploadGrid && CollectionGrid == false)return;//Так не должно быть
@@ -159,6 +184,7 @@ namespace WpfApp1
 		private void SwitchViewGrid_ToMainCollection() { EnableGrids(true, false, false); }
 		private void SwitchViewGrid_ToUserAccount() { EnableGrids(false, true, false); }
 		private void SwitchViewGrid_ToUpload() { EnableGrids(false, false, true); }
+
 
     }
 }
