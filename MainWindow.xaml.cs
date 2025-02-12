@@ -24,12 +24,12 @@ namespace WpfApp1
 	delegate void Update();
 	public partial class MainWindow : Window
 	{
-		Book testBook1 = new Book("0", "Принцесса Марса", "Джон Картер на Марсе", new DateTime(1911, 1, 1), "");
+		Book testBook1 = new Book("0", "Принцесса Марса", "0", "Джон Картер на Марсе", "", "");
 		BOOKS books = BOOKS.getInstance();
 		GENRES genres = GENRES.getInstance();
 		BOOKS2G Books2G = BOOKS2G.getInstance();
-		SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-UNTJG88\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
-		//SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
+		//SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-UNTJG88\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
+		SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
 		public MainWindow()
 		{
 			var result = MessageBox.Show("Загрузить с sql?", "SQL", MessageBoxButton.YesNo, MessageBoxImage.Question);
