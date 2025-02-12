@@ -170,7 +170,7 @@ namespace WpfApp1
             ConnectToDTBaseAndRead(select);
             if (rdr != null)
             {
-                Book[] books = new Book()
+                Book[] books = new Book[0];
                 try
                 {
                     Dictionary<string, string> Dict = new Dictionary<string, string>();
@@ -178,7 +178,7 @@ namespace WpfApp1
                     {
                         Dict.Add(rdr[0].ToString(), rdr[1].ToString());
                     }
-                    return Dict;
+                    return books;
                 }
                 catch (SqlException e)
                 {
