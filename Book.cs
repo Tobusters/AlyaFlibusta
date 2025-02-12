@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Security.Policy;
 using System.Windows;
@@ -45,7 +47,34 @@ namespace WpfApp1
 			Books  = booksNew;
 		}
 
-		private ref Book GetBookByID(string ID)
+        public DataView SimpleFillDataGrid()
+        {
+
+            try
+            {
+                DataTable dt = new DataTable("Books");
+                dt.Columns.Add(new DataColumn("Название", typeof(string)));
+                dt.Columns.Add(new DataColumn("Автор", typeof(string)));
+                for (var i = 0; i < Books.Length; i++)
+                {
+                    DataRow r = dt.NewRow();
+                    r[0] = Books[i].Name;
+                    r[1] = Books[i].AuthorName;
+                    dt.Rows.Add(r);
+                }
+                return dt.DefaultView;
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message.ToString(), e.ToString());
+            }
+            MessageBox.Show("Ошибка заполнения Datagrid");
+            return null;
+        }
+
+
+        private ref Book GetBookByID(string ID)
 		{
 			//if (Books?[Convert.ToInt64(ID)] != null)
 			//{
@@ -114,12 +143,12 @@ namespace WpfApp1
 			set { name = value; }
 		}
 
-		private string authorId;
+		private string authorname;
 
-		public string AuthorId
+		public string AuthorName
         {
-			get { return authorId; }
-			set { authorId = value; }
+			get { return authorname; }
+			set { authorname = value; }
 		}
 
 
@@ -140,16 +169,20 @@ namespace WpfApp1
 
 		private string filepath;
 
-		public Book(string iD, string name, string AId, string description, string dateOfUpload,string filePath)
+		public Book(string iD, string name, string Author, string description, string dateOfUpload,string filePath)
 		{
 			ID = iD;
-			AuthorId = AId;
+			AuthorName = Author;
 			Name = name;
 			Description = description;
-			DateOfUpload = DateTime.Parse(dateOfUpload);
-			FilePath = filePath;
+			DateTime ret;
+            DateTime.TryParse(dateOfUpload, out ret);
+			DateOfUpload = ret;
+            FilePath = filePath;
 		}
 		public Book() : this("-1", "Void", "Noname", "Empty class", "2010-4-11", "/") {}
+
+		public Book(string iD, string name, string Author): this(iD, name, Author, "", "", "") { }
 
 		public string FilePath
 		{

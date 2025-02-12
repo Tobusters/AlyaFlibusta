@@ -24,7 +24,7 @@ namespace WpfApp1
 	delegate void Update();
 	public partial class MainWindow : Window
 	{
-		Book testBook1 = new Book("0", "Принцесса Марса", "0", "Джон Картер на Марсе", "", "");
+		Book testBook1 = new Book("-1", "Принцесса Марса", "0", "Джон Картер на Марсе", "", "");
 		BOOKS books = BOOKS.getInstance();
 		GENRES genres = GENRES.getInstance();
 		BOOKS2G Books2G = BOOKS2G.getInstance();
@@ -59,7 +59,8 @@ namespace WpfApp1
 			books.AddBook(ref testBook1);
 			//Books2G.AddBook2genre(books[0].ID, genres[0]);
 			genres.SetGenres(conn.ConnectToDTBaseAndReadDictionary("exec ShowGenre"));
-			CollectionBooksViewTable.ItemsSource = conn.ConnectToDTBaseAndFillDataGrid("exec ShowSimpleBooksForViewTable");
+			books.SetBooksBySql(conn.ConnectToDTBaseAndReadBooks("exec ShowSimpleBooksForViewTable"));
+			CollectionBooksViewTable.ItemsSource = books.SimpleFillDataGrid();
 			//UpdateComboBox(GenreSelect);
 			ExpandGenresUpdate();
 		}

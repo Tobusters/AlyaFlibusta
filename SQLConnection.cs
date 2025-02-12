@@ -104,27 +104,6 @@ namespace WpfApp1
             }
         }
 
-        public DataView ConnectToDTBaseAndFillDataGrid(string select)
-        {
-            try
-            {
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(TryConnectionAndQueryBody(select));
-                DataTable dataTable = new DataTable("Books");
-                sqlDataAdapter.Fill(dataTable);
-                return dataTable.DefaultView;
-
-            }
-            catch (SqlException e)
-            {
-                MessageBox.Show(e.Message.ToString(), e.ToString());
-            }
-            finally 
-            {
-                FinallyBody();
-            }
-            MessageBox.Show("Ошибка заполнения Datagrid");
-            return null;
-        }
 
         private void ConnectToDTBaseAndRead(string select)
         {
@@ -170,15 +149,14 @@ namespace WpfApp1
             ConnectToDTBaseAndRead(select);
             if (rdr != null)
             {
-                Book[] books = new Book[0];
                 try
                 {
-                    Dictionary<string, string> Dict = new Dictionary<string, string>();
+                    List<Book> list = new List<Book>();
                     while (rdr.Read())
                     {
-                        Dict.Add(rdr[0].ToString(), rdr[1].ToString());
+                        list.Add(new Book(rdr[0].ToString(), rdr[1].ToString(), rdr[2].ToString()));
                     }
-                    return books;
+                    return list.ToArray();
                 }
                 catch (SqlException e)
                 {
