@@ -109,9 +109,9 @@ namespace WpfApp1
 
         private void ConnectToDTBaseAndRead(string select)
         {
+            if(!IsConnected) return;
             try
             {
-                if(!IsConnected) return;
                 SqlCommand sqlCommand = new SqlCommand(select, Conn);//Запрос
                 Conn.Open();//Открываем подключение
                 rdr = sqlCommand.ExecuteReader();

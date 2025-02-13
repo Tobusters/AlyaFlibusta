@@ -30,8 +30,10 @@ namespace WpfApp1
 		BOOKS books = BOOKS.getInstance();
 		GENRES genres = GENRES.getInstance();
 		BOOKS2G Books2G = BOOKS2G.getInstance();
+		USERS users = USERS.getInstance();
 		//SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-UNTJG88\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
-		SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
+		static SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
+		RegLog RegLog = new RegLog(conn);
 		//SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
 		public MainWindow()
 		{
@@ -118,32 +120,33 @@ namespace WpfApp1
 			
         }
 
-		private async void ToUserAccount(object sender, RoutedEventArgs e)
+
+
+		#region Вкладки
+		private void ToUserAccount(object sender, RoutedEventArgs e)
 		{
 			//Проверка на логин
 			if (_Is_Logged)
 			{
 				SwitchViewGrid_ToUserAccount();
 			}
-            else
-            {
-                RegLog regLog = new RegLog();
+			else
+			{
+				RegLog regLog = new RegLog();
 				regLog.Owner = this;
 				regLog.ShowDialog();
-            }
-        }
-
+			}
+		}
 		private void ToMainCollection(object sender, RoutedEventArgs e)
 		{
 			SwitchViewGrid_ToMainCollection();
-        }
-
+		}
 		private void ToUpload(object sender, RoutedEventArgs e)
 		{
 			SwitchViewGrid_ToUpload();
-        }
-		
-		private void EnableGrids(bool CollectionGrid , bool AccountGrid,bool UploadGrid)
+		}
+
+		private void EnableGrids(bool CollectionGrid, bool AccountGrid, bool UploadGrid)
 		{
 			//if (CollectionGrid == AccountGrid == UploadGrid && CollectionGrid == true)return;	//Так не должно быть
 			//if (CollectionGrid == AccountGrid == UploadGrid && CollectionGrid == false)return;//Так не должно быть
@@ -152,26 +155,27 @@ namespace WpfApp1
 			if (AccountGrid == UploadGrid && AccountGrid == true) return;               //Так не должно быть
 			if (CollectionGrid)
 			{
-                BookMain.Visibility = Visibility.Visible;
-                Account.Visibility = Visibility.Hidden;
-                Upload.Visibility = Visibility.Hidden;
-            }
+				BookMain.Visibility = Visibility.Visible;
+				Account.Visibility = Visibility.Hidden;
+				Upload.Visibility = Visibility.Hidden;
+			}
 			if (AccountGrid)
 			{
-                BookMain.Visibility = Visibility.Hidden;
-                Account.Visibility = Visibility.Visible;
-                Upload.Visibility = Visibility.Hidden;
-            }
+				BookMain.Visibility = Visibility.Hidden;
+				Account.Visibility = Visibility.Visible;
+				Upload.Visibility = Visibility.Hidden;
+			}
 			if (UploadGrid)
 			{
-                Upload.Visibility = Visibility.Visible;
-                BookMain.Visibility = Visibility.Hidden;
-                Account.Visibility = Visibility.Hidden;
-            }
+				Upload.Visibility = Visibility.Visible;
+				BookMain.Visibility = Visibility.Hidden;
+				Account.Visibility = Visibility.Hidden;
+			}
 		}
 		private void SwitchViewGrid_ToMainCollection() { EnableGrids(true, false, false); }
 		private void SwitchViewGrid_ToUserAccount() { EnableGrids(false, true, false); }
-		private void SwitchViewGrid_ToUpload() { EnableGrids(false, false, true); }
+		private void SwitchViewGrid_ToUpload() { EnableGrids(false, false, true); } 
+		#endregion
 
-    }
+	}
 }
