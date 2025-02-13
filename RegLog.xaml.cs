@@ -29,5 +29,10 @@ namespace WpfApp1
 			Reg.Visibility = Visibility.Hidden;
 			Log.Visibility = Visibility.Visible;
         }
+
+        private void LogIn(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

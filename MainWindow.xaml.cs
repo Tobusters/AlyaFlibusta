@@ -24,6 +24,8 @@ namespace WpfApp1
 	delegate void Update();
 	public partial class MainWindow : Window
 	{
+		volatile static bool _Is_Logged = false;
+		volatile static User Logged = new User();
 		Book testBook1 = new Book("-1", "Принцесса Марса", "0", "Джон Картер на Марсе", "", "");
 		BOOKS books = BOOKS.getInstance();
 		GENRES genres = GENRES.getInstance();
@@ -114,11 +116,19 @@ namespace WpfApp1
 			
         }
 
-		private void ToUserAccount(object sender, RoutedEventArgs e)
+		private async void ToUserAccount(object sender, RoutedEventArgs e)
 		{
 			//Проверка на логин
-
-			SwitchViewGrid_ToUserAccount();
+			if (_Is_Logged)
+			{
+				SwitchViewGrid_ToUserAccount();
+			}
+            else
+            {
+                RegLog regLog = new RegLog();
+				regLog.Owner = this;
+				regLog.ShowDialog();
+            }
         }
 
 		private void ToMainCollection(object sender, RoutedEventArgs e)

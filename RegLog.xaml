@@ -11,10 +11,10 @@
             <Viewbox>
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="100">
                     <Label Content="Логин:"/>
-                    <TextBox/>
+                    <TextBox Template="{DynamicResource TextBoxRegular}" Text="Administrator"/>
                     <Label Content="Пароль:"/>
-                    <TextBox/>
-                    <Button Content="Войти"/>
+                    <TextBox Template="{DynamicResource TextBoxRegular}" Text="0451"/>
+                    <Button Content="Войти" Template="{DynamicResource ButtonRegularRemake}" Click="LogIn"/>
                 </StackPanel>
             </Viewbox>
         </Grid>
@@ -31,12 +31,12 @@
                 <TextBox Template="{DynamicResource TextBoxRegular}"/>
                 <Label Content="Пароль:"/>
                 <TextBox Template="{DynamicResource TextBoxRegular}"/>
-                <Button Content="Регистрация" Template="{DynamicResource ButtonRegular}"/>
+                <Button Content="Регистрация" Template="{DynamicResource ButtonRegularRemake}"/>
             </StackPanel>
             </Viewbox>
             <StackPanel Grid.Row="1" Style="{StaticResource Smaller}" HorizontalAlignment="Center">
                 <Label Content="Уже есть аккаунт?"/>
-                <Button Content="Войти" Click="ToLogIn" Template="{DynamicResource ButtonRegular}"/>
+                <Button Content="Войти" Click="ToLogIn" Template="{DynamicResource ButtonRegularRemake}"/>
             </StackPanel>
         </Grid>
     </Grid>
