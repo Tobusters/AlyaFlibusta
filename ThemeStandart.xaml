@@ -61,4 +61,6 @@
             </TransformGroup>
         </RadialGradientBrush.RelativeTransform>
     </RadialGradientBrush>
+    <SolidColorBrush x:Key="Grid" Color="{StaticResource SecondColorRGB}">
+    </SolidColorBrush>
 </ResourceDictionary>

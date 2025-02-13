@@ -2,7 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
         <!--<ResourceDictionary Source="/ThemeFirst.xaml"/>-->
-        <ResourceDictionary Source="/ThemeStandart.xaml"/>
+        <ResourceDictionary Source="/BoneTheme.xaml"/>
+        <!--<ResourceDictionary Source="/Raibow.xaml"/>-->
+        <!--<ResourceDictionary Source="/ThemeStandart.xaml"/>-->
         <!--<ResourceDictionary Source="/ThemeCoPilotLike.xaml"/>-->
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

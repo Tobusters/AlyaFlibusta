@@ -58,17 +58,10 @@
                 </Setter>
             </Style>
             <Style TargetType="{x:Type Grid}">
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <LinearGradientBrush SpreadMethod="Reflect" StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop Color="{StaticResource FirstColorRGB }" Offset="0"/>
-                            <GradientStop Color="{StaticResource SecondColorRGB }"  Offset="0.25"/>
-                            <GradientStop Color="{StaticResource TherdColorRGB }" Offset="0.8"/>
-                        </LinearGradientBrush>
-                    </Setter.Value>
+                <Setter Property="Background" Value="{StaticResource Grid}">
                 </Setter>
             </Style>
-            <Style TargetType="DataGrid">
+            <Style TargetType="DataGrid" >
                 <Setter Property="Background" Value="{StaticResource FirstColor}"/>
                 <Setter Property="Foreground" Value="{StaticResource TextColorFirst}"/>
                 <Setter Property="BorderBrush" Value="{StaticResource BorderMOver}"/>

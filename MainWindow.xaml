@@ -131,7 +131,7 @@
                             </Grid>
                         </Viewbox>
                     </Button>
-                    <Button Template="{DynamicResource ButtonMenuRemake}" Height="45" Width="88" Click="ToUserAccount">
+                    <Button Template="{DynamicResource ButtonMenuRemake}" Height="45" Width="88" Click="ToUserAccount" >
                         <Viewbox>
                             <Grid Style="{x:Null}">
                                 <Grid.RowDefinitions>

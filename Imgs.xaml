@@ -6,6 +6,7 @@
 
     <BitmapImage x:Key="Cloud" UriSource="/cloud-integration23.png"></BitmapImage>
     <BitmapImage x:Key="Book" UriSource="/llm-ops-language-model23.png"></BitmapImage>
+    <BitmapImage x:Key="BookFull" UriSource="/llm-ops-language-model.png"></BitmapImage>
     <BitmapImage x:Key="Person" UriSource="/free-icon-avatar-6387915.png"></BitmapImage>
     <Style x:Key="ImgBookUploads">
         <Setter Property="Image.Stretch" Value="Uniform"/>
@@ -21,6 +22,11 @@
         <Setter Property="Image.Stretch" Value="Uniform"/>
         <Setter Property="Image.Focusable" Value="False"/>
         <Setter Property="Image.Source" Value="{StaticResource Person}"/>
+    </Style>
+    <Style x:Key="ImgBookExploreFull">
+        <Setter Property="Image.Stretch" Value="Uniform"/>
+        <Setter Property="Image.Focusable" Value="False"/>
+        <Setter Property="Image.Source" Value="{StaticResource BookFull}"/>
     </Style>
 
 </ResourceDictionary>
