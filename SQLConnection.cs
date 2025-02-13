@@ -46,12 +46,13 @@ namespace WpfApp1
             Conn = new SqlConnection(@"Server=DESKTOP-QVUI8Q3;database=AlyaFlubusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//дом
             //Conn = new SqlConnection(@"Server=DESKTOP-CVTHJDK;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");
             rdr = null;
+            IsConnected = true;
         }
         private SQLConnection(string coon)
         {
             Conn = new SqlConnection(coon);
             rdr = null;
-
+            IsConnected = true;
         }
 
         public static SQLConnection getInstance()
@@ -71,6 +72,7 @@ namespace WpfApp1
 
         private SqlCommand TryConnectionAndQueryBody(string select)
         {
+            if(!IsConnected) return null;
             SqlCommand sqlCommand = new SqlCommand(select, Conn);
             Conn.Open();
             sqlCommand.ExecuteNonQuery();
@@ -109,6 +111,7 @@ namespace WpfApp1
         {
             try
             {
+                if(!IsConnected) return;
                 SqlCommand sqlCommand = new SqlCommand(select, Conn);//Запрос
                 Conn.Open();//Открываем подключение
                 rdr = sqlCommand.ExecuteReader();

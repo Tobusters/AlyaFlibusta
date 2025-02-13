@@ -49,7 +49,7 @@ namespace WpfApp1
 
         public DataView SimpleFillDataGrid()
         {
-
+			if(Books == null) return null;
             try
             {
                 DataTable dt = new DataTable("Books");

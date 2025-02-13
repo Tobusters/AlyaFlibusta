@@ -31,7 +31,8 @@ namespace WpfApp1
 		GENRES genres = GENRES.getInstance();
 		BOOKS2G Books2G = BOOKS2G.getInstance();
 		//SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-UNTJG88\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
-		SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
+		SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
+		//SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
 		public MainWindow()
 		{
 			var result = MessageBox.Show("Загрузить с sql?", "SQL", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -104,6 +105,7 @@ namespace WpfApp1
 
 
                 Dictionary<string, string> list = genres.GetGenresDict();
+				if (list == null) return;
 				ScrollViewer scrollViewer = new ScrollViewer();
 				StackPanel stackPanel = new StackPanel();
 				stackPanel.Children.Add(new TextBox { Name = "FilterGenre", HorizontalAlignment = HorizontalAlignment.Left, MinWidth = 50 });
