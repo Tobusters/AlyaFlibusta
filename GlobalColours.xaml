@@ -4,6 +4,6 @@
         <!--<ResourceDictionary Source="/ThemeFirst.xaml"/>-->
         <!--<ResourceDictionary Source="/ThemeStandart.xaml"/>-->
         <!--<ResourceDictionary Source="/ThemeCoPilotLike.xaml"/>-->
-        <ResourceDictionary Source="/Theme1.xaml"/>
+        <ResourceDictionary Source="/ThemeDark.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -1,13 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Color x:Key="FirstColorRGB" R="60" G="60" B="60" A="255" />
-    <Color x:Key="SecondColorRGB" R="70" G="70" B="70" A="255" />
+    <Color x:Key="FirstColorRGB" R="110" G="110" B="110" A="255" />
+    <Color x:Key="SecondColorRGB" R="90" G="90" B="90" A="255" />
     <Color x:Key="TherdColorRGB" R="0" G="0" B="0" A="255"/>
     <Color x:Key="BorderColorRGB" R="150" G="150" B="150" A="255" />
     <Color x:Key="GradientColorRGB" R="100" G="100" B="100" A="255" />
-    <Color x:Key="BorderMOverRGB" R="120" G="120" B="120" A="255"/>
-    <Color x:Key="TextColorFirstRGB" R="130" G="130" B="130" A="255"/>
+    <Color x:Key="BorderMOverRGB" R="130" G="130" B="130" A="255"/>
+    <Color x:Key="TextColorFirstRGB" R="140" G="140" B="140" A="255"/>
     <SolidColorBrush x:Key="FirstColor"		Color="{StaticResource FirstColorRGB}"/>
     <SolidColorBrush x:Key="SecondColor"	Color="{StaticResource SecondColorRGB}"/>
     <SolidColorBrush x:Key="TherdColor"		Color="{StaticResource TherdColorRGB}"/>

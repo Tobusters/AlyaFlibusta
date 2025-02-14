@@ -138,7 +138,7 @@ namespace WpfApp1
         {
             Messager.Visibility = Visibility.Hidden;
         }
-        private void Timed(object sender, RoutedEventArgs e)
+        private void Read(object sender, RoutedEventArgs e)
         {
             PreviewBook.Visibility = Visibility.Visible;
         }
