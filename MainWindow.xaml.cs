@@ -24,7 +24,7 @@ namespace WpfApp1
 	delegate void Update();
 	public partial class MainWindow : Window
 	{
-		volatile public static bool _Is_Logged = false;
+		volatile static bool _Is_Logged = false;
 		volatile static User Logged = new User();
 		Book testBook1 = new Book("-1", "Принцесса Марса", "0", "Джон Картер на Марсе", "", "");
 		BOOKS books = BOOKS.getInstance();
@@ -179,13 +179,23 @@ namespace WpfApp1
 		}
 		private void SwitchViewGrid_ToMainCollection() { EnableGrids(true, false, false); }
 		private void SwitchViewGrid_ToUserAccount() {
-			EnableGrids(false, true, false);
+			UpdateUserInformatin();
+            EnableGrids(false, true, false);
 		}
 		private void UpdateUserInformatin()
 		{
-
-		}
-		private void SwitchViewGrid_ToUpload() { EnableGrids(false, false, true); } 
+            User_Login.Text = Logged.Login;
+            ScrollViewer scrollViewer = new ScrollViewer();
+            StackPanel stackPanel = new StackPanel();
+            foreach (var Genres in list)
+            {
+                stackPanel.Children.Add(new CheckBox { Content = Genres.Value, Name = 'G' + Genres.Key, Template = (ControlTemplate)this.FindResource("CustomCheckBoxes") });
+            }
+            scrollViewer.Content = stackPanel;
+            scrollViewer.MaxHeight = 150;
+            User_UploadedBooksCollection.Content = null;
+        }
+        private void SwitchViewGrid_ToUpload() { EnableGrids(false, false, true); } 
 		#endregion
 
 	}

@@ -12,7 +12,7 @@
                 <RowDefinition/>
                 <RowDefinition MinHeight="15" MaxHeight="60"/>
             </Grid.RowDefinitions>
-            <Grid x:Name="BookMain" Grid.Row="0" Visibility="Visible">
+            <Grid x:Name="BookMain" Grid.Row="0" Visibility="Hidden">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -38,10 +38,10 @@
                 </Viewbox>
                 <DataGrid d:ItemsSource="{d:SampleData ItemCount=20}" AutoGenerateColumns="True" x:Name="CollectionBooksViewTable" Grid.Column="1"/>
             </Grid>
-            <Grid Name="Account" Grid.Row="0" Visibility="Hidden">
+            <Grid Name="Account" Grid.Row="0" Visibility="Visible">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10">
                     <Image Style="{StaticResource ImgAccount}" Width="50" Height="50" Margin="0,0,10,0"/>
-                    <TextBlock Text="Имя пользователя" VerticalAlignment="Center" FontSize="20"/>
+                    <TextBlock x:Name="User_Login" Text="Имя пользователя" VerticalAlignment="Center" FontSize="20"/>
                 </StackPanel>
 
                 <!-- Кнопка "Написать" -->
@@ -71,7 +71,7 @@
                         </Expander>
                     </StackPanel>
                     <StackPanel Grid.Column="2" VerticalAlignment="Top">
-                        <Expander Header="Загруженные книги">
+                        <Expander x:Name="User_UploadedBooksCollection" Header="Загруженные книги">
                             <StackPanel>
                                 <TextBlock Text="Название книги 1" Margin="5"/>
                                 <TextBlock Text="Название книги 2" Margin="5"/>
