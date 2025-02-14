@@ -12,7 +12,7 @@
                 <RowDefinition/>
                 <RowDefinition MinHeight="15" MaxHeight="60"/>
             </Grid.RowDefinitions>
-            <Grid x:Name="BookMain" Grid.Row="0" Visibility="Hidden">
+            <Grid x:Name="BookMain" Grid.Row="0" Visibility="Visible">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -26,6 +26,7 @@
                         <StackPanel  HorizontalAlignment="Left"  >
                             <Label Content="Поиск по жанру" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <Expander x:Name="GenreSelect">
+                                <CheckBox Content="Эпическая новелла" x:Name="G3" Template="{DynamicResource CustomCheckBoxes}"/>
                             </Expander>
                         </StackPanel>
                         <StackPanel  HorizontalAlignment="Left"  >
@@ -38,7 +39,7 @@
                 </Viewbox>
                 <DataGrid d:ItemsSource="{d:SampleData ItemCount=20}" AutoGenerateColumns="True" x:Name="CollectionBooksViewTable" Grid.Column="1"/>
             </Grid>
-            <Grid Name="Account" Grid.Row="0" Visibility="Visible">
+            <Grid Name="Account" Grid.Row="0" Visibility="Hidden">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10">
                     <Image Style="{StaticResource ImgAccount}" Width="50" Height="50" Margin="0,0,10,0"/>
                     <TextBlock x:Name="User_Login" Text="Имя пользователя" VerticalAlignment="Center" FontSize="20"/>

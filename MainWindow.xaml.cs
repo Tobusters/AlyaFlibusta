@@ -31,32 +31,32 @@ namespace WpfApp1
 		GENRES genres = GENRES.getInstance();
 		BOOKS2G Books2G = BOOKS2G.getInstance();
 		USERS users = USERS.getInstance();
-		SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-UNTJG88\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
-        RegLog reglog = new RegLog();
+		//SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-UNTJG88\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
+		SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
+		RegLog reglog = new RegLog();
 
-        //static SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
-        //SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
-        public MainWindow()
+		// SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
+		public MainWindow()
 		{
 			var result = MessageBox.Show("Загрузить с sql?", "SQL", MessageBoxButton.YesNo, MessageBoxImage.Question);
 			if (result == MessageBoxResult.Yes) {
-                try
-                {
-                    if (conn.Conn != null)
-                    {
-                        MessageBox.Show("Успешное подключение!", "Статус подключения", MessageBoxButton.OK);
-                        conn.Conn.Open();
-                    }
-                }
-                catch (SqlException e)
-                {
-                    MessageBox.Show(e.Message, e.ToString(), MessageBoxButton.OK);
-                }
-                finally
-                {
-                    conn.Conn.Close();
-                }
-            }
+				try
+				{
+					if (conn.Conn != null)
+					{
+						MessageBox.Show("Успешное подключение!", "Статус подключения", MessageBoxButton.OK);
+						conn.Conn.Open();
+					}
+				}
+				catch (SqlException e)
+				{
+					MessageBox.Show(e.Message, e.ToString(), MessageBoxButton.OK);
+				}
+				finally
+				{
+					conn.Conn.Close();
+				}
+			}
 
 			InitializeComponent();
 
@@ -68,7 +68,7 @@ namespace WpfApp1
 			books.SetBooksBySql(conn.ConnectToDTBaseAndReadBooks("exec ShowSimpleBooksForViewTable"));
 			CollectionBooksViewTable.ItemsSource = books.SimpleFillDataGrid();
 			//UpdateComboBox(GenreSelect);
-			ExpandGenresUpdate();
+			//ExpandGenresUpdate();
 		}
 		public void UpdateComboBox(params ComboBox[] comboBoxes)
 		{
@@ -91,23 +91,22 @@ namespace WpfApp1
 			{ 
 				GenreSelect.Content = null;
 			}
-                ////MessageBox.Show("sdsd");
-                //string[] list = genres.GetGenresNames();
-                //string[] listID = genres.GetGenresID();
-                //ScrollViewer scrollViewer = new ScrollViewer();
-                //StackPanel stackPanel = new StackPanel();
-                //for (int i = 0; i < list.Length; i++)
-                //{
-                //	stackPanel.Children.Add(new CheckBox { Content = list[i], Name = listID[i]});
-                //}
-                //scrollViewer.Content = stackPanel;
-                //scrollViewer.MaxHeight = 150;
-                //GenreSelect.Content = scrollViewer;
-                ////GenreSelect.Content;
-                ///
+				////MessageBox.Show("sdsd");
+				//string[] list = genres.GetGenresNames();
+				//string[] listID = genres.GetGenresID();
+				//ScrollViewer scrollViewer = new ScrollViewer();
+				//StackPanel stackPanel = new StackPanel();
+				//for (int i = 0; i < list.Length; i++)
+				//{
+				//	stackPanel.Children.Add(new CheckBox { Content = list[i], Name = listID[i]});
+				//}
+				//scrollViewer.Content = stackPanel;
+				//scrollViewer.MaxHeight = 150;
+				//GenreSelect.Content = scrollViewer;
+				////GenreSelect.Content;
+				///
 
-
-                Dictionary<string, string> list = genres.GetGenresDict();
+				Dictionary<string, string> list = genres.GetGenresDict();
 				if (list == null) return;
 				ScrollViewer scrollViewer = new ScrollViewer();
 				StackPanel stackPanel = new StackPanel();
@@ -117,31 +116,32 @@ namespace WpfApp1
 				}
 				scrollViewer.Content = stackPanel;
 				scrollViewer.MaxHeight = 150;
+				GenreSelect.Content = null ;
 				GenreSelect.Content = scrollViewer;
 			
-        }
+		}
 
 
 
 		#region Вкладки
 		private void ToUserAccount(object sender, RoutedEventArgs e)
 		{
-            if (_Is_Logged)
+			if (_Is_Logged)
 			{
 				SwitchViewGrid_ToUserAccount();
 			}
 			else
 			{
 				reglog.SetRef(ref conn.GetRef());
-                reglog.Owner = this;
-                reglog.ShowDialog();
-                Logged = reglog.GetLog();
+				reglog.Owner = this;
+				reglog.ShowDialog();
+				Logged = reglog.GetLog();
 				_Is_Logged = reglog.Is_Logged;
 				reglog.Close();
 				reglog = null;
-                SwitchViewGrid_ToUserAccount();
-            }
-        }
+				SwitchViewGrid_ToUserAccount();
+			}
+		}
 		private void ToMainCollection(object sender, RoutedEventArgs e)
 		{
 			SwitchViewGrid_ToMainCollection();
@@ -180,22 +180,27 @@ namespace WpfApp1
 		private void SwitchViewGrid_ToMainCollection() { EnableGrids(true, false, false); }
 		private void SwitchViewGrid_ToUserAccount() {
 			UpdateUserInformatin();
-            EnableGrids(false, true, false);
+			EnableGrids(false, true, false);
 		}
 		private void UpdateUserInformatin()
 		{
-            User_Login.Text = Logged.Login;
-            ScrollViewer scrollViewer = new ScrollViewer();
-            StackPanel stackPanel = new StackPanel();
-            foreach (var Genres in list)
-            {
-                stackPanel.Children.Add(new CheckBox { Content = Genres.Value, Name = 'G' + Genres.Key, Template = (ControlTemplate)this.FindResource("CustomCheckBoxes") });
-            }
-            scrollViewer.Content = stackPanel;
-            scrollViewer.MaxHeight = 150;
-            User_UploadedBooksCollection.Content = null;
-        }
-        private void SwitchViewGrid_ToUpload() { EnableGrids(false, false, true); } 
+			User_Login.Text = Logged.Login;
+
+			//ПОПРОБОВАТЬ сначала сделать фильтры книг с помощью checkboxов, тк всё может пойти по откосу
+
+
+
+			//ScrollViewer scrollViewer = new ScrollViewer();
+			//StackPanel stackPanel = new StackPanel();
+			//foreach (var Genres in list)
+			//{
+			//    stackPanel.Children.Add(new CheckBox { Content = Genres.Value, Name = 'G' + Genres.Key, Template = (ControlTemplate)this.FindResource("CustomCheckBoxes") });
+			//}
+			//scrollViewer.Content = stackPanel;
+			//scrollViewer.MaxHeight = 150;
+			//User_UploadedBooksCollection.Content = null;
+		}
+		private void SwitchViewGrid_ToUpload() { EnableGrids(false, false, true); } 
 		#endregion
 
 	}
