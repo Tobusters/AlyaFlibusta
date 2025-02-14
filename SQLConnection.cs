@@ -40,6 +40,11 @@ namespace WpfApp1
             private set { connection = value; }
         }
 
+        public ref SqlConnection GetRef()
+        {
+            return ref connection;
+        }
+
 
         private SQLConnection()
         {

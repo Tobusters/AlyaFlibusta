@@ -24,18 +24,19 @@ namespace WpfApp1
 	delegate void Update();
 	public partial class MainWindow : Window
 	{
-		volatile static bool _Is_Logged = false;
+		volatile public static bool _Is_Logged = false;
 		volatile static User Logged = new User();
 		Book testBook1 = new Book("-1", "Принцесса Марса", "0", "Джон Картер на Марсе", "", "");
 		BOOKS books = BOOKS.getInstance();
 		GENRES genres = GENRES.getInstance();
 		BOOKS2G Books2G = BOOKS2G.getInstance();
 		USERS users = USERS.getInstance();
-		//SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-UNTJG88\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
-		static SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
-		RegLog RegLog = new RegLog(conn);
-		//SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
-		public MainWindow()
+		SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-UNTJG88\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
+        RegLog reglog = new RegLog();
+
+        //static SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
+        //SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
+        public MainWindow()
 		{
 			var result = MessageBox.Show("Загрузить с sql?", "SQL", MessageBoxButton.YesNo, MessageBoxImage.Question);
 			if (result == MessageBoxResult.Yes) {
@@ -125,18 +126,22 @@ namespace WpfApp1
 		#region Вкладки
 		private void ToUserAccount(object sender, RoutedEventArgs e)
 		{
-			//Проверка на логин
-			if (_Is_Logged)
+            if (_Is_Logged)
 			{
 				SwitchViewGrid_ToUserAccount();
 			}
 			else
 			{
-				RegLog regLog = new RegLog();
-				regLog.Owner = this;
-				regLog.ShowDialog();
-			}
-		}
+				reglog.SetRef(ref conn.GetRef());
+                reglog.Owner = this;
+                reglog.ShowDialog();
+                Logged = reglog.GetLog();
+				_Is_Logged = reglog.Is_Logged;
+				reglog.Close();
+				reglog = null;
+                SwitchViewGrid_ToUserAccount();
+            }
+        }
 		private void ToMainCollection(object sender, RoutedEventArgs e)
 		{
 			SwitchViewGrid_ToMainCollection();
@@ -173,7 +178,13 @@ namespace WpfApp1
 			}
 		}
 		private void SwitchViewGrid_ToMainCollection() { EnableGrids(true, false, false); }
-		private void SwitchViewGrid_ToUserAccount() { EnableGrids(false, true, false); }
+		private void SwitchViewGrid_ToUserAccount() {
+			EnableGrids(false, true, false);
+		}
+		private void UpdateUserInformatin()
+		{
+
+		}
 		private void SwitchViewGrid_ToUpload() { EnableGrids(false, false, true); } 
 		#endregion
 

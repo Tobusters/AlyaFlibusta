@@ -3,7 +3,7 @@ using WpfApp1;
 
 namespace WpfApp1
 {
-    class User
+    public class User
     {
         private string id;
 
