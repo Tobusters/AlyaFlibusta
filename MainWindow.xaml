@@ -158,8 +158,8 @@
                 </WrapPanel>
             </Viewbox>
             <!--Осталось доработать-->
-            <Grid x:Name="Messager" Visibility="Hidden">
-                <ListBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="397" Height="322" Margin="403,0,0,0"/>
+            <Grid x:Name="Messager" Visibility="Visible">
+                <ListBox Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="397" Height="322"/>
                 <TextBox Grid.Row="0" Foreground="{StaticResource TextColorFirst}" Template="{DynamicResource TextBoxRegular}" HorizontalAlignment="Right" TextWrapping="Wrap" Text="Сообщения" VerticalAlignment="Bottom" Width="265" Height="17" Margin="0,0,128,0"/>
                 <Button Grid.Row="0" Template="{DynamicResource ButtonRegularRemake}" Content="Отправить" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Height="17" Width="125"/>
                 <Button Grid.Row="0" Template="{DynamicResource ButtonRegularRemake}" Content="Назад" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ToBackMessage"/>
