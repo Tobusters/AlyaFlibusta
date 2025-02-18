@@ -51,48 +51,48 @@ namespace WpfApp1
 
         public DataView SimpleFillDataGrid()
         {
-			//if(Books == null) return null;
-			//         try
-			//         {
-			//             DataTable dt = new DataTable("Books");
-			//             dt.Columns.Add(new DataColumn("Название", typeof(string)));
-			//             dt.Columns.Add(new DataColumn("Автор", typeof(string)));
-			//             for (var i = 0; i < Books.Length; i++)
-			//             {
-			//                 DataRow r = dt.NewRow();
-			//                 r[0] = Books[i].Name;
-			//                 r[1] = Books[i].AuthorName;
-			//                 dt.Rows.Add(r);
-			//             }
-			//             return dt.DefaultView;
-
-			//         }
-			//         catch (Exception e)
-			//         {
-			//             MessageBox.Show(e.Message.ToString(), e.ToString());
-			//         }
-			//         MessageBox.Show("Ошибка заполнения Datagrid");
-			//         return null;
-
+			if (Books == null) return null;
 			try
 			{
-                ObservableCollection<string> ComboBoxContent
-                ComboBoxContent = new ObservableCollection<string>();
-                ComboBoxContent.Add("1");
-                ComboBoxContent.Add("2");
-                ComboBoxContent.Add("3");
-                Name = name;
-            }
-			catch (Exception ex) {
-				MessageBox.Show(e.Message.ToString(), e.ToString());
+				DataTable dt = new DataTable("Books");
+				dt.Columns.Add(new DataColumn("Название", typeof(string)));
+				dt.Columns.Add(new DataColumn("Автор", typeof(string)));
+				for (var i = 0; i < Books.Length; i++)
+				{
+					DataRow r = dt.NewRow();
+					r[0] = Books[i].Name;
+					r[1] = Books[i].AuthorName;
+					dt.Rows.Add(r);
+				}
+				return dt.DefaultView;
 
 			}
-            MessageBox.Show("Ошибка заполнения Datagrid");
+			catch (Exception e)
+			{
+				MessageBox.Show(e.Message.ToString(), e.ToString());
+			}
+			MessageBox.Show("Ошибка заполнения Datagrid");
 			return null;
+
+			//	try
+			//	{
+			//              ObservableCollection<string> ComboBoxContent
+			//              ComboBoxContent = new ObservableCollection<string>();
+			//              ComboBoxContent.Add("1");
+			//              ComboBoxContent.Add("2");
+			//              ComboBoxContent.Add("3");
+			//              Name = name;
+			//          }
+			//	catch (Exception ex) {
+			//		MessageBox.Show(e.Message.ToString(), e.ToString());
+
+			//	}
+			//          MessageBox.Show("Ошибка заполнения Datagrid");
+			//	return null;
 		}
 
 
-        private ref Book GetBookByID(string ID)
+		private ref Book GetBookByID(string ID)
 		{
 			//if (Books?[Convert.ToInt64(ID)] != null)
 			//{
