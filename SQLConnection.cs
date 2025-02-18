@@ -1,24 +1,18 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace WpfApp1
 {
     class SQLConnection
     {
         private static SQLConnection instance;
-
         //static readonly string connectionString = @"Server=.\SQLEXPRESS;database=Warehouse;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true";
         //static readonly string connectionString = @"Server=DESKTOP-QVUI8Q3;database=Warehouse;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true";
         private SqlConnection connection;
         SqlDataReader rdr;
-
         public static bool IsConnected { get; private set; } = false;
-
-
-        private void CheckConn()
+        public void CheckConn()
         {
             try
             {
@@ -32,8 +26,6 @@ namespace WpfApp1
             }
             finally { Conn.Close(); }
         }
-
-
         public SqlConnection Conn
         {
             get { return connection; }
@@ -44,8 +36,6 @@ namespace WpfApp1
         {
             return ref connection;
         }
-
-
         private SQLConnection()
         {
             Conn = new SqlConnection(@"Server=DESKTOP-QVUI8Q3;database=AlyaFlubusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//дом
@@ -59,7 +49,6 @@ namespace WpfApp1
             rdr = null;
             IsConnected = true;
         }
-
         public static SQLConnection getInstance()
         {
             if (instance == null)
@@ -72,12 +61,9 @@ namespace WpfApp1
                 instance = new SQLConnection(coon);
             return instance;
         }
-
-
-
         private SqlCommand TryConnectionAndQueryBody(string select)
         {
-            if(!IsConnected) return null;
+            if (!IsConnected) return null;
             SqlCommand sqlCommand = new SqlCommand(select, Conn);
             Conn.Open();
             sqlCommand.ExecuteNonQuery();
@@ -94,7 +80,17 @@ namespace WpfApp1
                 Conn.Close();
             }
         }
-
+        public void Close()
+        {
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
+            if (Conn != null)
+            {
+                Conn.Close();
+            }
+        }
         public void ConnectToDTBaseAndQuery(string select)//without Select
         {
             try
@@ -110,11 +106,9 @@ namespace WpfApp1
                 FinallyBody();
             }
         }
-
-
         private void ConnectToDTBaseAndRead(string select)
         {
-            if(!IsConnected) return;
+            if (!IsConnected) return;
             try
             {
                 SqlCommand sqlCommand = new SqlCommand(select, Conn);//Запрос
@@ -126,7 +120,6 @@ namespace WpfApp1
                 MessageBox.Show(select, e.ToString());
             }
         }
-
         public Dictionary<string, string> ConnectToDTBaseAndReadDictionary(string select)
         {
             ConnectToDTBaseAndRead(select);
@@ -178,6 +171,31 @@ namespace WpfApp1
             return null;
         }
 
+        public Dictionary<string, string> ConnectToDTBaseAndReadG2B(string select)
+        {
+            ConnectToDTBaseAndRead(select);
+            if (rdr != null)
+            {
+                try
+                {
+                    Dictionary<string, string> list = new Dictionary<string, string>();
+                    while (rdr.Read())
+                    {
+                        list.Add(rdr[0].ToString(),rdr[1].ToString());
+                    }
+                    return list;
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show(e.Message.ToString(), e.ToString());
+                }
+                finally
+                {
+                    FinallyBody();
+                }
+            }
+            return null;
+        }
 
     }
 }

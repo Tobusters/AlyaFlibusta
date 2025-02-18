@@ -24,7 +24,7 @@ namespace WpfApp1
     {
         User user;
         public SqlConnection Conn;
-        SqlDataReader rdr = null;
+        SqlDataReader rdr;
         public bool Is_Logged = false;
 
 
@@ -82,6 +82,18 @@ namespace WpfApp1
                 Conn.Close();
                 rdr.Close();
             }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Conn.Close();
+            rdr.Close();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Conn.Close();
+            rdr.Close();
         }
     }
 }

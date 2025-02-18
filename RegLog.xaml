@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="RegLog" Height="300" Width="200">
+        Title="RegLog" Height="300" Width="200" Closing="Window_Closing" Closed="Window_Closed">
     <Grid>
         <Grid x:Name="Log" Visibility="Visible">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="100">

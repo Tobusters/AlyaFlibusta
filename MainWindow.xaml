@@ -5,7 +5,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:WpfApp1"
 		mc:Ignorable="d"
-		Title="Flibusta" Width="800" Height="450">
+		Title="Flibusta" Width="800" Height="450" Closing="Window_Closing" Closed="Window_Closing">
     <Grid>
         <Grid Name="MainGrid">
             <Grid.RowDefinitions>
@@ -37,7 +37,8 @@
                         <!--<Button Content="Поиск" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 20" Template="{DynamicResource ButtonRegularRemake}" />-->
                     </StackPanel>
                 </Viewbox>
-                <DataGrid d:ItemsSource="{d:SampleData ItemCount=20}" AutoGenerateColumns="True" x:Name="CollectionBooksViewTable" Grid.Column="1"/>
+                <DataGrid d:ItemsSource="{d:SampleData ItemCount=20}" AutoGenerateColumns="True" x:Name="CollectionBooksViewTable" Grid.Column="1">
+                </DataGrid>
             </Grid>
             <Grid Name="Account" Grid.Row="0" Visibility="Hidden">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10">
