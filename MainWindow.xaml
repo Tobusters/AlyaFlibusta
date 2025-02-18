@@ -159,43 +159,52 @@
             </Viewbox>
             <!--Осталось доработать-->
             <Grid x:Name="Messager" Visibility="Hidden">
-                <ListBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="397" Height="322" Margin="403,0,0,0"/>
-                <TextBox Grid.Row="0" Foreground="{StaticResource TextColorFirst}" Template="{DynamicResource TextBoxRegular}" HorizontalAlignment="Right" TextWrapping="Wrap" Text="Сообщения" VerticalAlignment="Bottom" Width="265" Height="17" Margin="0,0,128,0"/>
-                <Button Grid.Row="0" Template="{DynamicResource ButtonRegularRemake}" Content="Отправить" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Height="17" Width="125"/>
-                <Button Grid.Row="0" Template="{DynamicResource ButtonRegularRemake}" Content="Назад" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ToBackMessage"/>
-                <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="326" Width="367" />
-                <TextBox Grid.Row="0" Foreground="{StaticResource TextColorFirst}" Template="{DynamicResource TextBoxRegular}" HorizontalAlignment="Right" TextWrapping="Wrap" Text="Поиск пользователей и групп" VerticalAlignment="Top" Width="345" Margin="0,1,52,0"/>
-                <Button Grid.Row="0" Template="{DynamicResource ButtonRegularRemake}" Content="Поиск" HorizontalAlignment="Right" VerticalAlignment="Top" />
-                <Button Grid.Row="0" Template="{DynamicResource ButtonRegularRemake}" Content="Пользователи" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="48, 0,0,0"/>
-                <Button Grid.Row="0" Template="{DynamicResource ButtonRegularRemake}" Content="Запросы" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="141,0,0,0"/>
-                <Button Grid.Row="0" Template="{DynamicResource ButtonRegularRemake}" Content="ЗаБАНеные" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="206,0,0,0"/>
-                <Button Grid.Row="0" Template="{DynamicResource ButtonRegularRemake}" Content="Группы" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="283,0,0,0"/>
-                <Button Grid.Row="0" Template="{DynamicResource ButtonRegularRemake}" Content="Подписки" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="334,0,0,0"/>
+                <WrapPanel Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Button Content="Back" Template="{DynamicResource ButtonRegularRemake}"/>
+                    <Button Content="Users" Template="{DynamicResource ButtonRegularRemake}"/>
+                    <Button Content="Groups" Template="{DynamicResource ButtonRegularRemake}"/>
+                    <TextBox Width="100" Template="{DynamicResource TextBoxRegular}"/>
+                    <Button Content="Search" Template="{DynamicResource ButtonRegularRemake}"/>
+                </WrapPanel>
+                <DataGrid Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="300" Width="280"/>
+                <TextBox Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Height="300" Width="500"/>
+                <WrapPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <TextBox Width="200" Template="{DynamicResource TextBoxRegular}"/>
+                    <Button Content="-->" Template="{DynamicResource ButtonRegularRemake}"/>
+                </WrapPanel>
             </Grid>
             <Grid x:Name="PreviewBook" Visibility="Hidden">
-                <Image Grid.Row="0"  HorizontalAlignment="Left" Height="230" Width="140"  VerticalAlignment="Top" />
-                <TextBlock Grid.Row="0" HorizontalAlignment="Right" TextWrapping="Wrap" Text="Назыание книги" VerticalAlignment="Top" Height="55" Width="617" Margin="0,0,5,0"/>
-                <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Описание" VerticalAlignment="Center" Height="244" Width="649" Margin="151,0,0,0"/>
-                <Button Template="{DynamicResource ButtonRegularRemake}" Grid.Row="0" Content="Читать" HorizontalAlignment="Right" Margin="0,0,0,1" VerticalAlignment="Bottom" Height="50" Width="90"/>
-                <Button Template="{DynamicResource ButtonRegularRemake}" Grid.Row="0" Content="Назад" HorizontalAlignment="Left" Margin="-1,0,0,2" VerticalAlignment="Bottom" Height="50" Width="90" Click="ToBackBook"/>
-                <Button Template="{DynamicResource ButtonRegularRemake}" Grid.Row="0" Content="Комментарии" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="50" Width="90" Click="ToComment"/>
-                <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="0,236,0,0" TextWrapping="Wrap" Text="Оценка 0\0" VerticalAlignment="Top" Width="90"/>
-                <Label Grid.Row="0" Content="Ваша оценка" HorizontalAlignment="Left" Margin="0,254,0,0" VerticalAlignment="Top"/>
-                <Slider Grid.Row="0" HorizontalAlignment="Left" Margin="0,277,0,0" VerticalAlignment="Top" Width="120"/>
+                <Image Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Height="150" Width="100"/>
+                <WrapPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Width="260" Height="40" />
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Width="400" Height="200"/>
+                </WrapPanel>
+                <WrapPanel  Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <Button Content="Read" Template="{DynamicResource ButtonRegularRemake}"/>
+                    <Button Content="Comments" Template="{DynamicResource ButtonRegularRemake}"/>
+                </WrapPanel>
+                <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Label Content="Estimetion 0::0"/>
+                    <Label Content="Your estimation: "/>
+                    <Slider/>
+                </StackPanel>
+                <Button Grid.Row="0" Content="Back" Template="{DynamicResource ButtonRegularRemake}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
             </Grid>
-            <Grid x:Name="Comments" Visibility="Hidden" Margin="400,0,0,0">
-                <TextBox Grid.Row="0" Foreground="{StaticResource TextColorFirst}" Template="{DynamicResource TextBoxRegular}" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Твой коммент" VerticalAlignment="Top" Width="256" Margin="0,355,0,0"/>
-                <Button Grid.Row="0" Template="{DynamicResource ButtonRegularRemake}" Content="Назад" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="ToBackComments"/>
-                <Button Grid.Row="0" Template="{DynamicResource ButtonRegularRemake}" Content="Отправить" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-                <ListBox Grid.Row="0" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="399" Height="301"/>
-
+            <Grid x:Name="Comments" Visibility="Hidden" VerticalAlignment="Center" HorizontalAlignment="Right" Height="370">
+                <TextBox Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="340" Width="400"/>
+                <WrapPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <Button Content="Back" Template="{DynamicResource ButtonRegularRemake}"/>
+                    <TextBox Width="320" Template="{DynamicResource TextBoxRegular}"/>
+                    <Button Content="-->" Template="{DynamicResource ButtonRegularRemake}"/>
+                </WrapPanel>
             </Grid>
-            <Grid x:Name="Settings" Visibility="Hidden">
-                <!--Пока в разработке -->
-            </Grid>
-            <!--Временно-->
-            <Button Template="{DynamicResource ButtonRegularRemake}" Content="Пока так" HorizontalAlignment="Left" Margin="1,2,0,0" Grid.Row="1" VerticalAlignment="Top" Click="Timed"/>
-            <Button Template="{DynamicResource ButtonRegularRemake}" Content="Settings" HorizontalAlignment="Left" Margin="2,23,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+            <Button Template="{DynamicResource ButtonRegularRemake}" Content="Читать" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Top" Click="Timed" Height="60" Width="225"/>
+            <Menu  Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <MenuItem Header="Themes">
+                    <ComboBox/>
+                    <Button Content="Aplly" Template="{DynamicResource ButtonRegularRemake}"/>
+                </MenuItem>
+            </Menu>
         </Grid>
     </Grid>
 </Window>
