@@ -32,10 +32,10 @@ namespace WpfApp1
 		BOOKS2G Books2G = BOOKS2G.getInstance();
 		USERS users = USERS.getInstance();
 		//SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-UNTJG88\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
-		SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
+		//SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
+		SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
 		RegLog reglog = new RegLog();
 
-		// SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
 		public MainWindow()
 		{
 			var result = MessageBox.Show("Загрузить с sql?", "SQL", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -110,7 +110,9 @@ namespace WpfApp1
 				if (list == null) return;
 				ScrollViewer scrollViewer = new ScrollViewer();
 				StackPanel stackPanel = new StackPanel();
-				stackPanel.Children.Add(new TextBox { Name = "FilterGenre", HorizontalAlignment = HorizontalAlignment.Left, MinWidth = 50 });
+            //Style buttonStyle = new Style();
+            //EventSetter clickEventSetter = new EventSetter(CheckBox.ClickEvent, new RoutedEventHandler(/**/));
+            stackPanel.Children.Add(new TextBox { Name = "FilterGenre", HorizontalAlignment = HorizontalAlignment.Left, MinWidth = 50 });
 				foreach (var Genres in list) { 
 					stackPanel.Children.Add(new CheckBox { Content = Genres.Value, Name = 'G' + Genres.Key, Template = (ControlTemplate)this.FindResource("CustomCheckBoxes") });
 				}
