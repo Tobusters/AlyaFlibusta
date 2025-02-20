@@ -171,17 +171,17 @@ namespace WpfApp1
             return null;
         }
 
-        public Dictionary<string, string> ConnectToDTBaseAndReadG2B(string select)
+        public List<string> ConnectToDTBaseAndReadG2B(string select)
         {
             ConnectToDTBaseAndRead(select);
             if (rdr != null)
             {
                 try
                 {
-                    Dictionary<string, string> list = new Dictionary<string, string>();
+                    List<string> list = new List<string>();
                     while (rdr.Read())
                     {
-                        list.Add(rdr[0].ToString(),rdr[1].ToString());
+                        list.Add($"{rdr[0].ToString()} { rdr[1].ToString()}");
                     }
                     return list;
                 }

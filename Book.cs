@@ -121,22 +121,20 @@ namespace WpfApp1
     class BOOKS2G
     {
         private static BOOKS2G instance;
-        //Update updatebox;
-        public Dictionary<string, string> G2B;//<BookID, GenreID>
+        public List<string> G2B;//<BookID, GenreID>
         public void AddBook2genre(string BookID, string GenreID)
         {
-            G2B.Add(BookID, GenreID);
+            G2B.Add($"{BookID} {GenreID}");
         }
 
-		public void SetBySql(Dictionary<string, string> newG2B)
+		public void SetBySql(List<string> newG2B)
 		{
 			G2B = newG2B;
-			MessageBox.Show(G2B.ToString());
 		}
 
         private BOOKS2G()
         {
-            G2B = new Dictionary<string, string>(0);
+            G2B = new List<string>(0);
         }
 
         public static BOOKS2G getInstance()

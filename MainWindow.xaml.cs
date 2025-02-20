@@ -31,9 +31,10 @@ namespace WpfApp1
 		GENRES genres = GENRES.getInstance();
 		BOOKS2G books2G = BOOKS2G.getInstance();
 		USERS users = USERS.getInstance();
+		List<string> SelectedGenreId = new List<string>();
 		//SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-UNTJG88\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
-		SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
-														 //SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
+		//SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
+		SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
 		RegLog reglog = new RegLog();
 
 		public MainWindow()
@@ -60,13 +61,18 @@ namespace WpfApp1
 
 			InitializeComponent();
 
+			try { 
 			genres.SetGenres(conn.ConnectToDTBaseAndReadDictionary("exec ShowGenre"));
 			books.SetBooksBySql(conn.ConnectToDTBaseAndReadBooks("exec ShowSimpleBooksForViewTable"));
-			books2G.SetBySql(conn.ConnectToDTBaseAndReadG2B("exec ShowGenre2Book"));
+				//books2G.SetBySql(conn.ConnectToDTBaseAndReadG2B("exec ShowGenre2Book"));
+				books2G.AddBook2genre("1053", "1075");
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show(e.Message, e.ToString());
+			}
 
-
-            //CollectionBooksViewTable.ItemsSource = books.SimpleFillDataGrid();
-			//UpdateComboBox(GenreSelect);
+			CollectionBooksViewTable.ItemsSource = books.SimpleFillDataGrid();
 			ExpandGenresUpdate();
 		}
 		public void UpdateComboBox(params ComboBox[] comboBoxes)
@@ -94,12 +100,20 @@ namespace WpfApp1
 			{ 
 				GenreSelect.Content = null;
 			}
-            void Button_Click(object sender, RoutedEventArgs e)
-            {
-                CheckBox ch = (CheckBox)sender;
-				if(ch.IsChecked == false) return;
-                MessageBox.Show(ch.Name);
-            }
+			void Button_Click(object sender, RoutedEventArgs e)
+			{
+				CheckBox ch = (CheckBox)sender;
+				//if(ch.IsChecked == false) return;
+				//MessageBox.Show(ch.Name);
+
+				if (ch.IsChecked == false)
+				{
+					SelectedGenreId.Remove(ch.Name.Substring(1));
+					return;
+				}
+				SelectedGenreId.Add(ch.Name.Substring(1));
+
+			}
             Dictionary<string, string> list = genres.GetGenresDict();
 				if (list == null) return;
 				ScrollViewer scrollViewer = new ScrollViewer();
@@ -208,8 +222,17 @@ namespace WpfApp1
 
 		void Window_Closing(object sender, EventArgs e)
 		{
-            reglog.Close();
-            conn.Close();
+			reglog.Close();
+			conn.Close();
 		}
-	}
+        private void CollectionBooksViewTable_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            DataGrid dt = (DataGrid)sender;
+            DataGridCell = (DataGridCellInfo)
+
+            MessageBox.Show();
+			хуйня
+			
+        }
+    }
 }
