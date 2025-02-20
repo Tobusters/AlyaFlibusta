@@ -52,7 +52,7 @@
                 </StackPanel>
 
                 <!-- Кнопка "Написать" -->
-                <Button Content="Написать" Width="100" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0" Template="{DynamicResource ButtonRegularRemake}"/>
+                <Button Content="Написать" Width="100" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0" Template="{DynamicResource ButtonRegularRemake}" Click="ToMessage"/>
 
                 <Grid Margin="10,80,10,10">
                     <Grid.ColumnDefinitions>
@@ -164,6 +164,55 @@
                     </Button>
                 </WrapPanel>
             </Viewbox>
+            <!--Осталось доработать-->
+            <Grid x:Name="Messager" Visibility="Hidden">
+                <WrapPanel Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Button Content="Back" Template="{DynamicResource ButtonRegularRemake}" Click="ToBackMessage"/>
+                    <Button Content="Users" Template="{DynamicResource ButtonRegularRemake}"/>
+                    <Button Content="Groups" Template="{DynamicResource ButtonRegularRemake}"/>
+                    <TextBox Width="100" Template="{DynamicResource TextBoxRegular}"/>
+                    <Button Content="Search" Template="{DynamicResource ButtonRegularRemake}"/>
+                </WrapPanel>
+                <DataGrid Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="300" Width="280"/>
+                <TextBox Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Height="300" Width="500"/>
+                <WrapPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <TextBox Width="200" Template="{DynamicResource TextBoxRegular}"/>
+                    <Button Content="-->" Template="{DynamicResource ButtonRegularRemake}"/>
+                </WrapPanel>
+            </Grid>
+            <Grid x:Name="PreviewBook" Visibility="Hidden">
+                <Image Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Height="150" Width="100"/>
+                <WrapPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Width="260" Height="40" />
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Width="400" Height="200"/>
+                </WrapPanel>
+                <WrapPanel  Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <Button Content="Read" Template="{DynamicResource ButtonRegularRemake}"/>
+                    <Button Content="Comments" Template="{DynamicResource ButtonRegularRemake}" Click="ToComment"/>
+                </WrapPanel>
+                <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Label Content="Estimetion 0::0"/>
+                    <Label Content="Your estimation: "/>
+                    <Slider/>
+                </StackPanel>
+                <Button Grid.Row="0" Content="Back" Template="{DynamicResource ButtonRegularRemake}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="ToBackBook"/>
+            </Grid>
+            <Grid x:Name="Comments" Visibility="Hidden" VerticalAlignment="Center" HorizontalAlignment="Right" Height="370">
+                <TextBox Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="340" Width="400"/>
+                <WrapPanel Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,7">
+                    <Button Content="Back" Template="{DynamicResource ButtonRegularRemake}" Click="ToBackComments"/>
+                    <TextBox Width="320" Template="{DynamicResource TextBoxRegular}"/>
+                    <Button Content="-->" Template="{DynamicResource ButtonRegularRemake}"/>
+                </WrapPanel>
+
+            </Grid>
+            <Button Template="{DynamicResource ButtonRegularRemake}" Content="Читать" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Top" Click="ToBook" Height="60" Width="225"/>
+            <Menu  Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <MenuItem Header="Themes">
+                    <ComboBox/>
+                    <Button Content="Aplly" Template="{DynamicResource ButtonRegularRemake}"/>
+                </MenuItem>
+            </Menu>
         </Grid>
     </Grid>
 </Window>
