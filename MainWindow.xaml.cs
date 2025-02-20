@@ -132,15 +132,15 @@ namespace WpfApp1
 
         private void ToMessage(object sender, RoutedEventArgs e)
         {
-			Messager.Visibility = Visibility.Visible;
+			SwitchViewGrid_ToMessage();
         }
         private void ToBackMessage(object sender, RoutedEventArgs e)
         {
             Messager.Visibility = Visibility.Hidden;
         }
-        private void Timed(object sender, RoutedEventArgs e)
+        private void ToBook(object sender, RoutedEventArgs e)
         {
-            PreviewBook.Visibility = Visibility.Visible;
+            SwitchViewGrid_ToBook();
         }
         private void ToBackBook(object sender, RoutedEventArgs e)
         {
@@ -148,14 +148,14 @@ namespace WpfApp1
         }
         private void ToComment(object sender, RoutedEventArgs e)
         {
-            Comments.Visibility = Visibility.Visible;
+            SwitchViewGrid_ToComment();
         }
         private void ToBackComments(object sender, RoutedEventArgs e)
         {
             Comments.Visibility = Visibility.Hidden;
         }
 
-        private void EnableGrids(bool CollectionGrid , bool AccountGrid,bool UploadGrid)
+        private void EnableGrids(bool CollectionGrid , bool AccountGrid,bool UploadGrid, bool MessagerGrid, bool PrewBookGrid, bool CommentGrid)
 		{
 			//if (CollectionGrid == AccountGrid == UploadGrid && CollectionGrid == true)return;	//Так не должно быть
 			//if (CollectionGrid == AccountGrid == UploadGrid && CollectionGrid == false)return;//Так не должно быть
@@ -167,23 +167,62 @@ namespace WpfApp1
                 BookMain.Visibility = Visibility.Visible;
                 Account.Visibility = Visibility.Hidden;
                 Upload.Visibility = Visibility.Hidden;
+                Messager.Visibility = Visibility.Hidden;
+                PreviewBook.Visibility = Visibility.Hidden;
+                Comments.Visibility = Visibility.Hidden;
             }
 			if (AccountGrid)
 			{
                 BookMain.Visibility = Visibility.Hidden;
                 Account.Visibility = Visibility.Visible;
                 Upload.Visibility = Visibility.Hidden;
+                Messager.Visibility = Visibility.Hidden;
+                PreviewBook.Visibility = Visibility.Hidden;
+                Comments.Visibility = Visibility.Hidden;
             }
 			if (UploadGrid)
 			{
                 Upload.Visibility = Visibility.Visible;
                 BookMain.Visibility = Visibility.Hidden;
                 Account.Visibility = Visibility.Hidden;
+                Messager.Visibility = Visibility.Hidden;
+                PreviewBook.Visibility = Visibility.Hidden;
+                Comments.Visibility = Visibility.Hidden;
             }
-		}
-		private void SwitchViewGrid_ToMainCollection() { EnableGrids(true, false, false); }
-		private void SwitchViewGrid_ToUserAccount() { EnableGrids(false, true, false); }
-		private void SwitchViewGrid_ToUpload() { EnableGrids(false, false, true); }
+            if (MessagerGrid)
+            {
+                Upload.Visibility = Visibility.Hidden;
+                BookMain.Visibility = Visibility.Hidden;
+                Account.Visibility = Visibility.Hidden;
+                Messager.Visibility = Visibility.Visible;
+                PreviewBook.Visibility = Visibility.Hidden;
+                Comments.Visibility = Visibility.Hidden;
+            }
+            if (PrewBookGrid)
+            {
+                Upload.Visibility = Visibility.Hidden;
+                BookMain.Visibility = Visibility.Hidden;
+                Account.Visibility = Visibility.Hidden;
+                Messager.Visibility = Visibility.Hidden;
+                PreviewBook.Visibility = Visibility.Visible;
+                Comments.Visibility = Visibility.Hidden;
+            }
+            if (CommentGrid)
+            {
+                Upload.Visibility = Visibility.Hidden;
+                BookMain.Visibility = Visibility.Hidden;
+                Account.Visibility = Visibility.Hidden;
+                Messager.Visibility = Visibility.Hidden;
+                PreviewBook.Visibility = Visibility.Visible;
+                Comments.Visibility = Visibility.Visible;
+            }
+        }
+		private void SwitchViewGrid_ToMainCollection() { EnableGrids(true, false, false, false, false, false); }
+		private void SwitchViewGrid_ToUserAccount() { EnableGrids(false, true, false, false, false, false); }
+		private void SwitchViewGrid_ToUpload() { EnableGrids(false, false, true, false, false, false); }
+        private void SwitchViewGrid_ToMessage() { EnableGrids(false, false, false, true, false, false); }
+        private void SwitchViewGrid_ToBook() { EnableGrids(false, false, false, false, true, false); }
+        private void SwitchViewGrid_ToComment() { EnableGrids(false, false, false, false, true, true); }
 
 
     }
