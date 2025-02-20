@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Security.Policy;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace WpfApp1
 {
@@ -10,7 +14,7 @@ namespace WpfApp1
 	{
 		private static BOOKS instance;
 		//Update updatebox;
-		public Book[] Books;
+		private Book[] Books;
         static Book empty = new Book();
         public void AddBook(ref Book book) {
 			var b = Books.Append(book);
@@ -39,6 +43,54 @@ namespace WpfApp1
 			}
 			MessageBox.Show(toShow);
 		}
+
+		public void SetBooksBySql(Book[] booksNew)
+		{
+			Books  = booksNew;
+		}
+
+        public DataView SimpleFillDataGrid()
+        {
+			if (Books == null) return null;
+			try
+			{
+				DataTable dt = new DataTable("Books");
+				dt.Columns.Add(new DataColumn("Название", typeof(string)));
+				dt.Columns.Add(new DataColumn("Автор", typeof(string)));
+				for (var i = 0; i < Books.Length; i++)
+				{
+					DataRow r = dt.NewRow();
+					r[0] = Books[i].Name;
+					r[1] = Books[i].AuthorName;
+					dt.Rows.Add(r);
+				}
+				return dt.DefaultView;
+
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show(e.Message.ToString(), e.ToString());
+			}
+			MessageBox.Show("Ошибка заполнения Datagrid");
+			return null;
+
+			//	try
+			//	{
+			//              ObservableCollection<string> ComboBoxContent
+			//              ComboBoxContent = new ObservableCollection<string>();
+			//              ComboBoxContent.Add("1");
+			//              ComboBoxContent.Add("2");
+			//              ComboBoxContent.Add("3");
+			//              Name = name;
+			//          }
+			//	catch (Exception ex) {
+			//		MessageBox.Show(e.Message.ToString(), e.ToString());
+
+			//	}
+			//          MessageBox.Show("Ошибка заполнения Datagrid");
+			//	return null;
+		}
+
 
 		private ref Book GetBookByID(string ID)
 		{
@@ -69,17 +121,20 @@ namespace WpfApp1
     class BOOKS2G
     {
         private static BOOKS2G instance;
-        //Update updatebox;
-        public Dictionary<string, string> G2B;//<BookID, GenreID>
+        public List<string> G2B;//<BookID, GenreID>
         public void AddBook2genre(string BookID, string GenreID)
         {
-            G2B.Add(BookID, GenreID);
+            G2B.Add($"{BookID} {GenreID}");
         }
 
-        public void DeleteGenre(int GenreID) { }
+		public void SetBySql(List<string> newG2B)
+		{
+			G2B = newG2B;
+		}
+
         private BOOKS2G()
         {
-            G2B = new Dictionary<string, string>(0);
+            G2B = new List<string>(0);
         }
 
         public static BOOKS2G getInstance()
@@ -108,6 +163,16 @@ namespace WpfApp1
 			get { return name; }
 			set { name = value; }
 		}
+
+		private string authorname;
+
+		public string AuthorName
+        {
+			get { return authorname; }
+			set { authorname = value; }
+		}
+
+
 		private string description;
 
 		public string Description
@@ -125,15 +190,20 @@ namespace WpfApp1
 
 		private string filepath;
 
-		public Book(string iD, string name, string description, DateTime dateOfUpload,string filePath)
+		public Book(string iD, string name, string Author, string description, string dateOfUpload,string filePath)
 		{
 			ID = iD;
+			AuthorName = Author;
 			Name = name;
 			Description = description;
-			DateOfUpload = dateOfUpload;
-			FilePath = filePath;
+			DateTime ret;
+            DateTime.TryParse(dateOfUpload, out ret);
+			DateOfUpload = ret;
+            FilePath = filePath;
 		}
-		public Book() : this("-1", "Void", "Empty class", new DateTime(2010, 4, 11), "/") {}
+		public Book() : this("-1", "Void", "Noname", "Empty class", "2010-4-11", "/") {}
+
+		public Book(string iD, string name, string Author): this(iD, name, Author, "", "", "") { }
 
 		public string FilePath
 		{

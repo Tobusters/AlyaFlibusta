@@ -5,7 +5,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:WpfApp1"
 		mc:Ignorable="d"
-		Title="Flibusta" Width="800" Height="450">
+		Title="Flibusta" Width="800" Height="450" Closing="Window_Closing" Closed="Window_Closing">
     <Grid>
         <Grid Name="MainGrid">
             <Grid.RowDefinitions>
@@ -26,6 +26,7 @@
                         <StackPanel  HorizontalAlignment="Left"  >
                             <Label Content="Поиск по жанру" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <Expander x:Name="GenreSelect">
+                                <CheckBox Content="Эпическая новелла" x:Name="G3" Template="{DynamicResource CustomCheckBoxes}"/>
                             </Expander>
                         </StackPanel>
                         <StackPanel  HorizontalAlignment="Left"  >
@@ -36,12 +37,18 @@
                         <!--<Button Content="Поиск" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 20" Template="{DynamicResource ButtonRegularRemake}" />-->
                     </StackPanel>
                 </Viewbox>
-                <DataGrid d:ItemsSource="{d:SampleData ItemCount=20}" AutoGenerateColumns="True" x:Name="CollectionBooksViewTable" Grid.Column="1"/>
+                <DataGrid AutoGenerateColumns="True" x:Name="CollectionBooksViewTable" Grid.Column="1" IsReadOnly="True" MouseUp="CollectionBooksViewTable_MouseUp">
+                    <DataGrid.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <EventSetter Event="PreviewMouseLeftButtonUp" Handler="CollectionBooksViewTable_MouseUp"/>
+                        </Style>
+                    </DataGrid.CellStyle>
+                </DataGrid>
             </Grid>
             <Grid Name="Account" Grid.Row="0" Visibility="Hidden">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10">
                     <Image Style="{StaticResource ImgAccount}" Width="50" Height="50" Margin="0,0,10,0"/>
-                    <TextBlock Text="Имя пользователя" VerticalAlignment="Center" FontSize="20"/>
+                    <TextBlock x:Name="User_Login" Text="Имя пользователя" VerticalAlignment="Center" FontSize="20"/>
                 </StackPanel>
 
                 <!-- Кнопка "Написать" -->
@@ -71,7 +78,7 @@
                         </Expander>
                     </StackPanel>
                     <StackPanel Grid.Column="2" VerticalAlignment="Top">
-                        <Expander Header="Загруженные книги">
+                        <Expander x:Name="User_UploadedBooksCollection" Header="Загруженные книги">
                             <StackPanel>
                                 <TextBlock Text="Название книги 1" Margin="5"/>
                                 <TextBlock Text="Название книги 2" Margin="5"/>
@@ -131,7 +138,7 @@
                             </Grid>
                         </Viewbox>
                     </Button>
-                    <Button Template="{DynamicResource ButtonMenuRemake}" Height="45" Width="88" Click="ToUserAccount">
+                    <Button Template="{DynamicResource ButtonMenuRemake}" Height="45" Width="88" Click="ToUserAccount" >
                         <Viewbox>
                             <Grid Style="{x:Null}">
                                 <Grid.RowDefinitions>
