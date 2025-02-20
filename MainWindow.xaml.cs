@@ -33,14 +33,15 @@ namespace WpfApp1
 		USERS users = USERS.getInstance();
 		List<string> SelectedGenreId = new List<string>();
 		//SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-UNTJG88\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
-		//SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
-		SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
+		SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
+		//SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
 		RegLog reglog = new RegLog();
 
 		public MainWindow()
 		{
 			var result = MessageBox.Show("Загрузить с sql?", "SQL", MessageBoxButton.YesNo, MessageBoxImage.Question);
-			if (result == MessageBoxResult.Yes) {
+			if (result == MessageBoxResult.Yes)
+			{
 				try
 				{
 					if (conn.Conn != null)
@@ -57,6 +58,10 @@ namespace WpfApp1
 				{
 					conn.Conn.Close();
 				}
+			}
+			else
+			{
+				
 			}
 
 			InitializeComponent();
@@ -114,7 +119,7 @@ namespace WpfApp1
 				SelectedGenreId.Add(ch.Name.Substring(1));
 
 			}
-            Dictionary<string, string> list = genres.GetGenresDict();
+			Dictionary<string, string> list = genres.GetGenresDict();
 				if (list == null) return;
 				ScrollViewer scrollViewer = new ScrollViewer();
 				StackPanel stackPanel = new StackPanel();
@@ -225,14 +230,15 @@ namespace WpfApp1
 			reglog.Close();
 			conn.Close();
 		}
-        private void CollectionBooksViewTable_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            DataGrid dt = (DataGrid)sender;
-            DataGridCell = (DataGridCellInfo)
+		private void CollectionBooksViewTable_MouseUp(object sender, MouseButtonEventArgs e)
+		{
+			DataGridCell dt = (DataGridCell)sender;
+			{
+				TextBlock dti = (TextBlock)dt.Content;
+				MessageBox.Show(dti.Text);
+			}
 
-            MessageBox.Show();
-			хуйня
-			
-        }
-    }
+
+		}
+	}
 }

@@ -38,6 +38,11 @@
                     </StackPanel>
                 </Viewbox>
                 <DataGrid AutoGenerateColumns="True" x:Name="CollectionBooksViewTable" Grid.Column="1" IsReadOnly="True" MouseUp="CollectionBooksViewTable_MouseUp">
+                    <DataGrid.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <EventSetter Event="PreviewMouseLeftButtonUp" Handler="CollectionBooksViewTable_MouseUp"/>
+                        </Style>
+                    </DataGrid.CellStyle>
                 </DataGrid>
             </Grid>
             <Grid Name="Account" Grid.Row="0" Visibility="Hidden">
