@@ -60,7 +60,9 @@ namespace WpfApp1
 				for (var i = 0; i < Books.Length; i++)
 				{
 					DataRow r = dt.NewRow();
-					r[0] = Books[i].Name;
+                    //DataGridCell BookName = new DataGridCell() { Content = new TextBlock { Text = Books[i].Name }, Name = $"B{Books[i].ID}" };
+                    //DataGridCell AuthorName = new DataGridCell() { Content = new TextBlock { Text = Books[i].AuthorName } };// добавить таблицу с Авторами
+                    r[0] = Books[i].Name;
 					r[1] = Books[i].AuthorName;
 					dt.Rows.Add(r);
 				}
