@@ -1,8 +1,9 @@
-﻿using WpfApp1;
+﻿using System.Collections.Generic;
+using WpfApp1;
 
 namespace WpfApp1
 {
-    class User
+    public class User
     {
         private string id;
 
@@ -76,10 +77,69 @@ class Admin: Moderator
     {
     }
 
-    public Admin(): this("-1", "voidmod", false)
+    public Admin(): this("-1", "voidadm", false)
     {
     }
 
     void User2Moderator(int UserID) { }
     void Moderator2User(int UserID) { }
+}
+
+class USERS
+{
+    private static USERS instance;
+    //Update updatebox;
+    public User[] users;
+    public Moderator[] moderators;
+    public Admin[] admins;
+
+    private USERS()
+    {
+        users = new User[10];
+        moderators = new Moderator[0];
+        admins = new Admin[3];
+    }
+
+    public static USERS getInstance()
+    {
+        if (instance == null)
+            instance = new USERS();
+        return instance;
+    }
+    public void AddUser(User user, short p)
+    {
+        if (p <= 0)
+        {
+            for (int i = 0; i < users.Length; i++)
+            {
+                if (users[i].ID != "-1")
+                {
+                    users[i] = user;
+                    return;
+                }
+            }
+        }
+        //else if(p == 1)
+            //{
+            //    for (int i = 0; i < moderators.Length; i++)
+            //    {
+            //        if (moderators[i].ID != "-1")
+            //        {
+            //            moderators[i] = user;
+            //            return;
+            //        }
+            //    }
+            //}
+            //else {
+            //    for (int i = 0; i < admins.Length; i++)
+            //    {
+            //        if (users[i].ID != "-1")
+            //        {
+            //            admins[i] = user;
+            //            return;
+            //        }
+            //    }
+            //}
+    }
+    
 }

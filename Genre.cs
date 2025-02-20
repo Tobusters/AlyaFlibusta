@@ -57,21 +57,9 @@ namespace WpfApp1
             return strings;
         }
 
-        public void SetGenres(SqlDataReader sqlData, ref SQLConnection connection)
+        public void SetGenres(Dictionary<string, string> data)
         {
-            genres.Clear();
-            try
-            {
-                while (sqlData.Read())
-                {
-                    genres.Add(sqlData[0].ToString(), sqlData[1].ToString());
-                }
-            }
-            finally
-            {
-                sqlData.Close();
-                connection.Conn.Close();
-            }
+            genres = data;
         }
 
         public string[] GetGenresID()

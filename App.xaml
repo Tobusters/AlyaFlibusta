@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="/Imgs.xaml"/>
                 <ResourceDictionary Source="/Buttons.xaml"/>
                 <ResourceDictionary Source="/GlobalColours.xaml"/>
+                <ResourceDictionary Source="/CheckBoxes.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <!--<Color x:Key="FirstColorRGB" R="55" G="97" B="105" A="255"/>
             <Color x:Key="SecondColorRGB" R="102" G="187" B="204" A="255" />
@@ -26,6 +27,8 @@
 
             <Style TargetType="{x:Type CheckBox}">
                 <Setter Property="Margin" Value="10 0 0 0"/>
+                <Setter Property="Foreground" Value="{StaticResource TextColorFirst}"/>
+                
             </Style>
             <Style x:Key="Smaller">
                 <Setter Property="FrameworkElement.Margin" Value="0 1 0 0"/>
@@ -38,6 +41,11 @@
             </Style>
             <Style TargetType="{x:Type TextBlock}">
                 <Setter Property="Margin" Value="5 0 5 0"/>
+                <Setter Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{StaticResource TextColorFirstRGB}"/>
+                    </Setter.Value>
+                </Setter>
             </Style>
             <Style TargetType="{x:Type Label}">
                 <Setter Property="Margin" Value="0 0 0 5"/>
@@ -50,16 +58,19 @@
                 </Setter>
             </Style>
             <Style TargetType="{x:Type Grid}">
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <LinearGradientBrush>
-                            <GradientStop Color="{StaticResource TherdColorRGB }"/>
-                            <GradientStop Color="{StaticResource FirstColorRGB }" Offset="1"/>
-                            <GradientStop Color="{StaticResource SecondColorRGB }" Offset="0.821"/>
-                        </LinearGradientBrush>
-                    </Setter.Value>
+                <Setter Property="Background" Value="{StaticResource Grid}">
                 </Setter>
             </Style>
+            <Style TargetType="DataGrid" >
+                <Setter Property="Background" Value="{StaticResource FirstColor}"/>
+                <Setter Property="Foreground" Value="{StaticResource TextColorFirst}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource BorderMOver}"/>
+            </Style>
+            <Style TargetType="DataGridCell">
+                <Setter Property="Background" Value="{StaticResource TherdColor}"/>
+            </Style>
+
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

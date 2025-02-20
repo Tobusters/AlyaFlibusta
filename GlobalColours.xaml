@@ -1,6 +1,17 @@
-﻿<ResourceDictionary  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary x:Name="Theme"  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/ThemeStandart.xaml"/>
+        <!--<ResourceDictionary Source="/ThemeFirst.xaml"/>-->
+        <ResourceDictionary Source="/BoneTheme.xaml"/>
+        <!--<ResourceDictionary Source="/Raibow.xaml"/>-->
+        <!--<ResourceDictionary Source="/ThemeStandart.xaml"/>-->
+        <ResourceDictionary Source="/ThemeCoPilotLike.xaml"/>
+        <!--<ResourceDictionary Source="/ThemeDark.xaml"/>-->
+        <!--<ResourceDictionary Source="/ThemeNight.xaml"/>-->
+        <!--<ResourceDictionary Source="/ThemeWinter.xaml"/>-->
+        <!--<ResourceDictionary Source="/ThemeSummery.xaml"/>-->
+        <!--<ResourceDictionary Source="/ThemeSpring.xaml"/>-->
+        <!--<ResourceDictionary Source="/ThemeAutumn.xaml"/>-->
+        <!--<ResourceDictionary Source="/ThemeSpace.xaml"/>-->
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

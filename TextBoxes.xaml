@@ -10,23 +10,28 @@
     <ControlTemplate x:Key="TextBoxRegular" TargetType="{x:Type TextBoxBase}">
         <!--<Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">-->
         <Border x:Name="border" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
-            <Grid Style="{x:Null}">
-                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+            <Grid Style="{x:Null}" MaxWidth="200">
+                <ScrollViewer  x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
                 <Grid.Background>
-                    <SolidColorBrush Color="{StaticResource FirstColorRGB}" />
+                    <SolidColorBrush Color="{StaticResource TherdColorRGB}" />
                 </Grid.Background>
             </Grid>
             <Border.BorderBrush>
                 <SolidColorBrush Color="{StaticResource BorderColorRGB}"/>
             </Border.BorderBrush>
         </Border>
+        <ControlTemplate.Resources>
+            <Style TargetType="TextBox">
+                <Setter Property="Foreground" Value="{StaticResource BorderColor}"></Setter>
+            </Style>
+        </ControlTemplate.Resources>
         <ControlTemplate.Triggers>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Opacity" TargetName="border" Value="0.56">
                 </Setter>
             </Trigger>
             <Trigger Property="IsMouseOver" Value="true">
-                
+
                 <Setter Property="BorderBrush" TargetName="border">
                     <Setter.Value>
                         <RadialGradientBrush>
