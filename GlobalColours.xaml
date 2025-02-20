@@ -3,8 +3,13 @@
     <ResourceDictionary.MergedDictionaries>
         <!--<ResourceDictionary Source="/ThemeFirst.xaml"/>-->
         <!--<ResourceDictionary Source="/ThemeStandart.xaml"/>-->
-        <ResourceDictionary Source="/ThemeCoPilotLike.xaml"/>
-        <!--<ResourceDictionary Source="/ThemeDark.xaml"/>-->
-        <!--<ResourceDictionary Source="/ThemePolice.xaml"/>-->
+        <!--<ResourceDictionary Source="/ThemeCoPilotLike.xaml"/>-->
+        <ResourceDictionary Source="/ThemeDark.xaml"/>
+        <!--<ResourceDictionary Source="/ThemeNight.xaml"/>-->
+        <!--<ResourceDictionary Source="/ThemeWinter.xaml"/>-->
+        <!--<ResourceDictionary Source="/ThemeSummery.xaml"/>-->
+        <!--<ResourceDictionary Source="/ThemeSpring.xaml"/>-->
+        <!--<ResourceDictionary Source="/ThemeAutumn.xaml"/>-->
+        <!--<ResourceDictionary Source="/ThemeSpace.xaml"/>-->
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
