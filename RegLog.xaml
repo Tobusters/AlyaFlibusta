@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="RegLog" Height="450" Width="200">
     <Grid>
-        <Grid x:Name="Log" Visibility="Hidden">
+        <Grid x:Name="Log" Visibility="Visible">
             <Viewbox>
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="100">
                     <Label Content="Логин:"/>
@@ -18,7 +18,7 @@
                 </StackPanel>
             </Viewbox>
         </Grid>
-        <Grid x:Name="Reg" Visibility="Visible">
+        <Grid x:Name="Reg" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="300*"/>
                 <RowDefinition Height="150*"/>

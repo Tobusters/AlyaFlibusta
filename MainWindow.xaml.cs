@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -24,7 +25,7 @@ namespace WpfApp1
 	delegate void Update();
 	public partial class MainWindow : Window
 	{
-		Book testBook1 = new Book("0", "Принцесса Марса", "Джон Картер на Марсе", new DateTime(1911, 1, 1), "");
+        Book testBook1 = new Book("0", "Принцесса Марса", "Джон Картер на Марсе", new DateTime(1911, 1, 1), "");
 		BOOKS books = BOOKS.getInstance();
 		GENRES genres = GENRES.getInstance();
 		BOOKS2G Books2G = BOOKS2G.getInstance();
@@ -55,13 +56,14 @@ namespace WpfApp1
 
 			InitializeComponent();
 
-			//RegLog regLog = new RegLog();
-			//regLog.ShowDialog();
-			//books.AddBook(ref testBook1);
-			//Books2G.AddBook2genre(books[0].ID, genres[0]);
-			//ExpandGenresUpdate();
-			//CollectionBooksViewTable.ItemsSource = conn.ConnectToDTBaseAndFillDataGrid("exec ShowSimpleBooksForViewTable");
-			//UpdateComboBox(GenreSelect);
+            //RegLog regLog = new RegLog();
+            //regLog.ShowDialog();
+            //books.AddBook(ref testBook1);
+            //Books2G.AddBook2genre(books[0].ID, genres[0]);
+            //ExpandGenresUpdate();
+            //CollectionBooksViewTable.ItemsSource = conn.ConnectToDTBaseAndFillDataGrid("exec ShowSimpleBooksForViewTable");
+            //UpdateComboBox(GenreSelect);
+
 		}
 		public void UpdateComboBox(params ComboBox[] comboBoxes)
 		{
@@ -224,6 +226,6 @@ namespace WpfApp1
         private void SwitchViewGrid_ToBook() { EnableGrids(false, false, false, false, true, false); }
         private void SwitchViewGrid_ToComment() { EnableGrids(false, false, false, false, true, true); }
 
-
     }
+
 }

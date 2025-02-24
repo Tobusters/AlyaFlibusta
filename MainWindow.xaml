@@ -6,6 +6,7 @@
 		xmlns:local="clr-namespace:WpfApp1"
 		mc:Ignorable="d"
 		Title="Flibusta" Width="800" Height="450">
+
     <Grid>
         <Grid Name="MainGrid">
             <Grid.RowDefinitions>
@@ -200,12 +201,6 @@
 
             </Grid>
             <Button Template="{DynamicResource ButtonRegularRemake}" Content="Читать" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Top" Click="ToBook" Height="60" Width="225"/>
-            <Menu  Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <MenuItem Header="Themes">
-                    <ComboBox/>
-                    <Button Content="Aplly" Template="{DynamicResource ButtonRegularRemake}"/>
-                </MenuItem>
-            </Menu>
         </Grid>
     </Grid>
 </Window>
