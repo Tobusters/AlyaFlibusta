@@ -64,7 +64,7 @@ namespace WpfApp1
             //CollectionBooksViewTable.ItemsSource = conn.ConnectToDTBaseAndFillDataGrid("exec ShowSimpleBooksForViewTable");
             //UpdateComboBox(GenreSelect);
 
-		}
+        }
 		public void UpdateComboBox(params ComboBox[] comboBoxes)
 		{
 			if (comboBoxes.Length == 0)
@@ -225,6 +225,7 @@ namespace WpfApp1
         private void SwitchViewGrid_ToMessage() { EnableGrids(false, false, false, true, false, false); }
         private void SwitchViewGrid_ToBook() { EnableGrids(false, false, false, false, true, false); }
         private void SwitchViewGrid_ToComment() { EnableGrids(false, false, false, false, true, true); }
+
 
     }
 

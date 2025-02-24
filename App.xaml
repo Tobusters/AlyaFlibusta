@@ -4,12 +4,12 @@
 			 xmlns:local="clr-namespace:WpfApp1"
 			 StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary>
+        <ResourceDictionary >
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/TextBoxes.xaml"/>
                 <ResourceDictionary Source="/Imgs.xaml"/>
                 <ResourceDictionary Source="/Buttons.xaml"/>
-                <ResourceDictionary Source="/GlobalColours.xaml"/>
+                <ResourceDictionary Source="/ThemeFirst.xaml"/>
                 <ResourceDictionary Source="/CheckBoxes.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <!--<Color x:Key="FirstColorRGB" R="55" G="97" B="105" A="255"/>
