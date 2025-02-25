@@ -145,16 +145,16 @@ as
 INSERT into G2B(BookID, GenreID) values(@BookID, @GenreID)
 go
                                                                                                                            
-alter procedure AddNameGenre2NameBook
-@GenreName varchar(50),
-@BookName nvarchar(100)
-as
-declare @GID int 
-declare @BID int
-exec @GID = GetGenreIdByName @GenreName
-exec @BID = GetBookIdByName @BookName
-insert into G2B(BookID, GenreID) values (@BID, @GID)
-go
+--alter procedure AddNameGenre2NameBook
+--@GenreName varchar(50),
+--@BookName nvarchar(100)
+--as
+--declare @GID int 
+--declare @BID int
+--exec @GID = GetGenreIdByName @GenreName
+--exec @BID = GetBookIdByName @BookName
+--insert into G2B(BookID, GenreID) values (@BID, @GID)
+--go
 
 alter proc ShowGenre2Book
 as
