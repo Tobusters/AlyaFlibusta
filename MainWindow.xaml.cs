@@ -29,12 +29,11 @@ namespace WpfApp1
 		volatile static User Logged = new User();
 		BOOKS books = BOOKS.getInstance();
 		GENRES genres = GENRES.getInstance();
-		BOOKS2G books2G = BOOKS2G.getInstance();
 		USERS users = USERS.getInstance();
 		List<string> SelectedGenreId = new List<string>();
 		//SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-UNTJG88\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
-		SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
-		//SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
+		//SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
+		SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
 		RegLog reglog = new RegLog();
 
 		public MainWindow()
@@ -69,16 +68,16 @@ namespace WpfApp1
 			try { 
 			genres.SetGenres(conn.ConnectToDTBaseAndReadDictionary("exec ShowGenre"));
 			books.SetBooksBySql(conn.ConnectToDTBaseAndReadBooks("exec ShowSimpleBooksForViewTable"));
-				//books2G.SetBySql(conn.ConnectToDTBaseAndReadG2B("exec ShowGenre2Book"));
-				books2G.AddBook2genre("1053", "1075");
+                //books2G.SetBySql(conn.ConnectToDTBaseAndReadG2B("exec ShowGenre2Book"));
+                books.B2G.AddBook2genre("1053", "1075");
 			}
 			catch (Exception e)
 			{
 				MessageBox.Show(e.Message, e.ToString());
 			}
 
-			CollectionBooksViewTable.ItemsSource = books.SimpleFillDataGrid();
 			ExpandGenresUpdate();
+			BooksGridUpdate();
 		}
 		public void UpdateComboBox(params ComboBox[] comboBoxes)
 		{
@@ -111,12 +110,22 @@ namespace WpfApp1
 				//if(ch.IsChecked == false) return;
 				//MessageBox.Show(ch.Name);
 
-				if (ch.IsChecked == false)
+				if (ch.IsChecked == true)
+				{
+					SelectedGenreId.Add(ch.Name.Substring(1));
+				}
+				else
 				{
 					SelectedGenreId.Remove(ch.Name.Substring(1));
-					return;
 				}
-				SelectedGenreId.Add(ch.Name.Substring(1));
+				//string tO = "";
+				//foreach(var g in SelectedGenreId)
+				//{
+				//	tO += g + "/n";
+				//}
+				//MessageBox.Show(tO);
+				BooksGridUpdate();
+
 
 			}
 			Dictionary<string, string> list = genres.GetGenresDict();
@@ -138,9 +147,16 @@ namespace WpfApp1
 		}
 
 
+		public void BooksGridUpdate()
+		{
+			CollectionBooksViewTable.ItemsSource = null;
+            CollectionBooksViewTable.ItemsSource = books.SimpleFillDataGridByGenre(SelectedGenreId);
+        }
 
-		#region Вкладки
-		void ToUserAccount(object sender, RoutedEventArgs e)
+
+
+        #region Вкладки
+        void ToUserAccount(object sender, RoutedEventArgs e)
 		{
 			if (_Is_Logged)
 			{
@@ -219,6 +235,7 @@ namespace WpfApp1
 		void SwitchViewGrid_ToUpload() { EnableGrids(false, false, true); }
 		#endregion
 
+		#region Closing
 		void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			reglog.Close();
@@ -232,13 +249,15 @@ namespace WpfApp1
 		}
 		private void CollectionBooksViewTable_MouseUp(object sender, MouseButtonEventArgs e)
 		{
-			DataGridCell dt = (DataGridCell)sender;
+			try
 			{
+				DataGridCell dt = (DataGridCell)sender;
 				TextBlock dti = (TextBlock)dt.Content;
 				MessageBox.Show(dti.Text);
 			}
-
-
+			catch { }
 		}
 	}
 }
+
+#endregion
