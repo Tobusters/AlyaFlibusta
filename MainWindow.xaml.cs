@@ -25,6 +25,7 @@ namespace WpfApp1
 	delegate void Update();
 	public partial class MainWindow : Window
 	{
+		#region Инициализация
 		volatile static bool _Is_Logged = false;
 		volatile static User Logged = new User();
 		BOOKS books = BOOKS.getInstance();
@@ -34,7 +35,8 @@ namespace WpfApp1
 		//SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-UNTJG88\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
 		//SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
 		SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
-		RegLog reglog = new RegLog();
+		RegLog reglog = new RegLog(); 
+		#endregion
 
 		public MainWindow()
 		{
@@ -96,6 +98,16 @@ namespace WpfApp1
 		}
 
 		
+		private void CollectionBooksViewTable_MouseUp(object sender, MouseButtonEventArgs e)
+		{
+			try
+			{
+				DataGridCell dt = (DataGridCell)sender;
+				TextBlock dti = (TextBlock)dt.Content;
+				MessageBox.Show(dti.Text);
+			}
+			catch { }
+		}
 
 
 		public void ExpandGenresUpdate()
@@ -146,16 +158,13 @@ namespace WpfApp1
 			
 		}
 
-
 		public void BooksGridUpdate()
 		{
 			CollectionBooksViewTable.ItemsSource = null;
             CollectionBooksViewTable.ItemsSource = books.SimpleFillDataGridByGenre(SelectedGenreId);
         }
-
-
-
-        #region Вкладки
+  
+      #region Вкладки
         void ToUserAccount(object sender, RoutedEventArgs e)
 		{
 			if (_Is_Logged)
@@ -246,16 +255,6 @@ namespace WpfApp1
 		{
 			reglog.Close();
 			conn.Close();
-		}
-		private void CollectionBooksViewTable_MouseUp(object sender, MouseButtonEventArgs e)
-		{
-			try
-			{
-				DataGridCell dt = (DataGridCell)sender;
-				TextBlock dti = (TextBlock)dt.Content;
-				MessageBox.Show(dti.Text);
-			}
-			catch { }
 		}
 	}
 }

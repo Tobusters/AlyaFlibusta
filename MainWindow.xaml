@@ -162,6 +162,18 @@
                             </Grid>
                         </Viewbox>
                     </Button>
+                    <Button Template="{DynamicResource ButtonMenuRemake}" Height="45" Width="88" Click="ToUpload">
+                        <Viewbox>
+                            <Grid Style="{x:Null}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="0.5*"/>
+                                </Grid.RowDefinitions>
+                                <Image Style="{StaticResource ImgBookExploreFull}" Grid.Row="0"/>
+                                <TextBlock Text="Читать" Grid.Row="1" VerticalAlignment="Top" />
+                            </Grid>
+                        </Viewbox>
+                    </Button>
                 </WrapPanel>
             </Viewbox>
         </Grid>
