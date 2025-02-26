@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
@@ -30,8 +32,14 @@ namespace WpfApp1
 		GENRES genres = GENRES.getInstance();
 		BOOKS2G Books2G = BOOKS2G.getInstance();
 		SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-UNTJG88\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
-		//SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
-		public MainWindow()
+                                                                                                                                                                                                //SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
+
+        private string _filePath; // Путь к открытому файлу
+        private string[] _pages; // Страницы из файла
+        private int _currentPageIndex = 0; // Текущая страница
+
+
+        public MainWindow()
 		{
 			var result = MessageBox.Show("Загрузить с sql?", "SQL", MessageBoxButton.YesNo, MessageBoxImage.Question);
 			if (result == MessageBoxResult.Yes) {
@@ -156,6 +164,14 @@ namespace WpfApp1
         {
             Comments.Visibility = Visibility.Hidden;
         }
+        private void ToBackRead(object sender, RoutedEventArgs e)
+        {
+            Reader.Visibility = Visibility.Hidden;
+        }
+        private void Read(object sender, RoutedEventArgs e)
+        {
+            Reader.Visibility = Visibility.Visible;
+        }
 
         private void EnableGrids(bool CollectionGrid , bool AccountGrid,bool UploadGrid, bool MessagerGrid, bool PrewBookGrid, bool CommentGrid)
 		{
@@ -172,6 +188,7 @@ namespace WpfApp1
                 Messager.Visibility = Visibility.Hidden;
                 PreviewBook.Visibility = Visibility.Hidden;
                 Comments.Visibility = Visibility.Hidden;
+
             }
 			if (AccountGrid)
 			{
@@ -226,7 +243,99 @@ namespace WpfApp1
         private void SwitchViewGrid_ToBook() { EnableGrids(false, false, false, false, true, false); }
         private void SwitchViewGrid_ToComment() { EnableGrids(false, false, false, false, true, true); }
 
+        // Открытие файла
+        private void OpenFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Текстовые файлы (*.txt)|*.txt|Все файлы (*.*)|*.*",
+                Title = "Выберите книгу"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                _filePath = openFileDialog.FileName;
+                LoadBook(_filePath);
+            }
+        }
+
+        // Загрузка книги
+        private void LoadBook(string filePath)
+        {
+            try
+            {
+                string content = File.ReadAllText(filePath);
+                _pages = SplitIntoPages(content); // Разбиваем текст на страницы
+                _currentPageIndex = 0; // Начинаем с первой страницы
+                DisplayPage(_currentPageIndex);
+
+                btnPreviousPage.IsEnabled = false; // Кнопка "Назад" недоступна на первой странице
+                btnNextPage.IsEnabled = _pages.Length > 1; // Кнопка "Вперед" доступна, если есть следующая страница
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки книги: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        // Разбиение текста на страницы
+        private string[] SplitIntoPages(string content)
+        {
+            const int pageSize = 2000; // Размер страницы (в символах)
+            return content.Split(new string[] { Environment.NewLine }, StringSplitOptions.None)
+                          .Aggregate(new System.Text.StringBuilder(), (sb, line) => sb.AppendLine(line))
+                          .ToString()
+                          .Split(new string[] { Environment.NewLine }, StringSplitOptions.None)
+                          .Chunk(pageSize)
+                          .Select(chunk => string.Join(Environment.NewLine, chunk))
+                          .ToArray();
+        }
+
+        // Отображение страницы
+        private void DisplayPage(int pageIndex)
+        {
+            txtContent.Text = _pages[pageIndex];
+        }
+
+        // Кнопка "Предыдущая страница"
+        private void PreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (_currentPageIndex > 0)
+            {
+                _currentPageIndex--;
+                DisplayPage(_currentPageIndex);
+
+                btnNextPage.IsEnabled = true;
+                btnPreviousPage.IsEnabled = _currentPageIndex > 0;
+            }
+        }
+
+        // Кнопка "Следующая страница"
+        private void NextPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (_currentPageIndex < _pages.Length - 1)
+            {
+                _currentPageIndex++;
+                DisplayPage(_currentPageIndex);
+
+                btnPreviousPage.IsEnabled = true;
+                btnNextPage.IsEnabled = _currentPageIndex < _pages.Length - 1;
+            }
+        }
 
     }
 
+    // Расширение для разбиения массива на части
+    public static class ArrayExtensions
+    {
+        public static T[][] Chunk<T>(this T[] array, int size)
+        {
+            var chunks = new T[(int)Math.Ceiling((double)array.Length / size)][];
+            for (int i = 0, j = 0; i < array.Length; i += size, j++)
+            {
+                chunks[j] = array.Skip(i).Take(size).ToArray();
+            }
+            return chunks;
+        }
+    }
 }

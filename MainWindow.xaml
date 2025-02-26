@@ -181,7 +181,7 @@
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Width="400" Height="200"/>
                 </WrapPanel>
                 <WrapPanel  Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                    <Button Content="Read" Template="{DynamicResource ButtonRegularRemake}"/>
+                    <Button Content="Read" Template="{DynamicResource ButtonRegularRemake}" Click="Read"/>
                     <Button Content="Comments" Template="{DynamicResource ButtonRegularRemake}" Click="ToComment"/>
                 </WrapPanel>
                 <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center">
@@ -201,6 +201,42 @@
 
             </Grid>
             <Button Template="{DynamicResource ButtonRegularRemake}" Content="Читать" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Top" Click="ToBook" Height="60" Width="225"/>
+        </Grid>
+        <Grid Visibility="Visible" x:Name="Reader">
+            <WrapPanel>
+            <Button Content="Back" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ToBackRead"/>
+            <!-- Меню -->
+            <Menu Grid.Row="0" Height="30" VerticalAlignment="Top">
+                <MenuItem Header="_Файл">
+                        <MenuItem Header="_Открыть..." Click="OpenFile_Click"/>
+                </MenuItem>
+            </Menu> 
+            </WrapPanel>
+
+
+            <!-- Панель инструментов -->
+            <ToolBarTray Grid.Row="0" VerticalAlignment="Top" Margin="0,30,0,0">
+                <ToolBar>
+                    <Button Name="btnOpen" Click="OpenFile_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <!--Image Source="pack://application:,,,/Resources/open.png" Width="16" Height="16"/-->
+                            <TextBlock Text=" Открыть" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <Separator/>
+                    <Button Name="btnPreviousPage" Click="PreviousPage_Click" IsEnabled="False">
+                        <!--Image Source="pack://application:,,,/Resources/previous.png" Width="16" Height="16"/-->
+                    </Button>
+                    <Button Name="btnNextPage" Click="NextPage_Click">
+                        <!--Image Source="pack://application:,,,/Resources/next.png" Width="16" Height="16"/-->
+                    </Button>
+                </ToolBar>
+            </ToolBarTray>
+
+            <!-- Основной контент -->
+            <ScrollViewer Grid.Row="0" Margin="0,60,0,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <TextBlock Name="txtContent" FontSize="16" TextWrapping="Wrap" Padding="10"/>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Window>
