@@ -202,7 +202,7 @@
             </Grid>
             <Button Template="{DynamicResource ButtonRegularRemake}" Content="Читать" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Top" Click="ToBook" Height="60" Width="225"/>
         </Grid>
-        <Grid Visibility="Visible" x:Name="Reader">
+        <Grid Visibility="Hidden" x:Name="Reader">
             <WrapPanel>
             <Button Content="Back" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ToBackRead"/>
             <!-- Меню -->
