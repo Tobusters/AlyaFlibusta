@@ -75,7 +75,7 @@ namespace WpfApp1
 
 			InitializeComponent();
 
-        }
+        
 			try { 
 			genres.SetGenres(conn.ConnectToDTBaseAndReadDictionary("exec ShowGenre"));
 			books.SetBooksBySql(conn.ConnectToDTBaseAndReadBooks("exec ShowSimpleBooksForViewTable"));
@@ -244,7 +244,8 @@ namespace WpfApp1
         }
 
         private void EnableGrids(bool CollectionGrid , bool AccountGrid,bool UploadGrid, bool MessagerGrid, bool PrewBookGrid, bool CommentGrid)
-		}
+        {
+            if (CollectionGrid) { 
                 BookMain.Visibility = Visibility.Visible;
                 Account.Visibility = Visibility.Hidden;
                 Upload.Visibility = Visibility.Hidden;
@@ -300,22 +301,19 @@ namespace WpfApp1
             }
         }
 		private void SwitchViewGrid_ToMainCollection() { EnableGrids(true, false, false, false, false, false); }
-		private void SwitchViewGrid_ToUserAccount() { EnableGrids(false, true, false, false, false, false); }
+		private void SwitchViewGrid_ToUserAccount() { EnableGrids(false, true, false, false, false, false); UpdateUserInformatin(); }
 		private void SwitchViewGrid_ToUpload() { EnableGrids(false, false, true, false, false, false); }
         private void SwitchViewGrid_ToMessage() { EnableGrids(false, false, false, true, false, false); }
         private void SwitchViewGrid_ToBook() { EnableGrids(false, false, false, false, true, false); }
         private void SwitchViewGrid_ToComment() { EnableGrids(false, false, false, false, true, true); }
-		void SwitchViewGrid_ToUserAccount() {
-			UpdateUserInformatin();
-			EnableGrids(false, true, false);
-		}
-		void UpdateUserInformatin()
-		{
-			User_Login.Text = Logged.Login;
+        void UpdateUserInformatin()
+        {
+            User_Login.Text = Logged.Login;
 
-			//ПОПРОБОВАТЬ сначала сделать фильтры книг с помощью checkboxов, тк всё может пойти по откосу
+            //ПОПРОБОВАТЬ сначала сделать фильтры книг с помощью checkboxов, тк всё может пойти по откосу
 
-        // Открытие файла
+            // Открытие файла
+        }
         private void OpenFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
