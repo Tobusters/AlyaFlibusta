@@ -32,9 +32,10 @@ namespace WpfApp1
 		GENRES genres = GENRES.getInstance();
 		USERS users = USERS.getInstance();
 		List<string> SelectedGenreId = new List<string>();
-		//SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-UNTJG88\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
-		SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
-														 //SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
+        Book SelectedBook;
+        //SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-UNTJG88\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
+        SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
+		//SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
 		RegLog reglog = new RegLog(); 
 		#endregion
 
@@ -101,12 +102,20 @@ namespace WpfApp1
 		private void CollectionBooksViewTable_MouseUp(object sender, MouseButtonEventArgs e)
 		{
 			try
-			{
-				DataGridCell dt = (DataGridCell)sender;
-				TextBlock dti = (TextBlock)dt.Content;
-				MessageBox.Show(dti.Text);
-			}
-			catch { }
+            {
+                DataGridCell dt = (DataGridCell)sender;
+                {
+                    TextBlock dti = (TextBlock)dt.Content;
+                    //MessageBox.Show(dti.Text);
+                    SelectedBook = books.GetbookByName(dti.Text);
+                    MessageBox.Show(SelectedBook.ID);
+                    ToreadImage.Style = SelectedBook.style;
+                    ToreadImage.UpdateLayout();
+
+                }
+            }
+
+            catch { }
 		}
 
 

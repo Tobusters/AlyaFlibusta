@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace WpfApp1
 {
@@ -96,6 +98,7 @@ namespace WpfApp1
                     //DataGridCell AuthorName = new DataGridCell() { Content = new TextBlock { Text = Books[i].AuthorName } };// добавить таблицу с Авторами
                     r[0] = Books[i].Name;
                     r[1] = Books[i].AuthorName;
+                    
                     dt.Rows.Add(r);
                 }
                 return dt.DefaultView;
@@ -109,6 +112,14 @@ namespace WpfApp1
             return null;
         }
 
+        public Book GetbookByName(string name)
+        {
+            foreach (Book item in Books)
+            {
+                if (item.Name == name || item.AuthorName == name) return item;
+            }
+            return null;
+        }
 
         private ref Book GetBookByID(string ID)
         {
@@ -185,6 +196,8 @@ namespace WpfApp1
     {
         private string id;
 
+        public BitmapImage image = new BitmapImage() { UriSource = new Uri(@"/llm-ops-language-model23.png", UriKind.Relative)};
+        public Style style;
 
         public string ID
         {
@@ -236,6 +249,11 @@ namespace WpfApp1
             DateTime.TryParse(dateOfUpload, out ret);
             DateOfUpload = ret;
             FilePath = filePath;
+            style = new Style();
+            style.Setters.Add(new Setter { Property = System.Windows.Controls.Image.StretchProperty, Value = Stretch.Uniform });
+            style.Setters.Add(new Setter { Property = System.Windows.Controls.Image.FocusableProperty, Value = false });
+            style.Setters.Add(new Setter { Property = System.Windows.Controls.Image.SourceProperty, Value = new BitmapImage() { UriSource = new Uri(@"/llm-ops-language-model23.png", UriKind.Relative) } });
+
         }
         public Book() : this("-1", "Void", "Noname", "Empty class", "2010-4-11", "/") { }
 
