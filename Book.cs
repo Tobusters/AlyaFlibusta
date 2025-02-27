@@ -183,10 +183,22 @@ namespace WpfApp1
 
             return BooksId;
         }
-        public void AddBook2genre(string BookId, string GenreId) {
-            G2B  = new string[1][];
-            G2B[0] = new string[] { BookId , GenreId };
-            
+
+        public void shout()
+        {
+            string tO = "";
+            foreach (string[] we in G2B)
+            {
+                tO += we[0] + "_" +  we[1] + "\n";
+            }
+            MessageBox.Show(tO);
+        }
+
+        public void AddBook2genre(string BookId, string GenreId)
+        {
+            G2B = new string[1][];
+            G2B[0] = new string[] { BookId, GenreId };
+
         }
 
     }
@@ -195,7 +207,7 @@ namespace WpfApp1
     {
         private string id;
 
-        public BitmapImage image = new BitmapImage() { UriSource = new Uri(@"/llm-ops-language-model23.png", UriKind.Relative)};
+        public BitmapImage image = new BitmapImage() { UriSource = new Uri(@"/llm-ops-language-model23.png", UriKind.Relative) };
         public Style style;
 
         public string ID

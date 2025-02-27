@@ -83,10 +83,11 @@ namespace WpfApp1
                 books.SetBooksBySql(conn.ConnectToDTBaseAndReadBooks("exec ShowSimpleBooksForViewTable"));
                 //books2G.SetBySql(conn.ConnectToDTBaseAndReadG2B("exec ShowGenre2Book"));
                 books.B2G.SetBySql(conn.ConnectToDTBaseAndReadG2B("exec ShowGenre2Book"));
+                books.B2G.shout();
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, e.ToString());
+                MessageBox.Show(e.Message, "Заполнение полей");
             }
 
             ExpandGenresUpdate();

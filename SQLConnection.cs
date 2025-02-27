@@ -174,19 +174,38 @@ namespace WpfApp1
 
         public string[][] ConnectToDTBaseAndReadG2B(string select)
         {
+            ConnectToDTBaseAndRead("exec ShowGenre2BookCount");
+            int lnth = 0;
+            if (rdr != null)
+            {
+                try
+                {
+                    while (rdr.Read())
+                    {
+                        lnth = Convert.ToInt32(rdr[0].ToString());
+                    }
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show(e.Message.ToString(), e.ToString());
+                }
+                finally
+                {
+                    FinallyBody();
+                }
+            }
             ConnectToDTBaseAndRead(select);
             if (rdr != null)
             {
                 try
                 {
-                    rdr.Read();
-                    int lnth = Convert.ToInt32(rdr[0].ToString());
                     string[][] list = new string[lnth][];
                     int i = 0;
                     while (rdr.Read())
                     {
+                        list[i] = new string[] { "", "" };
                         list[i][0] = rdr[0].ToString();
-                        list[i][0] = rdr[1].ToString();
+                        list[i][1] = rdr[1].ToString();
                         i++;
                     }
                     return list;
