@@ -61,4 +61,6 @@
             </TransformGroup>
         </RadialGradientBrush.RelativeTransform>
     </RadialGradientBrush>
+    <LinearGradientBrush x:Key="Grid" SpreadMethod="Reflect" StartPoint="0,0" EndPoint="1,1">
+    </LinearGradientBrush>
 </ResourceDictionary>

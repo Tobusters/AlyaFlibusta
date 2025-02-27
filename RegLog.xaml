@@ -5,38 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="RegLog" Height="450" Width="200">
+        Title="RegLog" Height="300" Width="200" Closing="Window_Closing" Closed="Window_Closed">
     <Grid>
         <Grid x:Name="Log" Visibility="Visible">
             <Viewbox>
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="100">
                     <Label Content="Логин:"/>
-                    <TextBox/>
+                    <TextBox Template="{DynamicResource TextBoxRegular}" x:Name="LogIn_Login" Text="Administrator"/>
                     <Label Content="Пароль:"/>
-                    <TextBox/>
-                    <Button Content="Войти"/>
+                    <TextBox Template="{DynamicResource TextBoxRegular}" x:Name="LogIn_Pass" Text="0451"/>
+                    <Button Content="Войти" Template="{DynamicResource ButtonRegularRemake}" Click="LogIn"/>
                 </StackPanel>
-            </Viewbox>
         </Grid>
         <Grid x:Name="Reg" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="300*"/>
                 <RowDefinition Height="150*"/>
             </Grid.RowDefinitions>
-            <Viewbox>
             <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" MinWidth="100">
                 <Label Content="Email:"/>
-                <TextBox Template="{DynamicResource TextBoxRegular}"/>
+                <TextBox x:Name="LogOn_Email" Template="{DynamicResource TextBoxRegular}"/>
                 <Label Content="Логин:"/>
-                <TextBox Template="{DynamicResource TextBoxRegular}"/>
+                <TextBox x:Name="LogOn_Login" Template="{DynamicResource TextBoxRegular}"/>
                 <Label Content="Пароль:"/>
-                <TextBox Template="{DynamicResource TextBoxRegular}"/>
-                <Button Content="Регистрация" Template="{DynamicResource ButtonRegular}"/>
+                <TextBox x:Name="LogOn_Pass" Template="{DynamicResource TextBoxRegular}"/>
+                <Button Content="Регистрация" Template="{DynamicResource ButtonRegularRemake}"/>
             </StackPanel>
-            </Viewbox>
             <StackPanel Grid.Row="1" Style="{StaticResource Smaller}" HorizontalAlignment="Center">
                 <Label Content="Уже есть аккаунт?"/>
-                <Button Content="Войти" Click="ToLogIn" Template="{DynamicResource ButtonRegular}"/>
+                <Button Content="Войти" Click="ToLogIn" Template="{DynamicResource ButtonRegularRemake}"/>
             </StackPanel>
         </Grid>
     </Grid>
