@@ -314,6 +314,7 @@ namespace WpfApp1
 
             // Открытие файла
         }
+        // Открытие файла
         private void OpenFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -409,17 +410,16 @@ namespace WpfApp1
         }
     }
 
-			//ScrollViewer scrollViewer = new ScrollViewer();
-			//StackPanel stackPanel = new StackPanel();
-			//foreach (var Genres in list)
-			//{
-			//    stackPanel.Children.Add(new CheckBox { Content = Genres.Value, Name = 'G' + Genres.Key, Template = (ControlTemplate)this.FindResource("CustomCheckBoxes") });
-			//}
-			//scrollViewer.Content = stackPanel;
-			//scrollViewer.MaxHeight = 150;
-			//User_UploadedBooksCollection.Content = null;
-		}
-		void SwitchViewGrid_ToUpload() { EnableGrids(false, false, true); }
+    //ScrollViewer scrollViewer = new ScrollViewer();
+    //StackPanel stackPanel = new StackPanel();
+    //foreach (var Genres in list)
+    //{
+    //    stackPanel.Children.Add(new CheckBox { Content = Genres.Value, Name = 'G' + Genres.Key, Template = (ControlTemplate)this.FindResource("CustomCheckBoxes") });
+    //}
+    //scrollViewer.Content = stackPanel;
+    //scrollViewer.MaxHeight = 150;
+    //User_UploadedBooksCollection.Content = null;
+}
 		#endregion
 
 		#region Closing
