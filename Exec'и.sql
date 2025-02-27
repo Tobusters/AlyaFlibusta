@@ -27,13 +27,15 @@ as
 delete from Genre where GenreName = @GenreName
 go
 
-alter proc GetGenreIdByName
-@GenreName varchar(50)
-as
-declare @ID int
-set @ID = (select Id from Genre where @GenreName = GenreName)
-return @ID
-go
+alter PROCEDURE GetGenreIdByName
+    @GenreName NVARCHAR(50),
+    @NeededId INT OUTPUT
+AS
+BEGIN
+    SELECT @NeededId = Id
+    FROM Genre
+    WHERE GenreName = @GenreName
+END
 
 alter procedure AddAuthor
 @AuthorFirstName varchar(50), 
@@ -151,7 +153,7 @@ alter procedure AddNameGenre2NameBook
 as
 declare @GID int 
 declare @BID int
-exec @GID = GetGenreIdByName @GenreName
+exec GetGenreIdByName @GenreName, 
 exec @BID = GetBookIdByName @BookName
 insert into G2B(BookID, GenreID) values (@BID, @GID)
 go
