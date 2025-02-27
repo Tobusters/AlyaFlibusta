@@ -40,7 +40,7 @@ namespace WpfApp1
 		//SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
 		RegLog reglog = new RegLog(); 
     
-    private string _filePath; // Путь к открытому файлу
+            private string _filePath; // Путь к открытому файлу
         private string[] _pages; // Страницы из файла
         private int _currentPageIndex = 0; // Текущая страница
     
