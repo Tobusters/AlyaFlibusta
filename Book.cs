@@ -98,7 +98,6 @@ namespace WpfApp1
                     //DataGridCell AuthorName = new DataGridCell() { Content = new TextBlock { Text = Books[i].AuthorName } };// добавить таблицу с Авторами
                     r[0] = Books[i].Name;
                     r[1] = Books[i].AuthorName;
-                    
                     dt.Rows.Add(r);
                 }
                 return dt.DefaultView;
