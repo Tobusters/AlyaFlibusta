@@ -38,8 +38,8 @@ namespace WpfApp1
         List<string> SelectedGenreId = new List<string>();
         Book SelectedBook;
         //SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-UNTJG88\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
-        //SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
-        SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
+        SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
+        //SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
         RegLog reglog = new RegLog();
 
         private string _filePath; // Путь к открытому файлу
