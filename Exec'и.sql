@@ -145,8 +145,11 @@ insert into G2B(BookID, GenreID) values (@BID, @GID)
 go
 alter proc ShowGenre2Book
 as
-select Count(*)  from G2B
 select *  from G2B
+go
+alter proc ShowGenre2BookCount
+as
+select Count(*)  from G2B
 go
 alter proc ShowSimpleBooksForViewTable
 as
