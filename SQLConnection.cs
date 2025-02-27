@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Windows;
 
@@ -171,17 +172,22 @@ namespace WpfApp1
             return null;
         }
 
-        public List<string> ConnectToDTBaseAndReadG2B(string select)
+        public string[][] ConnectToDTBaseAndReadG2B(string select)
         {
             ConnectToDTBaseAndRead(select);
             if (rdr != null)
             {
                 try
                 {
-                    List<string> list = new List<string>();
+                    rdr.Read();
+                    int lnth = Convert.ToInt32(rdr[0].ToString());
+                    string[][] list = new string[lnth][];
+                    int i = 0;
                     while (rdr.Read())
                     {
-                        list.Add($"{rdr[0].ToString()} { rdr[1].ToString()}");
+                        list[i][0] = rdr[0].ToString();
+                        list[i][0] = rdr[1].ToString();
+                        i++;
                     }
                     return list;
                 }

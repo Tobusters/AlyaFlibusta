@@ -82,7 +82,7 @@ namespace WpfApp1
                 genres.SetGenres(conn.ConnectToDTBaseAndReadDictionary("exec ShowGenre"));
                 books.SetBooksBySql(conn.ConnectToDTBaseAndReadBooks("exec ShowSimpleBooksForViewTable"));
                 //books2G.SetBySql(conn.ConnectToDTBaseAndReadG2B("exec ShowGenre2Book"));
-                books.B2G.AddBook2genre("1053", "1075");
+                books.B2G.SetBySql(conn.ConnectToDTBaseAndReadG2B("exec ShowGenre2Book"));
             }
             catch (Exception e)
             {

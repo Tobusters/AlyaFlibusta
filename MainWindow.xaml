@@ -162,18 +162,7 @@
                             </Grid>
                         </Viewbox>
                     </Button>
-                    <Button Template="{DynamicResource ButtonMenuRemake}" Height="45" Width="88" Click="ToUpload">
-                        <Viewbox>
-                            <Grid Style="{x:Null}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*" />
-                                    <RowDefinition Height="0.5*"/>
-                                </Grid.RowDefinitions>
-                                <Image Style="{StaticResource ImgBookUploads}" x:Name="ToreadImage" Grid.Row="0"/>
-                                <TextBlock Text="Читать" Grid.Row="1" VerticalAlignment="Top" />
-                            </Grid>
-                        </Viewbox>
-                    </Button>
+
                 </WrapPanel>
             </Viewbox>
             <!--Осталось доработать-->
@@ -218,7 +207,19 @@
                 </WrapPanel>
 
             </Grid>
-            <Button Template="{DynamicResource ButtonRegularRemake}" Content="Читать" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Top" Click="ToBook" Height="60" Width="225"/>
+            <!--<Button Template="{DynamicResource ButtonRegularRemake}" Content="Читать" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Top" Click="ToBook" Height="60" Width="225"/>-->
+            <Button Template="{DynamicResource ButtonRegularRemake}"  HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Top" Click="ToBook" Height="60" Width="225">
+                <Viewbox>
+                    <Grid Style="{x:Null}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="23*" />
+                            <RowDefinition Height="22*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="ToreadImage"  Style="{StaticResource ImgAccount}" Grid.Row="0"/>
+                        <TextBlock Text="Читать" Grid.Row="1" VerticalAlignment="Top" />
+                    </Grid>
+                </Viewbox>
+            </Button>
         </Grid>
         <Grid Visibility="Hidden" x:Name="Reader">
             <WrapPanel>
@@ -230,8 +231,6 @@
                 </MenuItem>
             </Menu> 
             </WrapPanel>
-
-
             <!-- Панель инструментов -->
             <ToolBarTray Grid.Row="0" VerticalAlignment="Top" Margin="0,30,0,0">
                 <ToolBar>
