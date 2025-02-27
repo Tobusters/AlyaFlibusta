@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
@@ -13,6 +14,6 @@ namespace WpfApp1
     /// </summary>
     public partial class App : Application
 	{
-	}
+    }
 }
 

@@ -4,7 +4,7 @@
 			 xmlns:local="clr-namespace:WpfApp1"
 			 StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary>
+        <ResourceDictionary >
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/TextBoxes.xaml"/>
                 <ResourceDictionary Source="/Imgs.xaml"/>
