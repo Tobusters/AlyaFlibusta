@@ -12,7 +12,7 @@
                 <RowDefinition/>
                 <RowDefinition MinHeight="15" MaxHeight="60"/>
             </Grid.RowDefinitions>
-            <Grid x:Name="BookMain" Grid.Row="0" Visibility="Visible">
+            <Grid x:Name="BookMain" Grid.Row="0" Visibility="Hidden">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -219,8 +219,8 @@
 
             </Grid>
             <!--<Button Template="{DynamicResource ButtonRegularRemake}" Content="Читать" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Top" Click="ToBook" Height="60" Width="225"/>-->
-        </Grid>
-        <Grid Visibility="Hidden" x:Name="Reader">
+        
+        <Grid Visibility="Visible" x:Name="Reader">
             <WrapPanel>
                 <Button Content="Back" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ToBackRead"/>
                 <!-- Меню -->
@@ -253,6 +253,12 @@
             <ScrollViewer Grid.Row="0" Margin="0,60,0,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                 <TextBlock Name="txtContent" FontSize="16" TextWrapping="Wrap" Padding="10"/>
             </ScrollViewer>
+                <Button Content="Назад" HorizontalAlignment="Left" Margin="345,5,0,0" VerticalAlignment="Top" Width="55" Height="20"/>
+                <Button Content="Вперед" HorizontalAlignment="Left" Margin="400,5,0,0" VerticalAlignment="Top" Height="20" Width="55"/>
+                <TextBox HorizontalAlignment="Left" Margin="625,5,0,0" Text="Глава" VerticalAlignment="Top" Width="80"/>
+                <TextBox HorizontalAlignment="Left" Margin="710,5,0,0" Text="Стр" VerticalAlignment="Top" Width="80"/>
+                <TextBox HorizontalAlignment="Left" Margin="540,5,0,0" Text="Том" VerticalAlignment="Top" Width="80"/>
+            </Grid>
         </Grid>
         <Button Content="Смена темы" HorizontalAlignment="Right" VerticalAlignment="Bottom" Template="{DynamicResource ButtonRegularRemake}" />
     </Grid>
