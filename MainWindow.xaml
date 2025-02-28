@@ -88,7 +88,7 @@
                     </StackPanel>
                 </Grid>
             </Grid>
-            <Grid Name="Upload" Grid.Row="0" Visibility="Hidden">
+            <Grid Name="Upload" Grid.Row="0" Visibility="Visible">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -241,6 +241,6 @@
                 <TextBlock Name="txtContent" FontSize="16" TextWrapping="Wrap" Padding="10"/>
             </ScrollViewer>
         </Grid>
-        <Button Content="Смена темы" HorizontalAlignment="Right" VerticalAlignment="Bottom" Template="{DynamicResource ButtonRegularRemake}" Click="ToChagerThemes"/>
+        <Button Content="Смена темы" HorizontalAlignment="Right" VerticalAlignment="Bottom" Template="{DynamicResource ButtonRegularRemake}"/>
     </Grid>
 </Window>

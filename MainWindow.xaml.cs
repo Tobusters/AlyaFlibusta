@@ -400,28 +400,6 @@ namespace WpfApp1
             }
         }
 
-    private void ToChagerThemes(object sender, RoutedEventArgs e)
-    {
-            ResourceDictionary resourceDictionary = null;
-            var resourceStream = Application.GetResourceStream(new Uri("Global", UriKind.Relative));
-            if (resourceStream != null && resourceStream.Stream != null)
-            {
-                using (XmlReader xmlReader = XmlReader.Create(resourceStream.Stream))
-                {
-                    ChangeTheme(new Uri("First", UriKind.Relative));
-                }
-            }
-            App.Current.Resources.MergedDictionaries.Add(resourceDictionary);
-        }
-
-        public static void ChangeTheme(Uri themeuri)
-    {
-        ResourceDictionary Theme = new ResourceDictionary() { Source = themeuri };
-
-        App.Current.Resources.Clear();
-        App.Current.Resources.MergedDictionaries.Add(Theme);
-
-    }
     // Расширение для разбиения массива на части
 
 		#region Closing
