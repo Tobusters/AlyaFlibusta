@@ -1,29 +1,33 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Protocols;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Windows;
+using System.Configuration;
 
 namespace WpfApp1
 {
     class SQLConnection
     {
         private static SQLConnection instance;
-        //static readonly string connectionString = @"Server=.\SQLEXPRESS;database=Warehouse;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true";
-        //static readonly string connectionString = @"Server=DESKTOP-QVUI8Q3;database=Warehouse;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true";
+        static string serverName;
+        string databaseName = "AlyaFlibusta";
         private SqlConnection connection;
         SqlDataReader rdr;
         public static bool IsConnected { get; private set; } = false;
-        public void CheckConn()
+        public bool CheckConn()
         {
             try
             {
                 Conn.Open();
                 IsConnected = true;
+                return true;
             }
             catch (SqlException e)
             {
                 IsConnected = false;
                 MessageBox.Show(e.Message);
+                return false;
             }
             finally { Conn.Close(); }
         }
@@ -33,6 +37,37 @@ namespace WpfApp1
             private set { connection = value; }
         }
 
+        public void CreatenFillDT()
+        {
+            if (CheckConn())
+            {
+                try
+                {
+                    Conn.Open();
+                    SqlCommand command = new SqlCommand($@"USE master; GO IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = '{databaseName}')begin;CREATE DATABASE '{databaseName}'", Conn);
+                    command.ExecuteNonQuery();
+                    MessageBox.Show($"База данных '{databaseName}' успешно создана на сервере.");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, $"Ошибка при создании базы данных");
+                }
+            }
+        }
+        private void CreateDataBase()
+        {
+            string cmd = @"USE master; GO IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'Warehouse')begin;CREATE DATABASE Warehouse ON(NAME = Warehouse, FILENAME = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\Warehouse.mdf',SIZE = 8,MAXSIZE = 64,FILEGROWTH = 5)end;";
+            ConnectToDTBaseAndQuery(cmd);
+
+        }
+
+        private void ReconnectSql()
+        {
+            Conn.Close();
+            Conn = null;
+            Conn = new SqlConnection($@"Server={serverName};database={databaseName};Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");
+        }
+
         public ref SqlConnection GetRef()
         {
             return ref connection;
@@ -40,13 +75,21 @@ namespace WpfApp1
         private SQLConnection()
         {
             Conn = new SqlConnection(@"Server=DESKTOP-QVUI8Q3;database=AlyaFlubusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//дом
-            //Conn = new SqlConnection(@"Server=DESKTOP-CVTHJDK;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");
             rdr = null;
             IsConnected = true;
         }
         private SQLConnection(string coon)
         {
             Conn = new SqlConnection(coon);
+            rdr = null;
+            IsConnected = true;
+        }
+        private SQLConnection(string SvName, string coon)
+        {
+            serverName = SvName;
+            Conn = new SqlConnection(coon);
+            CreateDataBase();
+            ReconnectSql();
             rdr = null;
             IsConnected = true;
         }
@@ -60,6 +103,12 @@ namespace WpfApp1
         {
             if (instance == null)
                 instance = new SQLConnection(coon);
+            return instance;
+        }
+        public static SQLConnection getInstanceCreate(string SvName, string coon)
+        {
+            if (instance == null)
+                instance = new SQLConnection(SvName, coon);
             return instance;
         }
         private SqlCommand TryConnectionAndQueryBody(string select)

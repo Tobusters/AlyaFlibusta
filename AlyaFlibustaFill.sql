@@ -20,7 +20,7 @@ EXEC AddAuthor 'Stephen', 'King'; -- Стивен Кинг
 EXEC AddAuthor 'Victor', 'Hugo'; -- Виктор Гюго
 EXEC AddAuthor 'Alexander', 'Pushkin'; -- Александр Пушкин
 
---exec AddUserSimple 'Administrator', '0451'
+exec AddUserSimple 'Administrator', '0451'
 
 EXEC AddBook 1, 'War and Peace', 1, 'A historical epic novel', 'Path', 'IMG'; -- Война и мир
 EXEC AddBook 1, 'Crime and Punishment', 2, 'A psychological drama', 'Path', 'IMG'   ; -- Преступление и наказание

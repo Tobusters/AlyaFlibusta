@@ -32,51 +32,29 @@ namespace WpfApp1
         #region Инициализация
         volatile static bool _Is_Logged = false;
         volatile static User Logged = new User();
+        static string connstring = "";
         BOOKS books = BOOKS.getInstance();
         GENRES genres = GENRES.getInstance();
         USERS users = USERS.getInstance();
         List<string> SelectedGenreId = new List<string>();
         Book SelectedBook;
-        //SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-UNTJG88\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
-        SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
+
+        SQLConnection conn = SQLConnection.getInstance(@"Server=.\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
+        //SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
         //SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
         RegLog reglog = new RegLog();
 
         private string _filePath; // Путь к открытому файлу
         private string[] _pages; // Страницы из файла
-        private int _currentPageIndex = 0; // Текущая страница
+        private int _currentPageIndex = 0; // Текущая страница]
 
         #endregion
 
         public MainWindow()
         {
-            var result = MessageBox.Show("Загрузить с sql?", "SQL", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
-            {
-                try
-                {
-                    if (conn.Conn != null)
-                    {
-                        MessageBox.Show("Успешное подключение!", "Статус подключения", MessageBoxButton.OK);
-                        conn.CheckConn();
-                    }
-                }
-                catch (SqlException e)
-                {
-                    MessageBox.Show(e.Message, e.ToString(), MessageBoxButton.OK);
-                }
-                finally
-                {
-                    conn.Conn.Close();
-                }
-            }
-            else
-            {
-
-            }
-
-            InitializeComponent();
-
+            InitializeComponent(
+                
+                );
 
             try {
                 genres.SetGenres(conn.ConnectToDTBaseAndReadDictionary("exec ShowGenre"));
@@ -93,6 +71,12 @@ namespace WpfApp1
             ExpandGenresUpdate();
             BooksGridUpdate();
         }
+
+        private void CreateTables()
+        {
+            string cmd = "USE AlyaFlibusta;IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'Genre') AND type in (N'U'))BEGINcreate table Genre(Id int identity(1, 1) primary key,GenreName varchar(50) not null,);END;IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'Author') AND type in (N'U'))BEGINcreate table Author(Id int identity(1, 1) primary key,FirstName varchar(50) not null,LastName varchar(50) not null,);END;IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'BOOKS') AND type in (N'U'))BEGINCREATE TABLE BOOKS(   Id int identity(1, 1) primary key,  BookName nvarchar(100) not null,  AuthorId int references Author(Id) not null,  BookDescription varchar(1000) not null,  DateOfUpload datetime not null,  Filepath varchar(200) not null,  BookIMG varchar(200)  );END;IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'G2B') AND type in (N'U'))BEGIN  create table G2B(  BookID int references BOOKS(Id)not null,  GenreID int references Genre(Id)not null,  );END;IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'USERS') AND type in (N'U'))BEGIN  CREATE TABLE USERS  (  Id int identity(1, 1) primary key,  IsBanned bit not null default 0 check(IsBanned >=0 and IsBanned <= 1),  UserStatus bit not null default 0 check(UserStatus >=0 and UserStatus <= 2),  Login nvarchar(100) not null unique,  Email varchar(100) not null,  Password varchar(256) not null,  NickName nvarchar(50),  AvatarIMG varchar(200)  );END;IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'COMMENTS') AND type in (N'U'))BEGINCREATE TABLE COMMENTS (  Id int identity(1, 1) primary key,  UserID int references USERS(Id)not null,  BookID int references BOOKS(Id)not null,  WrittenDate date not null,   TextOf nvarchar(1000)not null   );END;IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'Estimation') AND type in (N'U'))BEGIN  CREATE TABLE Estimation (  UserId int references USERS(id) not null,  BookID int references BOOKS(id) not null,   Est float not null,  );END;IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PersonalLibrary') AND type in (N'U'))BEGIN  CREATE TABLE PersonalLibrary (  UserID int references USERS(Id) not null,  BookID int references BOOKS(id) not null,);END;IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PersonallyLoadedBooks') AND type in (N'U'))BEGIN  CREATE TABLE PersonallyLoadedBooks(   UserID int references USERS(Id)not null,  BookID int references BOOKS(id) not null,);END;\r\n";
+        }
+
         public void UpdateComboBox(params ComboBox[] comboBoxes)
         {
             if (comboBoxes.Length == 0)
@@ -119,7 +103,7 @@ namespace WpfApp1
                     TextBlock dti = (TextBlock)dt.Content;
                     //MessageBox.Show(dti.Text);
                     SelectedBook = books.GetbookByName(dti.Text);
-                    MessageBox.Show(SelectedBook.ID);
+                    //MessageBox.Show(SelectedBook.ID);
                     ToreadImage.Style = SelectedBook.style;
                     ToreadImage.UpdateLayout();
 
@@ -193,14 +177,17 @@ namespace WpfApp1
             }
             else
             {
-                reglog.SetRef(ref conn.GetRef());
-                reglog.Owner = this;
-                reglog.ShowDialog();
-                Logged = reglog.GetLog();
-                _Is_Logged = reglog.Is_Logged;
-                reglog.Close();
-                reglog = null;
                 SwitchViewGrid_ToUserAccount();
+                if (conn.Conn != null)
+                {
+                    reglog.SetRef(ref conn.GetRef());
+                    reglog.Owner = this;
+                    reglog.ShowDialog();
+                    Logged = reglog.GetLog();
+                    _Is_Logged = reglog.Is_Logged;
+                    reglog.Close();
+                    reglog = null;
+                }
             }
         }
         void ToMainCollection(object sender, RoutedEventArgs e)

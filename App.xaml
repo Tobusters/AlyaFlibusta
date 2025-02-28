@@ -38,6 +38,11 @@
                 <Setter Property="TextWrapping" Value="Wrap"/>
                 <Setter Property="Margin" Value="0 0 0 5"/>
                 <Setter Property="MinWidth" Value="30"/>
+                <Setter Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{StaticResource TextColorFirstRGB}"/>
+                    </Setter.Value>
+                </Setter>
             </Style>
             <Style TargetType="{x:Type TextBlock}">
                 <Setter Property="Margin" Value="5 0 5 0"/>
