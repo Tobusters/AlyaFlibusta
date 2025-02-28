@@ -13,11 +13,14 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
 using System.Xml.Linq;
+
 
 
 namespace WpfApp1
@@ -38,8 +41,8 @@ namespace WpfApp1
         List<string> SelectedGenreId = new List<string>();
         Book SelectedBook;
         //SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-UNTJG88\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
-        SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
-        //SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-CVTHJDK\SQLEXPRESS;database=AlyaFlibusta2;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
+        //SQLConnection conn = SQLConnection.getInstance();//под ето отдельный поток нужно кидать
+        SQLConnection conn = SQLConnection.getInstance(@"Server=DESKTOP-SK8K2H3\SQLEXPRESS;database=AlyaFlibusta;Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");//под ето отдельный поток нужно кидать
         RegLog reglog = new RegLog();
 
         private string _filePath; // Путь к открытому файлу
@@ -396,6 +399,29 @@ namespace WpfApp1
                 btnNextPage.IsEnabled = _currentPageIndex < _pages.Length - 1;
             }
         }
+
+    private void ToChagerThemes(object sender, RoutedEventArgs e)
+    {
+            ResourceDictionary resourceDictionary = null;
+            var resourceStream = Application.GetResourceStream(new Uri("Global", UriKind.Relative));
+            if (resourceStream != null && resourceStream.Stream != null)
+            {
+                using (XmlReader xmlReader = XmlReader.Create(resourceStream.Stream))
+                {
+                    ChangeTheme(new Uri("First", UriKind.Relative));
+                }
+            }
+            App.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+        }
+
+        public static void ChangeTheme(Uri themeuri)
+    {
+        ResourceDictionary Theme = new ResourceDictionary() { Source = themeuri };
+
+        App.Current.Resources.Clear();
+        App.Current.Resources.MergedDictionaries.Add(Theme);
+
+    }
     // Расширение для разбиения массива на части
 
 		#region Closing
@@ -424,5 +450,7 @@ namespace WpfApp1
             return chunks;
         }
     }
-		#endregion
+
+
+    #endregion
 }

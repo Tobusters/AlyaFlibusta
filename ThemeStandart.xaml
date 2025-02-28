@@ -61,6 +61,9 @@
             </TransformGroup>
         </RadialGradientBrush.RelativeTransform>
     </RadialGradientBrush>
-    <SolidColorBrush x:Key="Grid" Color="{StaticResource SecondColorRGB}">
-    </SolidColorBrush>
+    <LinearGradientBrush x:Key="Grid" SpreadMethod="Reflect" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="{StaticResource FirstColorRGB }" Offset="0"/>
+        <GradientStop Color="{StaticResource SecondColorRGB }"  Offset="0.25"/>
+        <GradientStop Color="{StaticResource TherdColorRGB }" Offset="0.8"/>
+    </LinearGradientBrush>
 </ResourceDictionary>

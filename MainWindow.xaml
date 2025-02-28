@@ -223,37 +223,24 @@
         <Grid Visibility="Hidden" x:Name="Reader">
             <WrapPanel>
                 <Button Content="Back" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ToBackRead"/>
-                <!-- Меню -->
-                <Menu Grid.Row="0" Height="30" VerticalAlignment="Top">
-                    <MenuItem Header="_Файл">
-                        <MenuItem Header="_Открыть..." Click="OpenFile_Click"/>
-                    </MenuItem>
-                </Menu>
-            </WrapPanel>
-            <!-- Панель инструментов -->
-            <ToolBarTray Grid.Row="0" VerticalAlignment="Top" Margin="0,30,0,0">
-                <ToolBar>
-                    <Button Name="btnOpen" Click="OpenFile_Click">
+                <Button Name="btnOpen" Click="OpenFile_Click">
                         <StackPanel Orientation="Horizontal">
-                            <!--Image Source="pack://application:,,,/Resources/open.png" Width="16" Height="16"/-->
-                            <TextBlock Text=" Открыть" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                        <TextBlock Text=" Открыть" VerticalAlignment="Center" Margin="5,0,0,0"/>
                         </StackPanel>
-                    </Button>
-                    <Separator/>
-                    <Button Name="btnPreviousPage" Click="PreviousPage_Click" IsEnabled="False">
-                        <!--Image Source="pack://application:,,,/Resources/previous.png" Width="16" Height="16"/-->
-                    </Button>
-                    <Button Name="btnNextPage" Click="NextPage_Click">
-                        <!--Image Source="pack://application:,,,/Resources/next.png" Width="16" Height="16"/-->
-                    </Button>
-                </ToolBar>
-            </ToolBarTray>
+                </Button>
+                <Separator/>
+                <Button Name="btnPreviousPage" Click="PreviousPage_Click" IsEnabled="False"/>
+                <Button Name="btnNextPage" Click="NextPage_Click"/>
+            </WrapPanel>
+
+
+
 
             <!-- Основной контент -->
             <ScrollViewer Grid.Row="0" Margin="0,60,0,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                 <TextBlock Name="txtContent" FontSize="16" TextWrapping="Wrap" Padding="10"/>
             </ScrollViewer>
         </Grid>
-        <Button Content="Смена темы" HorizontalAlignment="Right" VerticalAlignment="Bottom" Template="{DynamicResource ButtonRegularRemake}" />
+        <Button Content="Смена темы" HorizontalAlignment="Right" VerticalAlignment="Bottom" Template="{DynamicResource ButtonRegularRemake}" Click="ToChagerThemes"/>
     </Grid>
 </Window>
