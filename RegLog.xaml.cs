@@ -86,14 +86,22 @@ namespace WpfApp1
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Conn.Close();
-            rdr.Close();
+            try
+            {
+                Conn.Close();
+                rdr.Close();
+            }
+            catch { }
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            Conn.Close();
-            rdr.Close();
+            try
+            {
+                Conn.Close();
+                rdr.Close();
+            }
+            catch { }
         }
     }
 }

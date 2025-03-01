@@ -1,23 +1,12 @@
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Xml.Linq;
+using Microsoft.Win32;
 
 
 namespace WpfApp1
@@ -78,7 +67,8 @@ namespace WpfApp1
             InitializeComponent();
 
 
-            try {
+            try
+            {
                 genres.SetGenres(conn.ConnectToDTBaseAndReadDictionary("exec ShowGenre"));
                 books.SetBooksBySql(conn.ConnectToDTBaseAndReadBooks("exec ShowSimpleBooksForViewTable"));
                 //books2G.SetBySql(conn.ConnectToDTBaseAndReadG2B("exec ShowGenre2Book"));
@@ -168,7 +158,8 @@ namespace WpfApp1
             EventSetter clickEventSetter = new EventSetter(CheckBox.ClickEvent, new RoutedEventHandler(Button_Click));
             buttonStyle.Setters.Add(clickEventSetter);
             stackPanel.Children.Add(new TextBox { Name = "FilterGenre", HorizontalAlignment = HorizontalAlignment.Left, MinWidth = 50 });
-            foreach (var Genres in list) {
+            foreach (var Genres in list)
+            {
                 stackPanel.Children.Add(new CheckBox { Content = Genres.Value, Name = 'G' + Genres.Key, Template = (ControlTemplate)this.FindResource("CustomCheckBoxes"), Style = buttonStyle });
             }
             scrollViewer.Content = stackPanel;
@@ -248,7 +239,8 @@ namespace WpfApp1
 
         private void EnableGrids(bool CollectionGrid, bool AccountGrid, bool UploadGrid, bool MessagerGrid, bool PrewBookGrid, bool CommentGrid)
         {
-            if (CollectionGrid) {
+            if (CollectionGrid)
+            {
                 BookMain.Visibility = Visibility.Visible;
                 Account.Visibility = Visibility.Hidden;
                 Upload.Visibility = Visibility.Hidden;
@@ -396,21 +388,21 @@ namespace WpfApp1
                 btnNextPage.IsEnabled = _currentPageIndex < _pages.Length - 1;
             }
         }
-    // Расширение для разбиения массива на части
+        // Расширение для разбиения массива на части
 
-		#region Closing
-		void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			reglog.Close();
-			conn.Close();
-		}
+        #region Closing
+        void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            reglog.Close();
+            conn.Close();
+        }
 
-		void Window_Closing(object sender, EventArgs e)
-		{
-			reglog.Close();
-			conn.Close();
-		}
-	}
+        void Window_Closing(object sender, EventArgs e)
+        {
+            reglog.Close();
+            conn.Close();
+        }
+    }
     #endregion
     public static class ArrayExtensions
     {
@@ -424,5 +416,5 @@ namespace WpfApp1
             return chunks;
         }
     }
-		#endregion
+    #endregion
 }
