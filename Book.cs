@@ -189,7 +189,7 @@ namespace WpfApp1
             string tO = "";
             foreach (string[] we in G2B)
             {
-                tO += we[0] + "_" +  we[1] + "\n";
+                tO += we[0] + "_" + we[1] + "\n";
             }
             MessageBox.Show(tO);
         }

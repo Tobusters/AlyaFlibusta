@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Data.SqlClient;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Windows;
 
 namespace WpfApp1
@@ -17,7 +12,7 @@ namespace WpfApp1
 
         public void AddGenre(ref string ID, ref string Name)
         {
-            genres.Add(ID , Name);
+            genres.Add(ID, Name);
         }
         public void AddGenre(string ID, string Name)
         {

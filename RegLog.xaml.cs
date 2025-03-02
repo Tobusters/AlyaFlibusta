@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WpfApp1
 {
@@ -56,8 +45,10 @@ namespace WpfApp1
                 SqlCommand sqlCommand = new SqlCommand($"exec GetUserByLogin {LogIn_Login.Text}", Conn);//Запрос
                 Conn.Open();
                 rdr = sqlCommand.ExecuteReader();
-                while (rdr.Read()) {
-                    if (rdr[4].ToString() == LogIn_Pass.Text) {
+                while (rdr.Read())
+                {
+                    if (rdr[4].ToString() == LogIn_Pass.Text)
+                    {
                         if (rdr[1].ToString() == "1")
                         {
                             MessageBox.Show("Ваш аккаунт заблокирован", "БАН");
@@ -78,7 +69,8 @@ namespace WpfApp1
             {
                 MessageBox.Show(ex.Message.ToString(), ex.ToString());
             }
-            finally {
+            finally
+            {
                 Conn.Close();
                 rdr.Close();
             }

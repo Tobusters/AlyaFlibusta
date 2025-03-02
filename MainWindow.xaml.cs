@@ -57,7 +57,6 @@ namespace WpfApp1
             {
                 MessageBox.Show(e.Message, "Заполнение полей");
             }
-
             ExpandGenresUpdate();
             BooksGridUpdate();
         }
