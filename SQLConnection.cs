@@ -56,7 +56,6 @@ namespace WpfApp1
                 }
             }
         }
-
         private void ReconnectSql()
         {
             Conn.Close();
