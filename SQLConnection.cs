@@ -10,7 +10,7 @@ namespace WpfApp1
     class SQLConnection
     {
         private static SQLConnection instance;
-        static string serverName;
+        static string serverName = $@".\SQLEXPRESS";
         string databaseName = "AlyaFlibusta";
         private SqlConnection connection;
         SqlDataReader rdr;
@@ -44,9 +44,11 @@ namespace WpfApp1
                 try
                 {
                     Conn.Open();
-                    SqlCommand command = new SqlCommand($@"USE master; GO IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = '{databaseName}')begin;CREATE DATABASE '{databaseName}'", Conn);
-                    command.ExecuteNonQuery();
+                    string cmd = $@"USE master; GO IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = '{databaseName}')begin;CREATE DATABASE '{databaseName}'";
+                    ConnectToDTBaseAndQuery(cmd);
                     MessageBox.Show($"База данных '{databaseName}' успешно создана на сервере.");
+                    cmd = "USE AlyaFlibusta; GO IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'Genre') AND type in (N'U'))BEGINcreate table Genre(Id int identity(1, 1) primary key,GenreName varchar(50) not null,);END;IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'Author') AND type in (N'U'))BEGINcreate table Author(Id int identity(1, 1) primary key,FirstName varchar(50) not null,LastName varchar(50) not null,);END;IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'BOOKS') AND type in (N'U'))BEGINCREATE TABLE BOOKS(   Id int identity(1, 1) primary key,  BookName nvarchar(100) not null,  AuthorId int references Author(Id) not null,  BookDescription varchar(1000) not null,  DateOfUpload datetime not null,  Filepath varchar(200) not null,  BookIMG varchar(200)  );END;IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'G2B') AND type in (N'U'))BEGIN  create table G2B(  BookID int references BOOKS(Id)not null,  GenreID int references Genre(Id)not null,  );END;IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'USERS') AND type in (N'U'))BEGIN  CREATE TABLE USERS  (  Id int identity(1, 1) primary key,  IsBanned bit not null default 0 check(IsBanned >=0 and IsBanned <= 1),  UserStatus bit not null default 0 check(UserStatus >=0 and UserStatus <= 2),  Login nvarchar(100) not null unique,  Email varchar(100) not null,  Password varchar(256) not null,  NickName nvarchar(50),  AvatarIMG varchar(200)  );END;IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'COMMENTS') AND type in (N'U'))BEGINCREATE TABLE COMMENTS (  Id int identity(1, 1) primary key,  UserID int references USERS(Id)not null,  BookID int references BOOKS(Id)not null,  WrittenDate date not null,   TextOf nvarchar(1000)not null   );END;IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'Estimation') AND type in (N'U'))BEGIN  CREATE TABLE Estimation (  UserId int references USERS(id) not null,  BookID int references BOOKS(id) not null,   Est float not null,  );END;IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PersonalLibrary') AND type in (N'U'))BEGIN  CREATE TABLE PersonalLibrary (  UserID int references USERS(Id) not null,  BookID int references BOOKS(id) not null,);END;IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PersonallyLoadedBooks') AND type in (N'U'))BEGIN  CREATE TABLE PersonallyLoadedBooks(   UserID int references USERS(Id)not null,  BookID int references BOOKS(id) not null,);END;\r\n";
+                    ConnectToDTBaseAndQuery(cmd);
                 }
                 catch (Exception ex)
                 {
@@ -54,18 +56,11 @@ namespace WpfApp1
                 }
             }
         }
-        private void CreateDataBase()
-        {
-            string cmd = @"USE master; GO IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'Warehouse')begin;CREATE DATABASE Warehouse ON(NAME = Warehouse, FILENAME = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\Warehouse.mdf',SIZE = 8,MAXSIZE = 64,FILEGROWTH = 5)end;";
-            ConnectToDTBaseAndQuery(cmd);
-
-        }
 
         private void ReconnectSql()
         {
             Conn.Close();
-            Conn = null;
-            Conn = new SqlConnection($@"Server={serverName};database={databaseName};Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");
+            Conn.ChangeDatabase($@"Server={serverName};database={databaseName};Integrated Security=true;Trusted_Connection=true;TrustServerCertificate=true");
         }
 
         public ref SqlConnection GetRef()
@@ -82,15 +77,9 @@ namespace WpfApp1
         {
             Conn = new SqlConnection(coon);
             rdr = null;
-            IsConnected = true;
-        }
-        private SQLConnection(string SvName, string coon)
-        {
-            serverName = SvName;
-            Conn = new SqlConnection(coon);
-            CreateDataBase();
-            ReconnectSql();
-            rdr = null;
+            string cmd = Conn.ConnectionString;
+            //CreatenFillDT();
+            //ReconnectSql();
             IsConnected = true;
         }
         public static SQLConnection getInstance()
@@ -103,12 +92,6 @@ namespace WpfApp1
         {
             if (instance == null)
                 instance = new SQLConnection(coon);
-            return instance;
-        }
-        public static SQLConnection getInstanceCreate(string SvName, string coon)
-        {
-            if (instance == null)
-                instance = new SQLConnection(SvName, coon);
             return instance;
         }
         private SqlCommand TryConnectionAndQueryBody(string select)
